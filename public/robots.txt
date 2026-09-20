@@ -1,0 +1,11 @@
+# robots.txt for ReviewLens
+User-agent: *
+Allow: /
+
+# Disallow private API endpoints from web crawler indexing
+Disallow: /api/
+Disallow: /docs
+Disallow: /redoc
+
+# Sitemap
+Sitemap: /sitemap.xml

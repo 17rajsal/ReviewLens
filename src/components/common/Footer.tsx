@@ -128,6 +128,28 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, githubUrl }) => {
                   Contact / Suggestion
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => {
+                    tactileAudio.playClick();
+                    onNavClick('privacy');
+                  }}
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    tactileAudio.playClick();
+                    onNavClick('terms');
+                  }}
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                >
+                  Terms of Use
+                </button>
+              </li>
             </ul>
           </div>
 

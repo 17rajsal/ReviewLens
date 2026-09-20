@@ -20,6 +20,10 @@ import { FullMapPage } from './components/map/FullMapPage';
 import { ResearchHistoryPage } from './components/history/ResearchHistoryPage';
 import { SourcesStatusPage } from './components/sources/SourcesStatusPage';
 import { MethodologyPage } from './components/methodology/MethodologyPage';
+import { PrivacyPolicyPage } from './components/legal/PrivacyPolicyPage';
+import { TermsPage } from './components/legal/TermsPage';
+import { NotFoundPage } from './components/common/NotFoundPage';
+import { CookieNotice } from './components/common/CookieNotice';
 import { genericEducationDemoData } from './data/genericDemoData';
 import { generateResearchReportForQuery, parseQueryConstraints } from './data/mockGenerator';
 import { fetchResearchReport } from './api/reviewLens';
@@ -74,6 +78,32 @@ export function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Hash routing listener for direct URL loading
+  React.useEffect(() => {
+    const handleHashRouting = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (['map', 'compare', 'history', 'sources', 'methodology', 'privacy', 'terms'].includes(hash)) {
+        setActiveView(hash as NavTarget);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === 'research' || hash === 'results') {
+        setActiveView('results');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === 'contact') {
+        setActiveView('hero');
+        setTimeout(() => {
+          document.getElementById('contact-suggestion-section')?.scrollIntoView({ behavior: 'smooth' });
+        }, 80);
+      } else if (hash === '404') {
+        setActiveView('404');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    handleHashRouting();
+    window.addEventListener('hashchange', handleHashRouting);
+    return () => window.removeEventListener('hashchange', handleHashRouting);
+  }, []);
+
   // Nav routing coordinator
   const handleNavClick = (target: NavTarget) => {
     if (target === 'graph') {
@@ -83,8 +113,13 @@ export function App() {
 
     setActiveView(target);
 
-    if (target === 'hero' || target === 'results' || target === 'map' || target === 'compare' || target === 'history' || target === 'sources' || target === 'methodology') {
+    if (target === 'hero' || target === 'results' || target === 'map' || target === 'compare' || target === 'history' || target === 'sources' || target === 'methodology' || target === 'privacy' || target === 'terms' || target === '404') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (target === 'hero') {
+        window.history.replaceState(null, '', window.location.pathname);
+      } else {
+        window.location.hash = target;
+      }
     } else if (target === 'story') {
       setActiveView('hero');
       setTimeout(() => {
@@ -93,6 +128,7 @@ export function App() {
       }, 50);
     } else if (target === 'contact') {
       setActiveView('hero');
+      window.location.hash = 'contact';
       setTimeout(() => {
         const contactElement = document.getElementById('contact-suggestion-section');
         contactElement?.scrollIntoView({ behavior: 'smooth' });
@@ -217,6 +253,27 @@ export function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
+      ) : activeView === 'privacy' ? (
+        <PrivacyPolicyPage
+          onBack={() => {
+            setActiveView('hero');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : activeView === 'terms' ? (
+        <TermsPage
+          onBack={() => {
+            setActiveView('hero');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : activeView === '404' ? (
+        <NotFoundPage
+          onHome={() => {
+            setActiveView('hero');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       ) : (
         <main>
           {/* Hero Section with 2D Honest Evidence Source Cards & Reference Background */}
@@ -286,6 +343,9 @@ export function App() {
 
       {/* Editorial Luxury Footer */}
       <Footer onNavClick={handleNavClick} />
+
+      {/* Local Storage & Privacy Notice */}
+      <CookieNotice onOpenPrivacy={() => handleNavClick('privacy')} />
 
       {/* Cinematic Research Pipeline Loading Modal */}
       <ResearchPipelineModal

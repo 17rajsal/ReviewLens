@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Search, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
 
-export type NavTarget = 'hero' | 'story' | 'results' | 'graph' | 'methodology' | 'map' | 'compare' | 'history' | 'sources' | 'entity' | 'contact';
+export type NavTarget = 'hero' | 'story' | 'results' | 'graph' | 'methodology' | 'map' | 'compare' | 'history' | 'sources' | 'entity' | 'contact' | 'privacy' | 'terms' | '404';
 
 interface GlassNavProps {
   onNavClick: (target: NavTarget) => void;
