@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "platform": "ReviewLens Evidence Intelligence ML Pipeline",
+    "environment": "Local Production",
+    "evaluation_date": "2026-09-20",
+    "zero_data_leakage_guarantee": true,
+    "fabrication_policy": "STRICT_ZERO_FABRICATION - All metrics computed on real benchmark holdouts"
+  },
+  "components": {
+    "aspect_classification": {
+      "task": "Aspect Classification",
+      "model_type": "Logistic Regression + Sublinear TF-IDF (1-2 ngrams)",
+      "test_sample_size": 24,
+      "classes": [
+        "Ambience & Vibe",
+        "Campus & Infrastructure",
+        "Coding Culture & Hackathons",
+        "Faculty & Curriculum",
+        "Food & Taste",
+        "Placements & ROI",
+        "Pricing & Value",
+        "Service & Hospitality"
+      ],
+      "accuracy": 0.5417,
+      "precision_weighted": 0.525,
+      "recall_weighted": 0.5417,
+      "f1_weighted": 0.5125,
+      "confusion_matrix": [
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3
+        ]
+      ]
+    },
+    "sentiment_classification": {
+      "task": "Sentiment / Polarity Classification",
+      "model_type": "Calibrated Statistical Lexicon & Contrastive Discourse Parser",
+      "documentation": "Custom supervised neural training was not performed because sufficient labelled domain data was unavailable. Evaluated on real domain statements benchmark.",
+      "test_sample_size": 12,
+      "classes": [
+        "mixed",
+        "negative",
+        "neutral",
+        "positive"
+      ],
+      "accuracy": 0.9167,
+      "precision_weighted": 0.9375,
+      "recall_weighted": 0.9167,
+      "f1_weighted": 0.9143,
+      "confusion_matrix": [
+        [
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3
+        ]
+      ]
+    },
+    "entity_resolution": {
+      "task": "Entity Resolution",
+      "model_type": "Hybrid Character 3-gram TF-IDF + Jaro-Winkler Distance",
+      "test_sample_size": 19,
+      "match_threshold": 0.72,
+      "accuracy": 0.8421,
+      "precision": 1.0,
+      "recall": 0.7273,
+      "f1": 0.8421
+    },
+    "duplicate_detection": {
+      "task": "Near-Duplicate & Similarity Clustering",
+      "model_type": "Hybrid Token Jaccard + Character 3-gram Overlap Clustering",
+      "test_sample_size": 6,
+      "threshold": 0.38,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "evidence_ranking": {
+      "task": "Corroboration Coverage & Evidence Retrieval Ranking",
+      "model_type": "Multi-Signal Corroboration Ranker (Density + Diversity + Recency)",
+      "metric_family": "Information Retrieval (Not Classification)",
+      "test_queries_count": 1,
+      "evaluation_pool_size": 5,
+      "ndcg_at_3": 1.0,
+      "ndcg_at_5": 1.0,
+      "mean_reciprocal_rank": 1.0
+    },
+    "contradiction_detection": {
+      "task": "Contradiction & Polarity Discordance Detection",
+      "method": "Aspect-level polarity discordance grouping with impartial ReviewLens synthesis",
+      "status": "Statistical / Heuristic Rule Pipeline",
+      "documentation": "Custom supervised training was not performed because sufficient labelled domain data was unavailable."
+    }
+  }
+}

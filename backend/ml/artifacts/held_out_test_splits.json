@@ -1,0 +1,150 @@
+{
+  "aspect_test": [
+    {
+      "text": "Guest lectures and industry seminars are frequently organized by the computer science department.",
+      "label": "Faculty & Curriculum"
+    },
+    {
+      "text": "Modern aesthetic with green potted plants, outdoor terrace seating and subdued chandelier lights.",
+      "label": "Ambience & Vibe"
+    },
+    {
+      "text": "Clean campus premises with dedicated computing centers open until late evening hours.",
+      "label": "Campus & Infrastructure"
+    },
+    {
+      "text": "Extremely overpriced for standard pasta; portion size is tiny relative to the steep bill.",
+      "label": "Pricing & Value"
+    },
+    {
+      "text": "Way too expensive for basic garlic bread and soft drinks with inflated prices.",
+      "label": "Pricing & Value"
+    },
+    {
+      "text": "Ravioli filling tasted bland and needed significantly more sea salt, sage and parmesan cheese.",
+      "label": "Food & Taste"
+    },
+    {
+      "text": "Library maintains IEEE digital explore subscriptions, extensive book catalog and quiet study zones.",
+      "label": "Campus & Infrastructure"
+    },
+    {
+      "text": "Strong open source contribution culture with several Google Summer of Code developer selections.",
+      "label": "Coding Culture & Hackathons"
+    },
+    {
+      "text": "No active coding society or technical workshops organized throughout the academic year.",
+      "label": "Coding Culture & Hackathons"
+    },
+    {
+      "text": "Senior faculty members are approachable and mentor students on academic research projects.",
+      "label": "Faculty & Curriculum"
+    },
+    {
+      "text": "Lasagna pasta sheets were overcooked and the bechamel sauce separated in the oven.",
+      "label": "Food & Taste"
+    },
+    {
+      "text": "Product companies visited early during placement season hiring twenty graduate developers.",
+      "label": "Placements & ROI"
+    },
+    {
+      "text": "Median software engineering CTC stood at twelve LPA with prominent fintech and product recruiters.",
+      "label": "Placements & ROI"
+    },
+    {
+      "text": "The dessert tiramisu had balanced espresso liqueur and smooth mascarpone cream.",
+      "label": "Food & Taste"
+    },
+    {
+      "text": "Inattentive waitstaff stood chatting near the service counter ignoring customer tables.",
+      "label": "Service & Hospitality"
+    },
+    {
+      "text": "Placement cell struggles to attract tier-one technology firms for campus recruitment drives.",
+      "label": "Placements & ROI"
+    },
+    {
+      "text": "The dining hall felt drafty and the tables were placed too closely together for private conversation.",
+      "label": "Ambience & Vibe"
+    },
+    {
+      "text": "Pocket-friendly beverage combos offer good value during afternoon happy hour slots.",
+      "label": "Pricing & Value"
+    },
+    {
+      "text": "Active competitive programming group on Discord with weekly LeetCode and Codeforces contests.",
+      "label": "Coding Culture & Hackathons"
+    },
+    {
+      "text": "Exams follow predictable patterns with little emphasis on innovative software design thinking.",
+      "label": "Faculty & Curriculum"
+    },
+    {
+      "text": "Aesthetic rooftop view overlooking the Connaught Place skyline with pleasant outdoor patio heaters.",
+      "label": "Ambience & Vibe"
+    },
+    {
+      "text": "Canteen food options are basic and student seating space is limited during afternoon lunch hour.",
+      "label": "Campus & Infrastructure"
+    },
+    {
+      "text": "Server was impatient when taking our food order and rushed us into choosing entrees quickly.",
+      "label": "Service & Hospitality"
+    },
+    {
+      "text": "Quick turnaround time between appetizer and main course served with warm hospitality.",
+      "label": "Service & Hospitality"
+    }
+  ],
+  "sentiment_test": [
+    {
+      "text": "Nearest metro transit point is situated four hundred meters from the main college entrance gates.",
+      "label": "neutral"
+    },
+    {
+      "text": "Delicious food and vibrant acoustic music created an unmatched pleasant evening experience.",
+      "label": "positive"
+    },
+    {
+      "text": "Placement figures were exaggerated and very few genuine product firms visited campus this year.",
+      "label": "negative"
+    },
+    {
+      "text": "Rude and dismissive management who refused to address genuine concerns about incorrect food orders.",
+      "label": "negative"
+    },
+    {
+      "text": "Prompt service, clean dining environment and courteous servers who attended to all requests.",
+      "label": "positive"
+    },
+    {
+      "text": "Outstanding computer laboratories with high-speed internet, modern Linux machines and updated software.",
+      "label": "positive"
+    },
+    {
+      "text": "Strong peer coding culture despite rigid eighty percent mandatory attendance enforcement.",
+      "label": "mixed"
+    },
+    {
+      "text": "Rigid administrative red tape made getting approvals for hackathons an exhausting ordeal.",
+      "label": "negative"
+    },
+    {
+      "text": "Tasty appetizers accompanied by somewhat dry and uninspiring main courses in the evening.",
+      "label": "mixed"
+    },
+    {
+      "text": "Helpful and knowledgeable faculty although the university syllabus itself is relatively outdated.",
+      "label": "mixed"
+    },
+    {
+      "text": "Institution was established in nineteen ninety-eight under state government university affiliation.",
+      "label": "neutral"
+    },
+    {
+      "text": "OpenStreetMap records confirm the facility operates as a licensed commercial establishment.",
+      "label": "neutral"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Newsreader', Georgia, Cambria, serif;
+    --font-script: 'Caveat', cursive, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --color-bg-base: #FAF8F5;
+    --color-surface-1: #FFFFFF;
+    --color-surface-2: #F6F3ED;
+    --color-surface-3: #EFEAE2;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-base);
+    color: #18181B;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Editorial Lavender-Blue text gradient for headline italic statements */
+.editorial-gradient {
+  background: linear-gradient(135deg, #4454D0 0%, #6879F7 45%, #927CF0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Light luxury frosted glass card styles matching reference */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(24, 24, 27, 0.07);
+  box-shadow: 0 20px 40px -15px rgba(24, 24, 27, 0.05), 0 2px 6px rgba(24, 24, 27, 0.02);
+}
+
+.glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(24, 24, 27, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(107, 124, 255, 0.35);
+  box-shadow: 0 24px 48px -12px rgba(107, 124, 255, 0.12), 0 8px 24px -6px rgba(24, 24, 27, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Subtle architectural grid texture on warm daylight */
+.bg-subtle-grid {
+  background-size: 54px 54px;
+  background-image: 
+    linear-gradient(to right, rgba(24, 24, 27, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24, 24, 27, 0.025) 1px, transparent 1px);
+}
+
+/* Refined light scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2DDD5;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CBC5BA;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
