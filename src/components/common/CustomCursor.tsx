@@ -10,18 +10,26 @@ export const CustomCursor: React.FC = () => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
-    // Disable on touch devices or if reduced motion is preferred
+    // Disable on touch devices, reduced motion, or automated browser testing
     if (
       window.matchMedia('(pointer: coarse)').matches ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      (typeof navigator !== 'undefined' && navigator.webdriver)
     ) {
       setIsDisabled(true);
       return;
     }
 
+    let idleTimer: ReturnType<typeof setTimeout> | null = null;
+
     const updateMouse = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
+
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        setIsVisible(false);
+      }, 800);
 
       const target = e.target as HTMLElement | null;
       if (!target) return;
@@ -47,7 +55,10 @@ export const CustomCursor: React.FC = () => {
       }
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseLeave = () => {
+      if (idleTimer) clearTimeout(idleTimer);
+      setIsVisible(false);
+    };
     const handleMouseEnter = () => setIsVisible(true);
 
     window.addEventListener('mousemove', updateMouse);
@@ -55,6 +66,7 @@ export const CustomCursor: React.FC = () => {
     document.addEventListener('mouseenter', handleMouseEnter);
 
     return () => {
+      if (idleTimer) clearTimeout(idleTimer);
       window.removeEventListener('mousemove', updateMouse);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);

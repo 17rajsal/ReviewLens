@@ -13,6 +13,7 @@ interface InteractiveMapViewProps {
   onOpenEvidenceDrawer?: (entity: EntityReport) => void;
   className?: string;
   height?: string;
+  showPreviewModal?: boolean;
 }
 
 export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
@@ -23,6 +24,7 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
   onOpenEvidenceDrawer,
   className = '',
   height = '540px',
+  showPreviewModal = true,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const leafletMapRef = useRef<L.Map | null>(null);
@@ -55,11 +57,10 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
         attributionControl: true,
       });
 
-      // CartoDB Positron: Ultra-clean, warm light editorial tile layer
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      // OpenStreetMap: High-reliability open map tiles with ODbL attribution
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        subdomains: 'abcd',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
       }).addTo(map);
 
       // Add clean zoom control to top-right
@@ -128,8 +129,28 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
       map.setView([geocodedEntities[0].latitude, geocodedEntities[0].longitude], 13);
     }
 
+    // Invalidate map size after DOM mount and layout paint
+    const timer = setTimeout(() => {
+      if (leafletMapRef.current) {
+        leafletMapRef.current.invalidateSize();
+      }
+    }, 150);
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (mapContainerRef.current && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        if (leafletMapRef.current) {
+          leafletMapRef.current.invalidateSize();
+        }
+      });
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
     return () => {
-      // Keep map instance alive across renders, clean up markers only
+      clearTimeout(timer);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [entities, selectedEntityId]);
 
@@ -141,12 +162,19 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
       leafletMapRef.current.flyTo([selected.latitude, selected.longitude], 14, {
         duration: 0.8,
       });
-      setActivePreviewEntity(selected);
+      if (showPreviewModal) {
+        setActivePreviewEntity(selected);
+      }
     }
-  }, [selectedEntityId, entities]);
+  }, [selectedEntityId, entities, showPreviewModal]);
 
   return (
-    <div className={`relative rounded-3xl overflow-hidden border border-zinc-200/90 bg-[#F6F3ED] shadow-sm ${className}`}>
+    <div
+      style={{ height }}
+      className={`relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-[#F6F3ED] shadow-sm ${
+        height === '100%' ? 'h-full w-full' : ''
+      } ${className}`}
+    >
       {/* Map Header Overlay */}
       <div className="absolute top-3 left-3 z-[400] flex items-center gap-2">
         <div className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-zinc-200/80 shadow-xs flex items-center gap-2">
@@ -168,12 +196,12 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
         role="region"
         aria-label="Interactive map showing verified physical locations across Delhi NCR"
         tabIndex={0}
-        style={{ height }}
-        className="w-full relative z-0 transition-opacity duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
+        style={{ height: '100%', minHeight: '100%' }}
+        className="w-full h-full relative z-0 transition-opacity duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
       />
 
       {/* Interactive Entity Preview Bottom Modal / Drawer */}
-      {activePreviewEntity && (
+      {showPreviewModal && activePreviewEntity && (
         <div className="absolute bottom-4 left-4 right-4 z-[450] max-w-md mx-auto sm:right-auto sm:left-4">
           <div className="p-4 sm:p-5 rounded-2xl bg-white/98 backdrop-blur-xl border border-zinc-200/90 shadow-2xl shadow-zinc-900/10 space-y-3 animate-in fade-in slide-in-from-bottom-3 duration-200">
             <div className="flex items-start justify-between gap-3">
