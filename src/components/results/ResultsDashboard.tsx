@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
 import { FilterBar, FilterState, initialFilterState } from './FilterBar';
+import { SectionMarker } from '../common/SectionMarker';
 
 interface ResultsDashboardProps {
   researchQuery: ResearchQuery;
@@ -416,12 +417,11 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
         {/* THE SIGNAL (Section 25 Master Requirement) */}
         <section className="p-6 sm:p-8 rounded-3xl bg-[#F6F3ED]/95 border border-zinc-200/90 shadow-sm space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-200/80 pb-3">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#4A5CD8]" />
-              <h2 className="text-xs font-mono-code uppercase tracking-widest font-bold text-[#18181B]">
-                THE SIGNAL • SYNTHESIZED EXECUTIVE CONSENSUS
-              </h2>
-            </div>
+            <SectionMarker
+              icon={Sparkles}
+              title="THE SIGNAL"
+              subtitle="SYNTHESIZED EXECUTIVE CONSENSUS"
+            />
             <span className="text-[10px] font-mono-code text-zinc-500">
               Traceable across {researchQuery.sourcesScannedCount} independent citations
             </span>
@@ -597,10 +597,10 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                 <div id="research-map-section" className="lg:col-span-4 sticky top-24 space-y-4">
                   <div className="p-4 rounded-3xl bg-white border border-zinc-200/80 shadow-md space-y-3">
                     <div className="flex items-center justify-between px-1">
-                      <div className="flex items-center gap-2">
-                        <Navigation className="w-4 h-4 text-[#4A5CD8]" aria-hidden="true" />
-                        <span className="text-xs font-mono-code font-bold uppercase tracking-wider text-[#18181B]">Geographic Discovery</span>
-                      </div>
+                      <SectionMarker
+                        icon={Navigation}
+                        title="GEOGRAPHIC DISCOVERY"
+                      />
                       <span className="text-[10px] font-mono-code text-zinc-500">{filteredEntities.length} Verified Nodes</span>
                     </div>
                     <div className="rounded-2xl overflow-hidden border border-zinc-200">

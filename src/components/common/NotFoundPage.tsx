@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, Compass, Search } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
+import { SectionMarker } from './SectionMarker';
 
 interface NotFoundPageProps {
   onHome: () => void;
@@ -13,10 +14,12 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onHome }) => {
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#EFEAE2]/50 via-transparent to-transparent blur-3xl -z-10" />
 
       <div className="max-w-md space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 text-xs font-mono-code">
-          <Compass className="w-3.5 h-3.5 text-zinc-500" />
-          <span className="uppercase tracking-wider font-semibold">404 • ROUTE UNRESOLVED</span>
-        </div>
+        <SectionMarker
+          number="404"
+          title="ROUTE UNRESOLVED"
+          align="center"
+          className="mb-2"
+        />
 
         <h1 className="text-4xl sm:text-6xl font-editorial font-normal tracking-tight text-[#18181B]">
           Evidence Not Found

@@ -23,6 +23,7 @@ import { MethodologyPage } from './components/methodology/MethodologyPage';
 import { PrivacyPolicyPage } from './components/legal/PrivacyPolicyPage';
 import { TermsPage } from './components/legal/TermsPage';
 import { NotFoundPage } from './components/common/NotFoundPage';
+import { SectionMarker } from './components/common/SectionMarker';
 import { CookieNotice } from './components/common/CookieNotice';
 import { genericEducationDemoData } from './data/genericDemoData';
 import { generateResearchReportForQuery, parseQueryConstraints } from './data/mockGenerator';
@@ -306,10 +307,12 @@ export function App() {
           {/* Bottom Call-to-Action Stage (Luxury Daylight Editorial) */}
           <section className="py-24 border-t border-zinc-200/80 bg-[#F6F3ED]/80 backdrop-blur-xs relative text-center overflow-hidden">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#3444B8] text-xs font-mono-code font-bold">
-                <Sparkles className="w-3.5 h-3.5 text-[#4A5CD8]" />
-                <span className="tracking-wider uppercase">READY TO AUDIT THE EVIDENCE?</span>
-              </div>
+              <SectionMarker
+                icon={Sparkles}
+                title="READY TO AUDIT THE EVIDENCE?"
+                align="center"
+                className="mb-2"
+              />
 
               <h2 className="text-3xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B] leading-tight">
                 Inspect multi-source public evidence

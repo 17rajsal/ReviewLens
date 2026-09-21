@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Cpu, Filter, Layers } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
+import { SectionMarker } from '../common/SectionMarker';
 
 export const StorySection04_Duplicates: React.FC = () => {
   const [isDeduplicated, setIsDeduplicated] = useState(false);
@@ -26,9 +27,11 @@ export const StorySection04_Duplicates: React.FC = () => {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono-code uppercase tracking-wider bg-orange-100 text-orange-800 border border-orange-200 font-semibold mb-3">
-            04 // SIMILARITY & DUPLICATE DETECTION
-          </div>
+          <SectionMarker
+            number="04"
+            title="SIMILARITY & DUPLICATE DETECTION"
+            className="mb-4"
+          />
           <h2 className="text-3xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B] mb-3">
             Not every opinion is independent.
             <br />

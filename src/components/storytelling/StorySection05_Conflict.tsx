@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertTriangle, TrendingDown, TrendingUp, HelpCircle } from 'lucide-react';
+import { SectionMarker } from '../common/SectionMarker';
 
 export const StorySection05_Conflict: React.FC = () => {
   return (
@@ -11,9 +12,11 @@ export const StorySection05_Conflict: React.FC = () => {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono-code uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-200 font-semibold mb-3">
-            05 // CONTRADICTION ENGINE
-          </div>
+          <SectionMarker
+            number="05"
+            title="CONTRADICTION ENGINE"
+            className="mb-4"
+          />
           <h2 className="text-3xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B] mb-3">
             People rarely agree on everything.
             <br />

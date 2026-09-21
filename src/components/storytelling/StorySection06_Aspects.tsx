@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
+import { SectionMarker } from '../common/SectionMarker';
 
 export const StorySection06_Aspects: React.FC = () => {
   const [selectedAspect, setSelectedAspect] = useState<number>(0);
@@ -62,9 +63,11 @@ export const StorySection06_Aspects: React.FC = () => {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono-code uppercase tracking-wider bg-zinc-200/80 text-zinc-800 border border-zinc-300 font-semibold mb-3">
-            06 // ASPECT-BASED INTELLIGENCE
-          </div>
+          <SectionMarker
+            number="06"
+            title="ASPECT-BASED INTELLIGENCE"
+            className="mb-4"
+          />
           <h2 className="text-3xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B] mb-3">
             What are people actually talking about?
             <br />

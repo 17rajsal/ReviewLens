@@ -14,6 +14,7 @@ import {
   FileText
 } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
+import { SectionMarker } from '../common/SectionMarker';
 
 interface StorySectionScatteredEvidenceProps {
   onExploreResearch?: () => void;
@@ -142,13 +143,12 @@ export const StorySection_ScatteredEvidence: React.FC<StorySectionScatteredEvide
         {/* SECTION 4: THE 6 NUMBERED PIPELINE CARDS (Master Specification)     */}
         {/* =================================================================== */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between border-b border-zinc-200/80 pb-3">
-            <span className="text-[11px] font-mono-code font-bold uppercase tracking-wider text-zinc-500">
-              ARCHITECTURE // THE 6-STAGE EVIDENCE PIPELINE
-            </span>
-            <span className="text-[10px] font-mono-code text-[#4A5CD8] font-semibold hidden sm:inline-block">
-              TECHNICAL EXECUTION MODEL
-            </span>
+          <div className="pb-3 border-b border-zinc-200/80">
+            <SectionMarker
+              variant="hairline"
+              title="THE 6-STAGE EVIDENCE PIPELINE"
+              subtitle="TECHNICAL EXECUTION MODEL"
+            />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -191,9 +191,11 @@ export const StorySection_ScatteredEvidence: React.FC<StorySectionScatteredEvide
           <div className="lg:col-span-5 space-y-6">
             
             {/* Technical Header Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/80 text-[#3444B8] text-[11px] font-mono-code font-bold">
-              <span>01 — MULTI-SOURCE RETRIEVAL</span>
-            </div>
+            <SectionMarker
+              number="01"
+              title="MULTI-SOURCE RETRIEVAL"
+              className="mb-1"
+            />
 
             {/* Monumental Editorial Serif Headline */}
             <h2 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-editorial font-normal tracking-tight text-[#18181B] leading-[1.08]">

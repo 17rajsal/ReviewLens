@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, FileText, Scale, ExternalLink, AlertCircle } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
 import { CONTACT_EMAIL } from '../home/ContactSuggestionSection';
+import { SectionMarker } from '../common/SectionMarker';
 
 interface TermsPageProps {
   onBack: () => void;
@@ -29,10 +30,10 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onBack }) => {
 
         {/* Header */}
         <div className="space-y-4 border-b border-zinc-200 pb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200/80 text-zinc-700 text-xs font-mono-code font-bold">
-            <Scale className="w-3.5 h-3.5 text-zinc-600" />
-            <span className="tracking-wider uppercase">Terms of Use & Attribution</span>
-          </div>
+          <SectionMarker
+            icon={Scale}
+            title="TERMS OF USE & ATTRIBUTION"
+          />
 
           <h1 className="text-4xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B]">
             Terms & Conditions

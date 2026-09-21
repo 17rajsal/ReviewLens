@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, Shield, CheckCircle2, Lock, Database, Eye } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
 import { CONTACT_EMAIL } from '../home/ContactSuggestionSection';
+import { SectionMarker } from '../common/SectionMarker';
 
 interface PrivacyPolicyPageProps {
   onBack: () => void;
@@ -29,10 +30,10 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onBack }) 
 
         {/* Header */}
         <div className="space-y-4 border-b border-zinc-200 pb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-[#3444B8] text-xs font-mono-code font-bold">
-            <Shield className="w-3.5 h-3.5 text-[#4A5CD8]" />
-            <span className="tracking-wider uppercase">Transparency & Privacy</span>
-          </div>
+          <SectionMarker
+            icon={Shield}
+            title="TRANSPARENCY & PRIVACY"
+          />
 
           <h1 className="text-4xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B]">
             Privacy Policy

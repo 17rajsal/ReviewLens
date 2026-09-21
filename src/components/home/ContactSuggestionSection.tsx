@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Lightbulb, AlertTriangle, Mail, ArrowUpRight, Copy, Check } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
+import { SectionMarker } from '../common/SectionMarker';
 
 /**
  * CONTACT CONFIGURATION
@@ -42,10 +43,11 @@ export const ContactSuggestionSection: React.FC<ContactSuggestionSectionProps> =
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-2xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200/80 text-zinc-700 text-xs font-mono-code">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#6B7CFF]" />
-            <span className="uppercase tracking-wider font-semibold">Community & Feedback</span>
-          </div>
+          <SectionMarker
+            title="COMMUNITY & FEEDBACK"
+            align="center"
+            className="mb-2"
+          />
 
           <h2 className="text-3xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B] leading-tight">
             Help shape ReviewLens.
