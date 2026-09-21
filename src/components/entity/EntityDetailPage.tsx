@@ -179,8 +179,8 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
       <div className="pointer-events-none absolute top-10 left-1/4 w-[800px] h-[500px] bg-[#6B7CFF]/[0.03] rounded-full blur-[140px] -z-10" />
       <div className="pointer-events-none absolute top-96 right-1/4 w-[700px] h-[500px] bg-[#F59E72]/[0.03] rounded-full blur-[160px] -z-10" />
 
-      {/* ONE MASTER CONTAINER: min(100% - 48px, 1500px) */}
-      <div className="w-full max-w-[1500px] mx-auto px-4 sm:px-6 space-y-6">
+      {/* ONE MASTER CONTAINER: max-w ≈ 1340–1380px at 1440px, expanding at 1920px */}
+      <div className="w-full max-w-[1380px] 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 space-y-6">
 
         {/* 1. BREADCRUMB & ACTION BAR */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3.5 sm:p-4 rounded-2xl bg-white border border-zinc-200/80 shadow-xs">
@@ -819,7 +819,7 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
           {/* RIGHT SIDEBAR: MapCard (360px), QuickFacts, RelatedEntities, Compare      */}
           {/* Starts at the EXACT SAME Y position as the Left Hero Card!               */}
           {/* ========================================================================= */}
-          <aside className="space-y-6 lg:sticky lg:top-24">
+          <aside className="space-y-6 lg:sticky lg:top-24 self-start">
 
             {/* SIDEBAR CARD 1: LOCATION & EMBEDDED MAP CARD */}
             <div id="entity-sidebar-map-card" className="p-5 rounded-3xl bg-white border border-zinc-200/80 shadow-sm space-y-3.5">
@@ -836,7 +836,7 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
               </div>
 
               {/* Exact 360px contained map without popup obstruction */}
-              <div className="w-full h-[280px] sm:h-[360px] rounded-2xl overflow-hidden border border-zinc-200 shadow-2xs">
+              <div className="w-full h-[280px] sm:h-[360px] rounded-[20px] overflow-hidden border border-zinc-200 shadow-2xs">
                 <InteractiveMapView
                   entities={[entity]}
                   selectedEntityId={entity.id}

@@ -140,22 +140,35 @@ export function generateResearchReportForQuery(query: string): ResearchQuery {
     const aff = (c.affiliation || "").toLowerCase();
 
     // 1. HARD INTENT CONSTRAINTS
+    const hasMedProgram = programs.some(p => /\b(mbbs|md|ms|m\.ch|dm|bds|nursing)\b/i.test(p));
+    const isMed = instType === 'medical' || domains.includes('medicine') || cat.includes('medical') || hasMedProgram;
+
     if (isBtechQuery) {
-      // Under B.Tech/CSE/Engineering, medical institutions (AIIMS, VMMC, LHMC) MUST NOT appear!
-      if (instType === 'medical' || domains.includes('medicine') || cat.includes('medical') || programs.some(p => p.includes('mbbs'))) {
+      // Under B.Tech/CSE/Engineering, medical institutions (AIIMS, VMMC, LHMC, MAMC, UCMS) MUST NOT appear!
+      if (isMed) {
         continue;
       }
-      // Pure DU arts/commerce/sciences with no B.Tech MUST NOT appear!
       const hasBtech = programs.some(p => p.includes('b.tech'));
-      const hasEngg = instType === 'engineering' || instType === 'university' || domains.includes('engineering') || cat.includes('engineering') || cat.includes('technology');
-      if (!hasBtech && !hasEngg) {
-        continue;
+      const hasCse = programs.some(p => p.includes('cse') || p.includes('computer') || p.includes('software')) || domains.includes('computer_science');
+      const hasEngg = instType === 'engineering' || programs.some(p => p.includes('b.tech') || p.includes('engineering') || p.includes('b.e.'));
+
+      if (lower.includes('cse') || lower.includes('computer science') || lower.includes('computer')) {
+        if (!hasBtech || !hasCse) {
+          continue;
+        }
+      } else if (lower.includes('b.tech') || lower.includes('btech')) {
+        if (!hasBtech) {
+          continue;
+        }
+      } else {
+        if (!hasEngg) {
+          continue;
+        }
       }
     }
 
     if (isMedicalQuery) {
       // Under medical queries, non-medical institutions MUST NOT appear
-      const isMed = instType === 'medical' || domains.includes('medicine') || cat.includes('medical') || programs.some(p => p.includes('mbbs'));
       if (!isMed) {
         continue;
       }

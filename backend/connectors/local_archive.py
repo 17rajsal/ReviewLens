@@ -633,19 +633,29 @@ class LocalArchiveConnector(BaseSourceConnector):
             tag = (ent.highlight_tag or "").lower()
 
             # 1. HARD INTENT CONSTRAINTS
+            has_med_program = any(bool(re.search(r'\b(mbbs|md|ms|m\.ch|dm|bds|nursing)\b', p, re.I)) for p in programs)
+            is_med = inst_type == "medical" or "medicine" in domains or "medical" in cat or has_med_program
+
             if is_btech_query:
-                # Under B.Tech/CSE/Engineering, medical institutions (AIIMS, VMMC, LHMC) MUST NOT appear!
-                if inst_type == "medical" or "medicine" in domains or "medical" in cat or any("mbbs" in p for p in programs):
+                # Under B.Tech/CSE/Engineering, medical institutions (AIIMS, VMMC, LHMC, MAMC, UCMS) MUST NOT appear!
+                if is_med:
                     continue
-                # Pure DU arts/commerce/science colleges with no B.Tech MUST NOT appear!
                 has_btech = any("b.tech" in p for p in programs)
-                has_engg = inst_type in ["engineering", "university"] or "engineering" in domains or "engineering" in cat or "technology" in cat
-                if not (has_btech or has_engg):
-                    continue
+                has_cse = any("cse" in p or "computer" in p or "software" in p for p in programs) or "computer_science" in domains
+                has_engg = inst_type == "engineering" or any("b.tech" in p or "engineering" in p or "b.e." in p for p in programs)
+
+                if "cse" in q or "computer science" in q:
+                    if not (has_btech and has_cse):
+                        continue
+                elif "b.tech" in q or "btech" in q:
+                    if not has_btech:
+                        continue
+                else:
+                    if not has_engg:
+                        continue
 
             if is_medical_query:
                 # Under medical queries, non-medical institutions MUST NOT appear
-                is_med = inst_type == "medical" or "medicine" in domains or "medical" in cat or any("mbbs" in p for p in programs)
                 if not is_med:
                     continue
 

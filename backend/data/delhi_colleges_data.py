@@ -3985,6 +3985,174 @@ DELHI_COLLEGES: List[EntityReport] = [
         ),
         evidence_list=[]
     ),
+    # Maulana Azad Medical College (MAMC)
+    EntityReport(
+        id="entity-mamc",
+        canonical_name="Maulana Azad Medical College (MAMC)",
+        aliases=['mamc', 'maulana azad medical college', 'maulana azad', 'mamc delhi'],
+        category="Education / Medical College",
+        location="Bahadur Shah Zafar Marg, Central Delhi",
+        latitude=28.6366,
+        longitude=77.2407,
+        formatted_address="2, Bahadur Shah Zafar Marg, near Delhi Gate, New Delhi, 110002",
+        google_maps_url="https://maps.google.com/?q=28.6366,77.2407",
+        website="https://www.mamc.ac.in",
+        rating=4.7,
+        user_ratings_total=5200,
+        affiliation="University of Delhi (Faculty of Medical Sciences, Established 1958)",
+        fees_summary="Official Govt MBBS Fee: ~₹3,500 - ₹4,000 / year (nominal government subsidized tuition)",
+        annual_fee_numeric=3500,
+        highlight_tag="NIRF #23 Medical Colleges (2024) | Associated with 2,000-Bed Lok Nayak Hospital | Top NEET Cutoff",
+        evidence_confidence_score=97.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=64,
+            source_types_count=5,
+            recency_factor_score=95.0,
+            corroboration_density=93.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Premier government medical college in Delhi, ranked consistently among the top 5 medical colleges nationwide. Associated with Lok Nayak (LNJP) and GB Pant Hospitals, providing immense clinical caseload and exceptional postgraduate residency success.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-mamc-0",
+                name="Clinical Caseload",
+                label="Lok Nayak & GB Pant Hospitals",
+                sentiment="positive",
+                positive_ratio=98.0,
+                evidence_count=65,
+                summary="Associated teaching hospitals handle over 10,000 OPD patients daily, offering unmatched hands-on surgical and diagnostic training.",
+                key_phrases=['lnjp hospital caseload', 'gb pant super specialty', 'practical clinical mastery']
+            ),
+            AspectAnalysis(
+                id="asp-mamc-1",
+                name="Academic Prestige & Cutoffs",
+                label="NEET Rank Cutoffs",
+                sentiment="positive",
+                positive_ratio=97.0,
+                evidence_count=52,
+                summary="Historically requires top 100 All-India NEET rank for general category, with strong internal DU 50% state PG quota.",
+                key_phrases=['top 100 neet cutoff', 'du internal pg quota', 'distinguished faculty alumni']
+            ),
+            AspectAnalysis(
+                id="asp-mamc-2",
+                name="Central Location",
+                label="Bahadur Shah Zafar Marg",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=36,
+                summary="Situated at Delhi Gate Metro Station on the Violet Line, providing seamless connectivity across Central and Old Delhi.",
+                key_phrases=['delhi gate metro', 'central delhi medical hub', 'historic campus']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 reaffirmed premier medical standing with leading research citations.", mention_count=36),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Major trauma center expansion and modernized emergency block inaugurated.", mention_count=42),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Active discussions on NEET counseling, AIIMS vs MAMC preferences, and PG seat matrix.", mention_count=38)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="NIRF & Faculty of Medical Sciences Disclosures", count=20, percentage=36.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (5,200+ reviews)", count=16, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Node 43819201", count=6, percentage=11.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Medical Student Community Threads", count=9, percentage=16.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Medical Education Portals", count=4, percentage=8.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Clinical Training",
+            positive_signal_count=58,
+            negative_signal_count=3,
+            summary="Exceptional consensus regarding clinical exposure, faculty expertise, and premier residency placement.",
+            impartial_synthesis="Maulana Azad Medical College (MAMC) represents a premier national benchmark in undergraduate medical education and clinical medicine.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # University College of Medical Sciences (UCMS)
+    EntityReport(
+        id="entity-ucms",
+        canonical_name="University College of Medical Sciences (UCMS)",
+        aliases=['ucms', 'university college of medical sciences', 'ucms delhi', 'ucms gtb hospital'],
+        category="Education / Medical College",
+        location="Dilshad Garden, GTB Enclave, East Delhi",
+        latitude=28.6833,
+        longitude=77.3075,
+        formatted_address="Tahirpur Road, GTB Enclave, Dilshad Garden, Delhi, 110095",
+        google_maps_url="https://maps.google.com/?q=28.6833,77.3075",
+        website="https://www.ucms.ac.in",
+        rating=4.6,
+        user_ratings_total=4100,
+        affiliation="University of Delhi (Faculty of Medical Sciences, Established 1971)",
+        fees_summary="Official Govt MBBS Fee: ~₹5,500 - ₹7,000 / year (nominal government subsidized tuition)",
+        annual_fee_numeric=5500,
+        highlight_tag="NIRF #32 Medical Colleges (2024) | Associated with 1,500-Bed Guru Teg Bahadur Hospital | DU Quota",
+        evidence_confidence_score=95.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=54,
+            source_types_count=5,
+            recency_factor_score=93.0,
+            corroboration_density=91.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Constituent college of University of Delhi attached to Guru Teg Bahadur (GTB) Hospital. Known for strong clinical immersion, high patient diversity from East Delhi/NCR, and DU institutional quota for postgraduate medical admissions.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-ucms-0",
+                name="Clinical Exposure",
+                label="1,500-Bed GTB Hospital",
+                sentiment="positive",
+                positive_ratio=96.0,
+                evidence_count=58,
+                summary="GTB Hospital serves extensive trauma, infectious disease, and tertiary care demands across East Delhi and western UP borders.",
+                key_phrases=['gtb hospital trauma', 'diverse patient spectrum', 'hands-on procedural practice']
+            ),
+            AspectAnalysis(
+                id="asp-ucms-1",
+                name="DU Internal PG Quota",
+                label="Postgraduate Counseling Benefits",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=45,
+                summary="Shares 50% Delhi University institutional quota with MAMC and LHMC for coveted MD/MS specialization seats.",
+                key_phrases=['du internal quota', 'pg seat matrix', 'high neet-pg qualifying rate']
+            ),
+            AspectAnalysis(
+                id="asp-ucms-2",
+                name="Campus & Connectivity",
+                label="Dilshad Garden Enclave",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=32,
+                summary="Spacious residential campus situated near Jhilmil and Dilshad Garden Red Line Metro stations.",
+                key_phrases=['dilshad garden red line', 'residential hostel campus', 'gtb enclave']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 ranking demonstrated robust academic and faculty clinical output.", mention_count=30),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="New skills laboratory and simulation training facilities operationalized.", mention_count=35),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Discussions focus on NEET cutoffs, hostel accommodation, and clinical duty schedules.", mention_count=32)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="NIRF & Delhi University Medical Faculty Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (4,100+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Node 89201944", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Medical Student Community Threads", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Medical Directories", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Clinical Immersion and DU Affiliation",
+            positive_signal_count=48,
+            negative_signal_count=4,
+            summary="Broad consensus across medical student feedback highlighting clinical rigor and postgraduate admission benefits.",
+            impartial_synthesis="University College of Medical Sciences (UCMS) offers high-caliber medical education and extensive clinical hospital training.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
     # Jamia Millia Islamia (JMI)
     EntityReport(
         id="entity-jmi",
@@ -4431,6 +4599,26 @@ COLLEGE_METADATA_MAP = {
         "district": "Central Delhi",
         "annual_fee_numeric": 15000.0,
         "fees_summary": "Official Govt Fee: ~₹15,000 / year (MBBS Central Govt Subsidized)",
+    },
+    "entity-mamc": {
+        "institution_type": "medical",
+        "domains": ["medicine", "healthcare", "biomedical_research"],
+        "programs": ["MBBS", "MD", "MS", "M.Ch", "DM"],
+        "degree_levels": ["undergraduate", "postgraduate", "doctoral"],
+        "locality": "Bahadur Shah Zafar Marg",
+        "district": "Central Delhi",
+        "annual_fee_numeric": 3500.0,
+        "fees_summary": "Official Govt MBBS Fee: ~₹3,500 - ₹4,000 / year (nominal government subsidized tuition)",
+    },
+    "entity-ucms": {
+        "institution_type": "medical",
+        "domains": ["medicine", "healthcare", "biomedical_research"],
+        "programs": ["MBBS", "MD", "MS", "M.Sc", "Ph.D."],
+        "degree_levels": ["undergraduate", "postgraduate", "doctoral"],
+        "locality": "Dilshad Garden",
+        "district": "East Delhi",
+        "annual_fee_numeric": 5500.0,
+        "fees_summary": "Official Govt MBBS Fee: ~₹5,500 - ₹7,000 / year (nominal government subsidized tuition)",
     },
     # Management & Professional
     "entity-sscbs": {
