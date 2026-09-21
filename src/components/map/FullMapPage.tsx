@@ -340,7 +340,8 @@ export const FullMapPage: React.FC<FullMapPageProps> = ({
               onSelectEntity={(ent) => setSelectedEntityId(ent.id)}
               onOpenEntityDetail={onOpenEntityDetail}
               onOpenEvidenceDrawer={onOpenEvidenceDrawer}
-              height="750px"
+              className="w-full h-[280px] sm:h-[480px] lg:h-[750px]"
+              height="auto"
             />
           </div>
         </div>

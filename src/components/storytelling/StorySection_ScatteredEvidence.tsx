@@ -34,7 +34,7 @@ export const StorySection_ScatteredEvidence: React.FC<StorySectionScatteredEvide
   const pipelineSteps = [
     { num: '01', title: 'QUERY', desc: 'Constraint parsing' },
     { num: '02', title: 'MULTI-SOURCE RETRIEVAL', desc: 'Disparate ingestion', active: true },
-    { num: '03', title: 'ENTITY RESOLUTION', desc: 'Alias clustering' },
+    { num: '03', title: 'INSTITUTION INTELLIGENCE', desc: 'Alias clustering' },
     { num: '04', title: 'CONTRADICTION ENGINE', desc: 'Polarity divergence' },
     { num: '05', title: 'ASPECT ANALYSIS', desc: 'Dimension rating' },
     { num: '06', title: 'EVIDENCE SYNTHESIS', desc: 'Traceable dossier' },

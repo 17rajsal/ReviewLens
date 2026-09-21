@@ -610,7 +610,8 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                         onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
                         onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
                         onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
-                        height="680px"
+                        className="w-full h-[280px] sm:h-[360px] lg:h-[680px]"
+                        height="auto"
                       />
                     </div>
                   </div>
@@ -651,7 +652,8 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                   onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
                   onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
                   onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
-                  height="750px"
+                  className="w-full h-[280px] sm:h-[480px] lg:h-[750px]"
+                  height="auto"
                 />
               </div>
             )}

@@ -58,8 +58,9 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
       });
 
       // OpenStreetMap: High-reliability open map tiles with ODbL attribution
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
+        subdomains: ['a', 'b', 'c'],
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
       }).addTo(map);
 
@@ -130,29 +131,50 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
     }
 
     // Invalidate map size after DOM mount and layout paint
-    const timer = setTimeout(() => {
+    const timer1 = setTimeout(() => {
       if (leafletMapRef.current) {
         leafletMapRef.current.invalidateSize();
       }
-    }, 150);
+    }, 100);
+
+    const timer2 = setTimeout(() => {
+      if (leafletMapRef.current) {
+        leafletMapRef.current.invalidateSize();
+      }
+    }, 400);
 
     let resizeObserver: ResizeObserver | null = null;
     if (mapContainerRef.current && typeof ResizeObserver !== 'undefined') {
-      resizeObserver = new ResizeObserver(() => {
-        if (leafletMapRef.current) {
-          leafletMapRef.current.invalidateSize();
+      resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
+            if (leafletMapRef.current) {
+              leafletMapRef.current.invalidateSize();
+            }
+          }
         }
       });
       resizeObserver.observe(mapContainerRef.current);
     }
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
       if (resizeObserver) {
         resizeObserver.disconnect();
       }
     };
   }, [entities, selectedEntityId]);
+
+  // Cleanup leaflet map instance on component unmount
+  useEffect(() => {
+    return () => {
+      if (leafletMapRef.current) {
+        leafletMapRef.current.remove();
+        leafletMapRef.current = null;
+      }
+    };
+  }, []);
 
   // Synchronize when selectedEntityId changes from entity card click
   useEffect(() => {
@@ -168,12 +190,14 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
     }
   }, [selectedEntityId, entities, showPreviewModal]);
 
+  const hasExplicitHeight = height && height !== 'auto' && height !== '100%';
+
   return (
     <div
-      style={{ height }}
+      style={hasExplicitHeight ? { height } : undefined}
       className={`relative rounded-2xl overflow-hidden border border-zinc-200/90 bg-[#F6F3ED] shadow-sm ${
         height === '100%' ? 'h-full w-full' : ''
-      } ${className}`}
+      } ${!hasExplicitHeight && !className.includes('h-') ? 'h-[280px] sm:h-[360px] w-full' : ''} ${className}`}
     >
       {/* Map Header Overlay */}
       <div className="absolute top-3 left-3 z-[400] flex items-center gap-2">

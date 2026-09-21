@@ -27,7 +27,7 @@ export const StorySection03_EntityRes: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono-code uppercase tracking-wider bg-purple-100 text-purple-800 border border-purple-200 font-semibold mb-3">
-            03 // ENTITY RESOLUTION
+            03 // INSTITUTION INTELLIGENCE
           </div>
           <h2 className="text-3xl sm:text-5xl font-editorial font-normal tracking-tight text-[#18181B] mb-3">
             Same entity.
