@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowLeft, FileText, Scale, ExternalLink, AlertCircle } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
-import { CONTACT_EMAIL_PLACEHOLDER } from '../home/ContactSuggestionSection';
+import { CONTACT_EMAIL } from '../home/ContactSuggestionSection';
 
 interface TermsPageProps {
   onBack: () => void;
@@ -122,7 +122,7 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onBack }) => {
             <p>
               For questions regarding these Terms, please contact:{' '}
               <code className="px-2 py-0.5 rounded-md bg-zinc-100 border border-zinc-200 font-mono-code text-zinc-800 text-xs">
-                {CONTACT_EMAIL_PLACEHOLDER}
+                {CONTACT_EMAIL}
               </code>
             </p>
           </section>

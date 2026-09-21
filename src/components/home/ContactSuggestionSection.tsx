@@ -4,16 +4,17 @@ import { tactileAudio } from '../../utils/audio';
 
 /**
  * CONTACT CONFIGURATION
- * Replace this placeholder email with your personal or project email address.
+ * Professional public contact address for ReviewLens inquiries and suggestions.
  */
-export const CONTACT_EMAIL_PLACEHOLDER = "hello@reviewlens.local";
+export const CONTACT_EMAIL = "empire1raj1@gmail.com";
+export const CONTACT_EMAIL_PLACEHOLDER = CONTACT_EMAIL;
 
 interface ContactSuggestionSectionProps {
   contactEmail?: string;
 }
 
 export const ContactSuggestionSection: React.FC<ContactSuggestionSectionProps> = ({
-  contactEmail = CONTACT_EMAIL_PLACEHOLDER,
+  contactEmail = CONTACT_EMAIL,
 }) => {
   const [copied, setCopied] = useState(false);
 

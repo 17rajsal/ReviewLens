@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowLeft, Shield, CheckCircle2, Lock, Database, Eye } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
-import { CONTACT_EMAIL_PLACEHOLDER } from '../home/ContactSuggestionSection';
+import { CONTACT_EMAIL } from '../home/ContactSuggestionSection';
 
 interface PrivacyPolicyPageProps {
   onBack: () => void;
@@ -132,7 +132,7 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onBack }) 
             <p>
               For privacy-related questions or feedback regarding data handling, please contact:{' '}
               <code className="px-2 py-0.5 rounded-md bg-zinc-100 border border-zinc-200 font-mono-code text-zinc-800 text-xs">
-                {CONTACT_EMAIL_PLACEHOLDER}
+                {CONTACT_EMAIL}
               </code>
             </p>
           </section>
