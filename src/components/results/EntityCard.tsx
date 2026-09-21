@@ -71,9 +71,18 @@ export const EntityCard: React.FC<EntityCardProps> = ({
                 <span>{entity.affiliation}</span>
               </div>
             )}
+            {entity.rating && (
+              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-50/80 border border-amber-200 text-amber-900 text-[11px] font-mono-code font-semibold">
+                <span className="text-amber-500">★</span>
+                <span>{entity.rating}</span>
+                {entity.userRatingsTotal && (
+                  <span className="text-zinc-500 font-normal">({entity.userRatingsTotal.toLocaleString()} on Google Maps)</span>
+                )}
+              </div>
+            )}
             <div className="text-zinc-300">•</div>
             <div className="text-[11px] text-zinc-500">
-              {entity.evidenceList.length} public discussions analyzed
+              {entity.evidenceList.length} public citations
             </div>
           </div>
         </div>

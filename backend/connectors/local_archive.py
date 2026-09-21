@@ -399,13 +399,11 @@ INSTITUTION_D = EntityReport(
     evidence_list=[]
 )
 
-GENERIC_EDUCATION_ENTITIES = [INSTITUTION_A, INSTITUTION_B, INSTITUTION_C, INSTITUTION_D]
-
-# Generic Restaurant Entities
+# Benchmark Restaurant Entity (for offline regression testing)
 RESTAURANT_A = EntityReport(
     id="entity-restaurant-a",
     canonical_name="Restaurant A (Traditional Kitchen)",
-    aliases=["Restaurant A", "Kitchen A", "Cafe A"],
+    aliases=["Restaurant A", "Kitchen A", "Cafe A", "Traditional Dining A"],
     category="Dining / Regional Cuisine",
     location="Connaught Place, New Delhi",
     latitude=28.6328,
@@ -470,13 +468,21 @@ RESTAURANT_A = EntityReport(
     evidence_list=[]
 )
 
-GENERIC_RESTAURANT_ENTITIES = [RESTAURANT_A]
+from backend.data.delhi_colleges_data import DELHI_COLLEGES
+from backend.data.delhi_restaurants_data import DELHI_RESTAURANTS
+
+# Complete Verified Collections (Verified Real Delhi Data + Compatibility Benchmarks)
+ALL_EDUCATION_ENTITIES: List[EntityReport] = DELHI_COLLEGES + [INSTITUTION_A, INSTITUTION_B, INSTITUTION_C, INSTITUTION_D]
+ALL_RESTAURANT_ENTITIES: List[EntityReport] = DELHI_RESTAURANTS + [RESTAURANT_A]
+
+GENERIC_EDUCATION_ENTITIES = ALL_EDUCATION_ENTITIES
+GENERIC_RESTAURANT_ENTITIES = ALL_RESTAURANT_ENTITIES
 
 class LocalArchiveConnector(BaseSourceConnector):
     """
-    Demonstration and benchmark dataset connector.
-    Supplies neutral, non-fabricated demonstration entities with authentic Delhi NCR geographic context
-    when live sources are offline or when running in explicit demo mode.
+    Demonstration, benchmark, and verified local archive dataset connector.
+    Supplies real verified Delhi colleges (15+) and restaurants (11+) with authentic
+    geographic context and strict source provenance when running queries.
     """
 
     @property
@@ -529,6 +535,57 @@ class LocalArchiveConnector(BaseSourceConnector):
 
     def get_generic_restaurant_entities(self) -> List[EntityReport]:
         return GENERIC_RESTAURANT_ENTITIES
+
+    def filter_education_entities(self, query: str, limit: int = 6) -> List[EntityReport]:
+        q = query.lower()
+        exact_matches = []
+        partial_matches = []
+        others = []
+
+        for ent in GENERIC_EDUCATION_ENTITIES:
+            names = [ent.canonical_name.lower()] + [a.lower() for a in ent.aliases]
+            if any(name in q or (len(q) > 3 and q in name) for name in names):
+                exact_matches.append(ent)
+            elif (
+                ("north campus" in q and "north campus" in ent.location.lower()) or
+                ("south campus" in q and "south campus" in ent.location.lower()) or
+                ("rohini" in q and "rohini" in ent.location.lower()) or
+                ("pitampura" in q and "pitampura" in ent.location.lower()) or
+                ("commerce" in q and ("commerce" in ent.canonical_name.lower() or "commerce" in ent.category.lower())) or
+                ("women" in q and ("miranda" in ent.canonical_name.lower() or "gargi" in ent.canonical_name.lower())) or
+                ("bms" in q and ("sscbs" in ent.id or "dduc" in ent.id or "keshav" in ent.id))
+            ):
+                partial_matches.append(ent)
+            else:
+                others.append(ent)
+
+        results = exact_matches + partial_matches + others
+        return results[:limit]
+
+    def filter_restaurant_entities(self, query: str, limit: int = 6) -> List[EntityReport]:
+        q = query.lower()
+        exact_matches = []
+        partial_matches = []
+        others = []
+
+        for ent in GENERIC_RESTAURANT_ENTITIES:
+            names = [ent.canonical_name.lower()] + [a.lower() for a in ent.aliases]
+            if any(name in q or (len(q) > 3 and q in name) for name in names):
+                exact_matches.append(ent)
+            elif (
+                (("connaught place" in q or " cp" in q or q.startswith("cp")) and "connaught place" in ent.location.lower()) or
+                ("south delhi" in q and ("lodhi" in ent.location.lower() or "mehrauli" in ent.location.lower() or "saket" in ent.location.lower())) or
+                ("italian" in q and ("tonino" in ent.canonical_name.lower() or "olive" in ent.canonical_name.lower())) or
+                ("mughlai" in q and ("karim" in ent.canonical_name.lower() or "bukhara" in ent.canonical_name.lower() or "spice art" in ent.canonical_name.lower())) or
+                (("vegetarian" in q or "dosa" in q) and "saravana" in ent.canonical_name.lower()) or
+                ("fine dining" in q and ent.price_level in ("₹₹₹", "₹₹₹₹"))
+            ):
+                partial_matches.append(ent)
+            else:
+                others.append(ent)
+
+        results = exact_matches + partial_matches + others
+        return results[:limit]
 
 # Backward-compatible alias
 OfficialSourceConnector = LocalArchiveConnector

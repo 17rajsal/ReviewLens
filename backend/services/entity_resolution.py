@@ -4,6 +4,115 @@ from backend.models.evidence import EvidenceItem
 from backend.utils.text import normalize_text, calculate_jaccard_similarity
 
 GENERIC_CANONICAL_MAP = {
+    # Real Verified Delhi Colleges
+    "entity-srcc": {
+        "canonical_name": "Shri Ram College of Commerce (SRCC)",
+        "aliases": ["srcc", "shri ram college of commerce", "shri ram college", "shriram college", "srcc delhi", "srcc north campus"]
+    },
+    "entity-miranda-house": {
+        "canonical_name": "Miranda House",
+        "aliases": ["miranda house", "miranda", "mh", "mh du", "miranda house delhi", "miranda college"]
+    },
+    "entity-hindu-college": {
+        "canonical_name": "Hindu College",
+        "aliases": ["hindu college", "hindu", "hindu du", "hindu college delhi", "hindu north campus"]
+    },
+    "entity-st-stephens": {
+        "canonical_name": "St. Stephen's College",
+        "aliases": ["st stephen's college", "st stephens", "stephens", "st stephen's", "stephens du", "stephens college delhi"]
+    },
+    "entity-hansraj-college": {
+        "canonical_name": "Hansraj College",
+        "aliases": ["hansraj college", "hansraj", "hans raj", "hansraj du", "hansraj north campus"]
+    },
+    "entity-ramjas-college": {
+        "canonical_name": "Ramjas College",
+        "aliases": ["ramjas college", "ramjas", "ramjas du", "ramjas north campus", "ramjas college delhi"]
+    },
+    "entity-gargi-college": {
+        "canonical_name": "Gargi College",
+        "aliases": ["gargi college", "gargi", "gargi du", "gargi south campus", "gargi college delhi"]
+    },
+    "entity-sscbs": {
+        "canonical_name": "Shaheed Sukhdev College of Business Studies (SSCBS)",
+        "aliases": ["sscbs", "shaheed sukhdev college of business studies", "shaheed sukhdev", "sukhdev", "cbs", "cbs du"]
+    },
+    "entity-andc": {
+        "canonical_name": "Acharya Narendra Dev College (ANDC)",
+        "aliases": ["andc", "acharya narendra dev college", "acharya narendra dev", "andc du", "andc kalkaji"]
+    },
+    "entity-dcac": {
+        "canonical_name": "Delhi College of Arts and Commerce (DCAC)",
+        "aliases": ["dcac", "delhi college of arts and commerce", "dcac du", "dcac south campus"]
+    },
+    "entity-sggscc": {
+        "canonical_name": "Sri Guru Gobind Singh College of Commerce (SGGSCC)",
+        "aliases": ["sggscc", "sri guru gobind singh college of commerce", "guru gobind singh college of commerce", "ggs", "sggs", "sggscc pitampura"]
+    },
+    "entity-dduc": {
+        "canonical_name": "Deen Dayal Upadhyaya College (DDUC)",
+        "aliases": ["dduc", "deen dayal upadhyaya college", "deen dayal upadhyay", "ddu college", "dduc dwarka"]
+    },
+    "entity-sbsc": {
+        "canonical_name": "Shaheed Bhagat Singh College (SBSC)",
+        "aliases": ["sbsc", "shaheed bhagat singh college", "bhagat singh college", "sbsc du", "sbsc south campus"]
+    },
+    "entity-keshav-mahavidyalaya": {
+        "canonical_name": "Keshav Mahavidyalaya",
+        "aliases": ["keshav mahavidyalaya", "kmv du", "keshav college", "keshav", "keshav mahavidyalaya pitampura"]
+    },
+    "entity-maharaja-agrasen": {
+        "canonical_name": "Maharaja Agrasen College",
+        "aliases": ["maharaja agrasen college", "mac du", "mac delhi", "agrasen college du"]
+    },
+
+    # Real Verified Delhi Restaurants
+    "entity-indian-accent": {
+        "canonical_name": "Indian Accent",
+        "aliases": ["indian accent", "indian accent delhi", "the lodhi restaurant", "manish mehrotra restaurant"]
+    },
+    "entity-bukhara": {
+        "canonical_name": "Bukhara",
+        "aliases": ["bukhara", "bukhara itc maurya", "bukhara delhi", "dal bukhara", "bukhara chanakyapuri"]
+    },
+    "entity-tamra": {
+        "canonical_name": "Tamra",
+        "aliases": ["tamra", "tamra shangri la", "tamra delhi", "shangri la tamra"]
+    },
+    "entity-delhi-o-delhi": {
+        "canonical_name": "Delhi 'O' Delhi",
+        "aliases": ["delhi o delhi", "delhi 'o' delhi", "ihc dining", "india habitat centre dining"]
+    },
+    "entity-dakshin": {
+        "canonical_name": "Dakshin",
+        "aliases": ["dakshin", "dakshin sheraton", "dakshin delhi", "sheraton saket dakshin"]
+    },
+    "entity-olive-mehrauli": {
+        "canonical_name": "Olive Bar & Kitchen",
+        "aliases": ["olive bar and kitchen", "olive mehrauli", "olive qutub", "olive bar & kitchen"]
+    },
+    "entity-spice-art": {
+        "canonical_name": "Spice Art",
+        "aliases": ["spice art", "spice art crowne plaza", "spice art rohini"]
+    },
+    "entity-daryaganj-cp": {
+        "canonical_name": "Daryaganj Restaurant",
+        "aliases": ["daryaganj", "daryaganj restaurant", "daryaganj cp", "daryaganj connaught place"]
+    },
+    "entity-karims": {
+        "canonical_name": "Karim's (Jama Masjid)",
+        "aliases": ["karim's", "karims", "karim's jama masjid", "karim hotel old delhi", "karims delhi", "karim old delhi"]
+    },
+    "entity-saravana-bhavan-cp": {
+        "canonical_name": "Saravana Bhavan",
+        "aliases": ["saravana bhavan", "saravana bhavan cp", "hsb delhi", "saravana bhavan connaught place"]
+    },
+    "entity-caffe-tonino-cp": {
+        "canonical_name": "Caffè Tonino",
+        "aliases": ["caffè tonino", "caffe tonino", "tonino cp", "caffe tonino connaught place"]
+    },
+
+    # Compatibility Benchmarks (for offline regression testing)
     "entity-institution-a": {
         "canonical_name": "Institution A (Technical Campus)",
         "aliases": ["institution a", "tech campus a", "campus a", "college a"]

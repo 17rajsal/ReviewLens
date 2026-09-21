@@ -121,17 +121,39 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
                 {entity.canonicalName}
               </h1>
 
-              <div className="flex items-center gap-2 text-sm text-zinc-600 flex-wrap">
-                <MapPin className="w-4 h-4 text-[#4A5CD8] shrink-0" />
-                <span>{entity.formattedAddress || entity.location}</span>
+              <div className="flex items-center gap-3 text-sm text-zinc-600 flex-wrap pt-1">
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-[#4A5CD8] shrink-0" />
+                  <span>{entity.formattedAddress || entity.location}</span>
+                </div>
+                {entity.rating && (
+                  <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50/80 border border-amber-200 text-amber-900 text-xs font-mono-code font-semibold">
+                    <span className="text-amber-500">★</span>
+                    <span>{entity.rating}</span>
+                    {entity.userRatingsTotal && (
+                      <span className="text-zinc-500 font-normal">({entity.userRatingsTotal.toLocaleString()} on Google Maps)</span>
+                    )}
+                  </div>
+                )}
+                {entity.website && (
+                  <a
+                    href={entity.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-mono-code text-[#4A5CD8] hover:underline"
+                  >
+                    <span>Official Website</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
                 {entity.googleMapsUrl && (
                   <a
                     href={entity.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-mono-code text-[#4A5CD8] hover:underline ml-2"
+                    className="inline-flex items-center gap-1 text-xs font-mono-code text-zinc-500 hover:text-zinc-900 hover:underline"
                   >
-                    <span>Google Maps</span>
+                    <span>Map Coordinates</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 )}

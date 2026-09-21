@@ -160,10 +160,18 @@ class EvidenceEngine:
             any(w in lower for w in ["college", "b.tech", "btech", "engineering", "campus", "cse", "ipu", "bpit", "mait", "usict", "msit", "dtu", "university"])
         )
 
+        # Check if query specifically targets a verified restaurant in the archive
+        is_verified_restaurant_query = any(
+            any(alias in lower for alias in ent.aliases)
+            for ent in self.archive_connector.get_generic_restaurant_entities()
+            if ent.id != "entity-restaurant-a"
+        )
+
         is_dining_or_location = (
             (domain == "dining" or category == "restaurant" or
             any(w in lower for w in ["italian", "restaurant", "cafe", "connaught place", "cp", "dining", "pizza", "pasta", "food", "delhi", "studying"]))
             and not is_education
+            and not is_verified_restaurant_query
         )
         has_live_capability = not settings.REVIEWLENS_DEMO_MODE
 
@@ -202,7 +210,7 @@ class EvidenceEngine:
         constraints: ParsedConstraints,
         source_status: Dict[str, str]
     ) -> ResearchQueryResponse:
-        entities = self.archive_connector.get_generic_education_entities()
+        entities = self.archive_connector.filter_education_entities(query, limit=6)
 
         total_clusters = 0
         total_sources_scanned = 0
@@ -290,7 +298,7 @@ class EvidenceEngine:
         constraints: ParsedConstraints,
         source_status: Dict[str, str]
     ) -> ResearchQueryResponse:
-        entities = self.archive_connector.get_generic_restaurant_entities()
+        entities = self.archive_connector.filter_restaurant_entities(query, limit=6)
         for ent in entities:
             for ev in ent.evidence_list:
                 ev.provenance = "DEMO_LOCAL_ARCHIVE"

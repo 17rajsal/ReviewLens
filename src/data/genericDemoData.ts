@@ -381,7 +381,10 @@ export const genericInstitutionD: EntityReport = {
   evidenceList: []
 };
 
+import { delhiColleges } from './delhiCollegesData';
+
 export const genericEducationEntities: EntityReport[] = [
+  ...delhiColleges,
   genericInstitutionA,
   genericInstitutionB,
   genericInstitutionC,
@@ -389,25 +392,28 @@ export const genericEducationEntities: EntityReport[] = [
 ];
 
 export const genericEducationDemoData: ResearchQuery = {
-  id: 'query-demo-education',
-  query: 'Best B.Tech CSE colleges in Delhi under ₹2 lakh/year with good coding culture',
+  id: 'query-delhi-colleges',
+  query: 'Top Delhi University colleges with high NIRF rankings and strong placements',
   category: 'college',
   constraints: {
-    degree: 'B.Tech',
-    branch: 'Computer Science (CSE)',
+    degree: 'Honours / Undergraduate',
+    branch: 'Commerce, Economics & Sciences',
     location: 'Delhi NCR',
-    budgetMax: '₹2 lakh/year',
-    priority: 'Coding Culture & Hackathons'
+    budgetMax: '₹50,000 / year',
+    priority: 'NIRF Ranking, Placement & Academic Rigor'
   },
-  sourcesScannedCount: 38,
-  entitiesDiscovered: 4,
-  conflictsIdentified: 3,
-  deduplicatedClusters: 8,
+  sourcesScannedCount: 74,
+  entitiesDiscovered: genericEducationEntities.length,
+  conflictsIdentified: 4,
+  deduplicatedClusters: 16,
   results: genericEducationEntities,
   demoMode: true,
+  researchMode: 'DEMO_DATA',
   sourceStatus: {
-    reddit: 'unavailable',
-    web_search: 'unavailable',
+    google_places: 'available',
+    openstreetmap: 'available',
+    wikipedia: 'available',
+    reddit: 'available',
     local_archive: 'available'
   }
 };

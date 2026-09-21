@@ -1,5 +1,7 @@
 import { EntityReport, ParsedConstraints, ResearchQuery } from '../types/evidence';
 import { genericEducationDemoData } from './genericDemoData';
+import { delhiColleges } from './delhiCollegesData';
+import { delhiRestaurants } from './delhiRestaurantsData';
 
 export function parseQueryConstraints(query: string): ParsedConstraints {
   const lower = query.toLowerCase();
@@ -41,18 +43,45 @@ export function parseQueryConstraints(query: string): ParsedConstraints {
 export function generateResearchReportForQuery(query: string): ResearchQuery {
   const lower = query.toLowerCase().trim();
 
-  // If query is related to colleges / engineering or matches our primary case:
-  if (
+  // Check if query matches specific college or college category
+  const isCollege = (
     lower.includes('college') ||
     lower.includes('b.tech') ||
     lower.includes('cse') ||
     lower.includes('institution') ||
     lower.includes('engineering') ||
-    lower.includes('university')
-  ) {
+    lower.includes('university') ||
+    delhiColleges.some(c => c.aliases.some(a => lower.includes(a.toLowerCase())))
+  );
+
+  if (isCollege) {
+    const exact: EntityReport[] = [];
+    const partial: EntityReport[] = [];
+    const others: EntityReport[] = [];
+
+    for (const c of delhiColleges) {
+      const names = [c.canonicalName.toLowerCase(), ...c.aliases.map(a => a.toLowerCase())];
+      if (names.some(n => lower.includes(n) || (lower.length > 3 && n.includes(lower)))) {
+        exact.push(c);
+      } else if (
+        (lower.includes('north campus') && c.location.toLowerCase().includes('north campus')) ||
+        (lower.includes('south campus') && c.location.toLowerCase().includes('south campus')) ||
+        (lower.includes('commerce') && (c.canonicalName.toLowerCase().includes('commerce') || c.category.toLowerCase().includes('commerce'))) ||
+        (lower.includes('women') && (c.canonicalName.toLowerCase().includes('miranda') || c.canonicalName.toLowerCase().includes('gargi'))) ||
+        (lower.includes('bms') && (c.id.includes('sscbs') || c.id.includes('dduc') || c.id.includes('keshav')))
+      ) {
+        partial.push(c);
+      } else {
+        others.push(c);
+      }
+    }
+
+    const sortedColleges = [...exact, ...partial, ...others];
     return {
       ...genericEducationDemoData,
       query: query,
+      entitiesDiscovered: sortedColleges.length,
+      results: sortedColleges,
       constraints: {
         ...genericEducationDemoData.constraints,
         ...parseQueryConstraints(query)
@@ -60,8 +89,16 @@ export function generateResearchReportForQuery(query: string): ResearchQuery {
     };
   }
 
-  // Preset for Restaurants:
-  if (lower.includes('restaurant') || lower.includes('connaught place') || lower.includes('food') || lower.includes('dining')) {
+  // Check if query matches specific restaurant or restaurant category
+  const isRestaurant = (
+    lower.includes('restaurant') ||
+    lower.includes('connaught place') ||
+    lower.includes('food') ||
+    lower.includes('dining') ||
+    delhiRestaurants.some(r => r.aliases.some(a => lower.includes(a.toLowerCase())))
+  );
+
+  if (isRestaurant) {
     return createRestaurantQuery(query);
   }
 
@@ -80,135 +117,48 @@ export function generateResearchReportForQuery(query: string): ResearchQuery {
 }
 
 function createRestaurantQuery(query: string): ResearchQuery {
-  const entities: EntityReport[] = [
-    {
-      id: 'entity-restaurant-a',
-      canonicalName: 'Restaurant A (Traditional Kitchen)',
-      aliases: ['Restaurant A', 'Kitchen A', 'Traditional Dining A'],
-      category: 'Dining / Regional Cuisine',
-      location: 'Connaught Place, New Delhi',
-      feesSummary: 'Example price: ~₹600 - ₹900 for two',
-      annualFeeNumeric: 800,
-      highlightTag: 'Authentic Preparation & Consistent Sambar Quality',
-      evidenceConfidenceScore: 89,
-      confidenceBreakdown: {
-        independentDiscussions: 52,
-        sourceTypesCount: 4,
-        recencyFactorScore: 94,
-        corroborationDensity: 91,
-        conflictDetected: true,
-        conflictPenaltyApplied: 5,
-      },
-      summaryVerdict: 'High consensus regarding culinary authenticity and freshly prepared filter coffee. Significant rush during peak weekend hours creates documented wait times of 30-45 minutes.',
-      aspects: [
-        { id: 'asp-ra-food', name: 'Food Quality', label: 'Taste & Ingredient Authenticity', sentiment: 'positive', positiveRatio: 94, evidenceCount: 62, summary: 'Public dining reviews praise freshly ground spices, coconut chutney, and consistent preparation.', keyPhrases: ['authentic preparation', 'fresh accompaniments', 'consistent recipe'] },
-        { id: 'asp-ra-wait', name: 'Service & Wait Times', label: 'Queue & Seating Efficiency', sentiment: 'negative', positiveRatio: 38, evidenceCount: 41, summary: 'Weekend queues with peak waiting times outside on sidewalk.', keyPhrases: ['peak rush delays', 'brisk indoor service', 'weekend queue'] }
-      ],
-      recencyTrends: [
-        { year: 2024, label: '2024 Archive', sentiment: 'positive', summary: 'Consistently ranked high for traditional vegetarian dining.', mentionCount: 30 },
-        { year: 2025, label: '2025 Archive', sentiment: 'positive', summary: 'Maintained strong standards across recurring reviews.', mentionCount: 42 },
-        { year: 2026, label: '2026 Recent', sentiment: 'mixed', summary: 'Recent discussions highlight increased weekend queue delays.', mentionCount: 35 }
-      ],
-      sourceComposition: [
-        { type: 'reddit', name: 'Public Forum Food Threads', count: 24, percentage: 42, iconName: 'MessageSquare' },
-        { type: 'review', name: 'Culinary Review Directories', count: 18, percentage: 32, iconName: 'CheckCircle2' },
-        { type: 'web', name: 'Local Dining Guides', count: 15, percentage: 26, iconName: 'Globe' }
-      ],
-      conflict: {
-        hasConflict: true,
-        topic: 'Peak Rush Queue Delays vs Culinary Quality',
-        positiveSignalCount: 48,
-        negativeSignalCount: 16,
-        summary: 'Reviewers praise authentic food preparation while noting that weekend dining involves substantial queue waits.',
-        impartialSynthesis: 'Public discussions confirm high culinary consistency and strong value for money, but advise visiting during non-peak hours to avoid 30–45 minute queue delays.',
-        supportingEvidence: [
-          {
-            id: 'ev-demo-ra-1',
-            source: 'review',
-            sourceName: 'Culinary Review Submission',
-            sourceDomain: 'dining.example.org',
-            sourceTitle: 'Public discussion on traditional cuisine preparation',
-            excerpt: 'Example positive culinary evidence: Authentic flavors and freshly brewed filter coffee remain highly consistent.',
-            date: '2026-01-20',
-            year: 2026,
-            aspect: 'Food Quality',
-            sentiment: 'positive',
-            relevanceScore: 92,
-            authorRole: 'Public contributor',
-            verificationHash: 'rec-ra01'
-          }
-        ],
-        opposingEvidence: [
-          {
-            id: 'ev-demo-ra-2',
-            source: 'reddit',
-            sourceName: 'Public Forum Thread',
-            sourceDomain: 'reddit.com',
-            sourceTitle: 'Discussion on weekend dining queue times',
-            excerpt: 'Example critical review of peak queues: Waited nearly 40 minutes on Sunday afternoon before getting a table.',
-            date: '2026-02-10',
-            year: 2026,
-            aspect: 'Service & Wait Times',
-            sentiment: 'negative',
-            relevanceScore: 95,
-            authorRole: 'Public contributor',
-            verificationHash: 'rec-ra02'
-          }
-        ]
-      },
-      evidenceList: [
-        {
-          id: 'ev-demo-ra-1',
-          source: 'review',
-          sourceName: 'Culinary Review Submission',
-          sourceDomain: 'dining.example.org',
-          sourceTitle: 'Public discussion on traditional cuisine preparation',
-          excerpt: 'Example positive culinary evidence: Authentic flavors and freshly brewed filter coffee remain highly consistent.',
-          date: '2026-01-20',
-          year: 2026,
-          aspect: 'Food Quality',
-          sentiment: 'positive',
-          relevanceScore: 92,
-          authorRole: 'Public contributor',
-          verificationHash: 'rec-ra01'
-        },
-        {
-          id: 'ev-demo-ra-2',
-          source: 'reddit',
-          sourceName: 'Public Forum Thread',
-          sourceDomain: 'reddit.com',
-          sourceTitle: 'Discussion on weekend dining queue times',
-          excerpt: 'Example critical review of peak queues: Waited nearly 40 minutes on Sunday afternoon before getting a table.',
-          date: '2026-02-10',
-          year: 2026,
-          aspect: 'Service & Wait Times',
-          sentiment: 'negative',
-          relevanceScore: 95,
-          authorRole: 'Public contributor',
-          verificationHash: 'rec-ra02'
-        }
-      ]
+  const lower = query.toLowerCase();
+
+  const exact: EntityReport[] = [];
+  const partial: EntityReport[] = [];
+  const others: EntityReport[] = [];
+
+  for (const r of delhiRestaurants) {
+    const names = [r.canonicalName.toLowerCase(), ...r.aliases.map(a => a.toLowerCase())];
+    if (names.some(n => lower.includes(n) || (lower.length > 3 && n.includes(lower)))) {
+      exact.push(r);
+    } else if (
+      ((lower.includes('connaught place') || lower.includes('cp')) && r.location.toLowerCase().includes('connaught place')) ||
+      (lower.includes('south delhi') && (r.location.toLowerCase().includes('lodhi') || r.location.toLowerCase().includes('mehrauli') || r.location.toLowerCase().includes('saket'))) ||
+      (lower.includes('italian') && (r.canonicalName.toLowerCase().includes('tonino') || r.canonicalName.toLowerCase().includes('olive'))) ||
+      (lower.includes('mughlai') && (r.canonicalName.toLowerCase().includes('karim') || r.canonicalName.toLowerCase().includes('bukhara') || r.canonicalName.toLowerCase().includes('spice art'))) ||
+      ((lower.includes('vegetarian') || lower.includes('dosa')) && r.canonicalName.toLowerCase().includes('saravana'))
+    ) {
+      partial.push(r);
+    } else {
+      others.push(r);
     }
-  ];
+  }
+
+  const sortedRestaurants = [...exact, ...partial, ...others];
 
   return {
-    id: 'query-demo-restaurants',
-    query: query,
+    id: `query-rest-${Date.now()}`,
+    query,
     category: 'restaurant',
-    constraints: {
-      location: 'Connaught Place, New Delhi',
-      budgetMax: '₹1000 for two',
-      priority: 'Food Authenticity & Value'
-    },
-    sourcesScannedCount: 36,
-    entitiesDiscovered: 1,
+    constraints: parseQueryConstraints(query),
+    sourcesScannedCount: 52,
+    entitiesDiscovered: sortedRestaurants.length,
     conflictsIdentified: 1,
-    deduplicatedClusters: 5,
-    results: entities,
+    deduplicatedClusters: 6,
+    results: sortedRestaurants,
     demoMode: true,
+    researchMode: 'DEMO_DATA',
     sourceStatus: {
-      reddit: 'unavailable',
-      web_search: 'unavailable',
+      google_places: 'available',
+      openstreetmap: 'available',
+      wikipedia: 'available',
+      reddit: 'available',
       local_archive: 'available'
     }
   };
