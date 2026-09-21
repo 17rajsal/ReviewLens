@@ -228,7 +228,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
       <div className="pointer-events-none absolute top-20 left-1/4 w-[600px] h-[400px] bg-[#6B7CFF]/[0.03] rounded-full blur-[140px] -z-10" />
       <div className="pointer-events-none absolute top-80 right-1/4 w-[500px] h-[400px] bg-[#F59E72]/[0.03] rounded-full blur-[160px] -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-8">
         {/* Top Research Breadcrumb & Query Banner */}
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-zinc-200/80 shadow-xl shadow-zinc-900/[0.04] relative overflow-hidden space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200/80">
@@ -595,14 +595,25 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
 
                 {/* Right: Sticky Interactive Map (5 cols) */}
                 <div id="research-map-section" className="lg:col-span-5 sticky top-24 space-y-4">
-                  <InteractiveMapView
-                    entities={filteredEntities}
-                    selectedEntityId={selectedEntityForMap}
-                    onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
-                    onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
-                    onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
-                    height="620px"
-                  />
+                  <div className="p-4 rounded-3xl bg-white border border-zinc-200/80 shadow-md space-y-3">
+                    <div className="flex items-center justify-between px-1">
+                      <div className="flex items-center gap-2">
+                        <Navigation className="w-4 h-4 text-[#4A5CD8]" aria-hidden="true" />
+                        <span className="text-xs font-mono-code font-bold uppercase tracking-wider text-[#18181B]">Geographic Discovery</span>
+                      </div>
+                      <span className="text-[10px] font-mono-code text-zinc-500">{filteredEntities.length} Verified Nodes</span>
+                    </div>
+                    <div className="rounded-2xl overflow-hidden border border-zinc-200">
+                      <InteractiveMapView
+                        entities={filteredEntities}
+                        selectedEntityId={selectedEntityForMap}
+                        onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
+                        onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
+                        onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
+                        height="580px"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

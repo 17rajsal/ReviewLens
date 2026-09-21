@@ -189,8 +189,13 @@ export function App() {
       ) : activeView === 'entity' && selectedEntityForDetail ? (
         <EntityDetailPage
           entity={selectedEntityForDetail}
+          allEntities={researchData.results}
           onBack={() => {
             setActiveView('results');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onSelectEntity={(entity) => {
+            setSelectedEntityForDetail(entity);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onCompare={(entity) => {
