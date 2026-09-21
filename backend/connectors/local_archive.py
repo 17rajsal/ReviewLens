@@ -1,8 +1,10 @@
+import re
 from typing import List, Dict, Any, Optional
 from backend.connectors.base import BaseSourceConnector, CATEGORY_DEMO_ARCHIVE
 from backend.models.source import NormalizedSource
 from backend.models.evidence import EvidenceItem
 from backend.models.entity import EntityReport
+from backend.models.query import ParsedConstraints
 from backend.models.analysis import (
     AspectAnalysis,
     RecencyTrend,
@@ -472,7 +474,40 @@ from backend.data.delhi_colleges_data import DELHI_COLLEGES
 from backend.data.delhi_restaurants_data import DELHI_RESTAURANTS
 
 # Complete Verified Collections (Verified Real Delhi Data + Compatibility Benchmarks)
-ALL_EDUCATION_ENTITIES: List[EntityReport] = DELHI_COLLEGES + [INSTITUTION_A, INSTITUTION_B, INSTITUTION_C, INSTITUTION_D]
+ALL_EDUCATION_ENTITIES: List[EntityReport] = DELHI_COLLEGES + [
+    INSTITUTION_A.model_copy(update={
+        "institution_type": "engineering",
+        "domains": ["engineering", "computer_science"],
+        "programs": ["B.Tech CSE", "B.Tech IT", "B.Tech ECE", "BBA"],
+        "locality": "Sector 17, Rohini",
+        "district": "North West Delhi",
+        "annual_fee_numeric": 135000.0,
+    }),
+    INSTITUTION_B.model_copy(update={
+        "institution_type": "engineering",
+        "domains": ["engineering", "computer_science"],
+        "programs": ["B.Tech CSE", "B.Tech IT", "B.Tech ECE", "B.Tech EEE"],
+        "locality": "Paschim Vihar",
+        "district": "West Delhi",
+        "annual_fee_numeric": 135000.0,
+    }),
+    INSTITUTION_C.model_copy(update={
+        "institution_type": "college",
+        "domains": ["management", "commerce"],
+        "programs": ["BBA", "B.Com"],
+        "locality": "Dwarka",
+        "district": "South West Delhi",
+        "annual_fee_numeric": 120000.0,
+    }),
+    INSTITUTION_D.model_copy(update={
+        "institution_type": "college",
+        "domains": ["humanities", "arts"],
+        "programs": ["B.A. (Hons)"],
+        "locality": "Janakpuri",
+        "district": "West Delhi",
+        "annual_fee_numeric": 110000.0,
+    })
+]
 ALL_RESTAURANT_ENTITIES: List[EntityReport] = DELHI_RESTAURANTS + [RESTAURANT_A]
 
 GENERIC_EDUCATION_ENTITIES = ALL_EDUCATION_ENTITIES
@@ -536,46 +571,139 @@ class LocalArchiveConnector(BaseSourceConnector):
     def get_generic_restaurant_entities(self) -> List[EntityReport]:
         return GENERIC_RESTAURANT_ENTITIES
 
-    def filter_education_entities(self, query: str, limit: int = 8) -> List[EntityReport]:
+    def filter_education_entities(
+        self,
+        query: str,
+        constraints: Optional[ParsedConstraints] = None,
+        limit: int = 12
+    ) -> List[EntityReport]:
         q = query.lower()
+        budget_limit = constraints.budget if (constraints and constraints.budget is not None) else None
+        if budget_limit is None:
+            budget_match = re.search(r'under\s+(₹?[\d,]+(\s*lakh|\s*k)?|\$?[\d,]+(\s*k)?)', query, re.IGNORECASE)
+            if budget_match:
+                raw_str = budget_match.group(0)
+                clean_str = re.sub(r'under\s+', '', raw_str, flags=re.IGNORECASE).strip()
+                num_clean = re.sub(r'[^\d.]', '', clean_str)
+                try:
+                    base_num = float(num_clean)
+                    if "lakh" in clean_str.lower():
+                        budget_limit = base_num * 100000.0
+                    elif "k" in clean_str.lower():
+                        budget_limit = base_num * 1000.0
+                    else:
+                        budget_limit = base_num
+                except ValueError:
+                    budget_limit = None
+
+        is_btech_query = any(w in q for w in [
+            "b.tech", "btech", "cse", "computer science", "engineering", "coding culture"
+        ]) or (constraints is not None and constraints.target_domain == "engineering")
+
+        is_medical_query = any(w in q for w in [
+            "medical", "mbbs", "doctor", "health science", "neet"
+        ]) or (constraints is not None and constraints.target_domain == "medical")
+
+        is_commerce_query = any(w in q for w in [
+            "commerce", "b.com", "bcom", "economics"
+        ]) or (constraints is not None and constraints.target_domain == "commerce")
+
+        is_management_query = any(w in q for w in [
+            "management", "bba", "bms", "mba"
+        ]) or (constraints is not None and constraints.target_domain == "management")
+
+        is_du_query = any(w in q for w in [
+            "du ", " du", "delhi university", "north campus", "south campus"
+        ]) or (constraints is not None and constraints.target_domain == "du")
+
+        is_rohini_query = "rohini" in q
+        is_dwarka_query = "dwarka" in q
+
         exact_matches = []
-        partial_matches = []
-        others = []
+        matching_candidates = []
 
         for ent in GENERIC_EDUCATION_ENTITIES:
             names = [ent.canonical_name.lower()] + [a.lower() for a in ent.aliases]
-            loc = (ent.location or "").lower() + " " + (ent.formatted_address or "").lower()
+            loc = (ent.location or "").lower() + " " + (ent.formatted_address or "").lower() + " " + (ent.locality or "").lower()
             cat = (ent.category or "").lower()
+            inst_type = (ent.institution_type or "").lower()
+            programs = [p.lower() for p in ent.programs]
+            domains = [d.lower() for d in ent.domains]
             aff = (ent.affiliation or "").lower()
             tag = (ent.highlight_tag or "").lower()
 
-            # Exact or direct alias match
-            if any(name in q or (len(q) > 2 and q in name) for name in names):
-                exact_matches.append(ent)
-            elif (
-                # Locality & Region filters
-                ("rohini" in q and "rohini" in loc) or
-                ("dwarka" in q and "dwarka" in loc) or
-                ("north campus" in q and ("north campus" in loc or "maurice nagar" in loc or "university enclave" in loc)) or
-                ("south campus" in q and ("south campus" in loc or "benito juarez" in loc or "dhaula kuan" in loc)) or
-                ("south delhi" in q and ("south" in loc or "kalkaji" in loc or "ansari nagar" in loc or "okhla" in loc or "hauz khas" in loc)) or
-                ("west delhi" in q and ("west" in loc or "raja garden" in loc or "janakpuri" in loc)) or
-                ("east delhi" in q and ("east" in loc or "vasundhara" in loc or "vivek vihar" in loc or "shahdara" in loc)) or
-                ("shahdara" in q and "shahdara" in loc) or
-                ("central delhi" in q and ("central" in loc or "connaught" in loc or "ajmeri" in loc or "chanakyapuri" in loc)) or
-                # Domain & Category filters
-                (("engineering" in q or "btech" in q or "tech" in q) and ("engineering" in cat or "technology" in cat or "b.tech" in tag or "tech" in ent.id)) or
-                (("medical" in q or "health" in q or "mbbs" in q or "doctor" in q) and ("medical" in cat or "hospital" in aff or "mbbs" in tag or "aiims" in ent.id or "vmmc" in ent.id or "lhmc" in ent.id)) or
-                (("commerce" in q or "bcom" in q) and ("commerce" in ent.canonical_name.lower() or "commerce" in cat or "commerce" in tag)) or
-                (("women" in q or "girls" in q) and ("women" in ent.canonical_name.lower() or "women" in aff or "women" in tag)) or
-                (("management" in q or "bba" in q or "bms" in q) and ("business" in ent.canonical_name.lower() or "bba" in tag or "bms" in tag or "sscbs" in ent.id or "msi" in ent.id)) or
-                (("du" in q or "delhi university" in q) and ("university of delhi" in aff or "du" in aff))
-            ):
-                partial_matches.append(ent)
-            else:
-                others.append(ent)
+            # 1. HARD INTENT CONSTRAINTS
+            if is_btech_query:
+                # Under B.Tech/CSE/Engineering, medical institutions (AIIMS, VMMC, LHMC) MUST NOT appear!
+                if inst_type == "medical" or "medicine" in domains or "medical" in cat or any("mbbs" in p for p in programs):
+                    continue
+                # Pure DU arts/commerce/science colleges with no B.Tech MUST NOT appear!
+                has_btech = any("b.tech" in p for p in programs)
+                has_engg = inst_type in ["engineering", "university"] or "engineering" in domains or "engineering" in cat or "technology" in cat
+                if not (has_btech or has_engg):
+                    continue
 
-        results = exact_matches + partial_matches + others
+            if is_medical_query:
+                # Under medical queries, non-medical institutions MUST NOT appear
+                is_med = inst_type == "medical" or "medicine" in domains or "medical" in cat or any("mbbs" in p for p in programs)
+                if not is_med:
+                    continue
+
+            # 2. NUMERIC BUDGET CONSTRAINT
+            if budget_limit is not None and ent.annual_fee_numeric is not None:
+                if ent.annual_fee_numeric > budget_limit:
+                    continue
+
+            # 3. DIRECT NAME OR ALIAS MATCH
+            if any(name == q or (len(name) > 3 and name in q) for name in names):
+                exact_matches.append(ent)
+                continue
+
+            # 4. LOCATION CONSTRAINT (if specifically asked for Rohini or Dwarka)
+            if is_rohini_query and "rohini" not in loc:
+                continue
+            if is_dwarka_query and "dwarka" not in loc:
+                continue
+
+            # 5. INTENT MATCHING
+            matched = False
+            if is_btech_query:
+                if "cse" in q or "computer science" in q:
+                    if any("cse" in p or "computer" in p for p in programs) or "computer_science" in domains:
+                        matched = True
+                    elif any("b.tech" in p for p in programs):
+                        matched = True
+                else:
+                    matched = True
+
+            elif is_medical_query:
+                matched = True
+
+            elif is_commerce_query:
+                if "commerce" in domains or "economics" in domains or any("b.com" in p for p in programs):
+                    matched = True
+
+            elif is_management_query:
+                if "management" in domains or "business" in domains or any("bba" in p or "bms" in p or "mba" in p for p in programs):
+                    matched = True
+
+            elif is_du_query:
+                if "university of delhi" in aff or "du" in aff:
+                    matched = True
+
+            elif is_rohini_query:
+                matched = True
+
+            elif is_dwarka_query:
+                matched = True
+
+            else:
+                matched = True
+
+            if matched:
+                matching_candidates.append(ent)
+
+        results = exact_matches + [e for e in matching_candidates if e not in exact_matches]
         return results[:limit]
 
     def filter_restaurant_entities(self, query: str, limit: int = 8) -> List[EntityReport]:

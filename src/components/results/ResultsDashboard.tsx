@@ -228,7 +228,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
       <div className="pointer-events-none absolute top-20 left-1/4 w-[600px] h-[400px] bg-[#6B7CFF]/[0.03] rounded-full blur-[140px] -z-10" />
       <div className="pointer-events-none absolute top-80 right-1/4 w-[500px] h-[400px] bg-[#F59E72]/[0.03] rounded-full blur-[160px] -z-10" />
 
-      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-8">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Top Research Breadcrumb & Query Banner */}
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-zinc-200/80 shadow-xl shadow-zinc-900/[0.04] relative overflow-hidden space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200/80">
@@ -569,13 +569,13 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
             {/* Primary Research Experience Layout */}
             {layoutMode === 'split' && (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Left: Entity Cards (7 cols) */}
-                <div className="lg:col-span-7 space-y-6">
+                {/* Left: Entity Cards (68-70% width: 8 cols) */}
+                <div className="lg:col-span-8 grid grid-cols-1 xl:grid-cols-2 gap-5">
                   {filteredEntities.map((entity, idx) => (
                     <div
                       key={entity.id}
                       className={`transition-all duration-200 rounded-3xl ${
-                        selectedEntityForMap === entity.id ? 'ring-2 ring-[#4A5CD8]/30 shadow-lg' : ''
+                        selectedEntityForMap === entity.id ? 'ring-2 ring-[#4A5CD8]/40 shadow-md' : ''
                       }`}
                       onClick={() => setSelectedEntityForMap(entity.id)}
                     >
@@ -593,8 +593,8 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                   ))}
                 </div>
 
-                {/* Right: Sticky Interactive Map (5 cols) */}
-                <div id="research-map-section" className="lg:col-span-5 sticky top-24 space-y-4">
+                {/* Right: Sticky Interactive Map (30-32% width: 4 cols) */}
+                <div id="research-map-section" className="lg:col-span-4 sticky top-24 space-y-4">
                   <div className="p-4 rounded-3xl bg-white border border-zinc-200/80 shadow-md space-y-3">
                     <div className="flex items-center justify-between px-1">
                       <div className="flex items-center gap-2">
@@ -610,7 +610,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                         onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
                         onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
                         onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
-                        height="580px"
+                        height="680px"
                       />
                     </div>
                   </div>
@@ -619,19 +619,26 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
             )}
 
             {layoutMode === 'cards' && (
-              <div className="space-y-6 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
                 {filteredEntities.map((entity, idx) => (
-                  <EntityCard
+                  <div
                     key={entity.id}
-                    entity={entity}
-                    index={idx}
-                    isCompared={comparedEntities.some((e) => e.id === entity.id)}
-                    onToggleCompare={() => handleToggleCompare(entity)}
-                    onOpenEvidence={(filterAspect) => handleOpenDrawer(entity, filterAspect)}
-                    onOpenGraph={() => handleOpenGraph(entity)}
-                    onViewOnMap={() => handleViewOnMap(entity)}
-                    onOpenDetail={() => onOpenEntityDetail && onOpenEntityDetail(entity)}
-                  />
+                    className={`transition-all duration-200 rounded-3xl ${
+                      selectedEntityForMap === entity.id ? 'ring-2 ring-[#4A5CD8]/40 shadow-md' : ''
+                    }`}
+                    onClick={() => setSelectedEntityForMap(entity.id)}
+                  >
+                    <EntityCard
+                      entity={entity}
+                      index={idx}
+                      isCompared={comparedEntities.some((e) => e.id === entity.id)}
+                      onToggleCompare={() => handleToggleCompare(entity)}
+                      onOpenEvidence={(filterAspect) => handleOpenDrawer(entity, filterAspect)}
+                      onOpenGraph={() => handleOpenGraph(entity)}
+                      onViewOnMap={() => handleViewOnMap(entity)}
+                      onOpenDetail={() => onOpenEntityDetail && onOpenEntityDetail(entity)}
+                    />
+                  </div>
                 ))}
               </div>
             )}

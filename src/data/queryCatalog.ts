@@ -68,5 +68,4 @@ export const catalogQueries: Record<string, ResearchQuery> = {
   [genericEducationDemoData.query.toLowerCase()]: genericEducationDemoData,
   'top delhi university colleges with high nirf rankings and strong placements': genericEducationDemoData,
   'top du north campus colleges': genericEducationDemoData,
-  'b.tech cse colleges in delhi': genericEducationDemoData,
 };

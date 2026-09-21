@@ -30,3 +30,10 @@ class EntityReport(BaseCamelModel):
     source_composition: List[SourceDistribution] = []
     conflict: ConflictReport
     evidence_list: List[EvidenceItem] = []
+    institution_type: Optional[str] = None  # "engineering" | "medical" | "management" | "college" | "university" | "restaurant"
+    programs: List[str] = []
+    domains: List[str] = []
+    degree_levels: List[str] = []
+    city: Optional[str] = "Delhi"
+    district: Optional[str] = None
+    locality: Optional[str] = None

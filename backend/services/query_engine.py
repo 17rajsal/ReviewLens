@@ -24,14 +24,65 @@ class RuleBasedQueryParser(BaseQueryParser):
         priorities: List[str] = []
 
         # 1. Domain & Entity Type Classification
-        if any(w in lower for w in ["college", "b.tech", "engineering", "campus", "cse", "ipu", "bpit", "mait", "usict", "msit", "dtu", "university"]):
+        is_restaurant_query = any(w in lower for w in [
+            "restaurant", "restaurants", "food", "cafe", "cafes", "dining", "dosa",
+            "coffee", "buffet", "kebab", "biryani", "dhaba", "bakery", "chaat"
+        ])
+        is_medical_query = any(w in lower for w in [
+            "medical", "mbbs", "doctor", "health science", "neet", "aiims", "vmmc", "lhmc", "mamc", "ucms"
+        ])
+        is_engineering_query = any(w in lower for w in [
+            "b.tech", "btech", "engineering", "cse", "computer science", "it branch", "ece branch",
+            "dtu", "nsut", "iiitd", "iiit-delhi", "igdtuw", "mait", "msit", "bpit", "bvcoe", "usict"
+        ])
+
+        if is_restaurant_query and not (is_engineering_query or is_medical_query or "college" in lower):
+            category = "restaurant"
+            constraints.domain = "dining"
+            constraints.target_domain = "dining"
+            constraints.entity_type = "restaurant"
+            constraints.institution_type = "restaurant"
+        elif is_medical_query and not is_engineering_query:
+            category = "college"
+            constraints.domain = "education"
+            constraints.target_domain = "medical"
+            constraints.entity_type = "college"
+            constraints.institution_type = "medical"
+            constraints.degree = "MBBS"
+            constraints.branch = "Medicine"
+            constraints.programs = ["MBBS", "MD"]
+        elif is_engineering_query:
+            category = "college"
+            constraints.domain = "education"
+            constraints.target_domain = "engineering"
+            constraints.entity_type = "college"
+            constraints.institution_type = "engineering"
+            constraints.degree = "B.Tech"
+            if "cse" in lower or "computer science" in lower:
+                constraints.branch = "CSE"
+                constraints.programs = ["B.Tech CSE"]
+            elif "it" in lower:
+                constraints.branch = "IT"
+                constraints.programs = ["B.Tech IT"]
+            elif "ece" in lower:
+                constraints.branch = "ECE"
+                constraints.programs = ["B.Tech ECE"]
+            else:
+                constraints.programs = ["B.Tech"]
+        elif any(w in lower for w in ["college", "colleges", "campus", "university", "du colleges", "north campus"]):
             category = "college"
             constraints.domain = "education"
             constraints.entity_type = "college"
-        elif any(w in lower for w in ["restaurant", "food", "cafe", "dining", "dosa", "coffee", "buffet", "connaught place", "cp"]):
-            category = "restaurant"
-            constraints.domain = "dining"
-            constraints.entity_type = "restaurant"
+            if any(w in lower for w in ["commerce", "b.com", "bcom", "economics"]):
+                constraints.target_domain = "commerce"
+                constraints.degree = "B.Com"
+            elif any(w in lower for w in ["management", "bba", "bms", "mba"]):
+                constraints.target_domain = "management"
+                constraints.degree = "BBA / BMS"
+            elif any(w in lower for w in ["du", "delhi university"]):
+                constraints.target_domain = "du"
+            else:
+                constraints.target_domain = "general_education"
         elif any(w in lower for w in ["hotel", "resort", "palace", "stay", "haveli", "heritage"]):
             category = "hotel"
             constraints.domain = "hospitality"
@@ -61,14 +112,28 @@ class RuleBasedQueryParser(BaseQueryParser):
                     constraints.budget = base_num * 1000.0
                 else:
                     constraints.budget = base_num
+                constraints.budget_numeric = constraints.budget
             except ValueError:
                 constraints.budget = None
+                constraints.budget_numeric = None
 
         # 3. Extract Location
-        if "delhi" in lower or "ncr" in lower or "rohini" in lower or "dwarka" in lower or "janakpuri" in lower:
-            constraints.location = "Delhi"
+        if "rohini" in lower:
+            constraints.location = "Rohini, Delhi"
+        elif "dwarka" in lower:
+            constraints.location = "Dwarka, Delhi"
         elif "connaught place" in lower or "cp" in lower or "janpath" in lower:
             constraints.location = "Connaught Place, New Delhi"
+        elif "north campus" in lower:
+            constraints.location = "North Campus, Delhi"
+        elif "south campus" in lower or "south delhi" in lower:
+            constraints.location = "South Delhi"
+        elif "west delhi" in lower or "janakpuri" in lower:
+            constraints.location = "West Delhi"
+        elif "east delhi" in lower or "shahdara" in lower:
+            constraints.location = "East Delhi"
+        elif "delhi" in lower or "ncr" in lower:
+            constraints.location = "Delhi"
         elif "jaipur" in lower or "rajasthan" in lower:
             constraints.location = "Jaipur, Rajasthan"
         elif "bangalore" in lower or "bengaluru" in lower:
@@ -76,23 +141,7 @@ class RuleBasedQueryParser(BaseQueryParser):
         elif "mumbai" in lower:
             constraints.location = "Mumbai, Maharashtra"
         elif "dtu" in lower or "bawana" in lower:
-            constraints.location = "Near DTU, Delhi"
-
-        # 4. Extract Degree & Branch for Colleges
-        if constraints.domain == "education":
-            if "b.tech" in lower or "engineering" in lower or "btech" in lower:
-                constraints.degree = "B.Tech"
-            elif "m.tech" in lower:
-                constraints.degree = "M.Tech"
-            elif "mba" in lower:
-                constraints.degree = "MBA"
-
-            if "cse" in lower or "computer science" in lower:
-                constraints.branch = "CSE"
-            elif "it" in lower or "information tech" in lower:
-                constraints.branch = "IT"
-            elif "ece" in lower or "electronics" in lower:
-                constraints.branch = "ECE"
+            constraints.location = "Rohini / Bawana, Delhi"
 
         # 5. Extract User Priorities
         if any(w in lower for w in ["coding", "hackathon", "developer", "leetcode", "programming", "coding culture"]):

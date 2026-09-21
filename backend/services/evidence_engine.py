@@ -218,7 +218,9 @@ class EvidenceEngine:
         constraints: ParsedConstraints,
         source_status: Dict[str, str]
     ) -> ResearchQueryResponse:
-        entities = self.archive_connector.filter_education_entities(query, limit=6)
+        entities = self.archive_connector.filter_education_entities(query, constraints=constraints, limit=10)
+        if not entities:
+            entities = self.archive_connector.get_generic_education_entities()[:4]
 
         total_clusters = 0
         total_sources_scanned = 0

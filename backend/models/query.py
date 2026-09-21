@@ -5,11 +5,15 @@ from backend.models.analysis import AspectAnalysis, ConflictReport, ConfidenceBr
 
 class ParsedConstraints(BaseCamelModel):
     domain: Optional[str] = None
+    target_domain: Optional[str] = None
     entity_type: Optional[str] = None
+    institution_type: Optional[str] = None
+    programs: List[str] = []
     location: Optional[str] = None
     degree: Optional[str] = None
     branch: Optional[str] = None
     budget: Optional[float] = None
+    budget_numeric: Optional[float] = None
     budget_max: Optional[str] = None
     priority: Optional[str] = None
     priorities: List[str] = []

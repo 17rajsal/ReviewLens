@@ -11,26 +11,54 @@ export function parseQueryConstraints(query: string): ParsedConstraints {
   const budgetMatch = query.match(/under\s+(₹?[\d,]+(\s*lakh|\s*k)?|\$?[\d,]+)/i);
   if (budgetMatch) {
     constraints.budgetMax = budgetMatch[0].replace(/under\s+/i, '').trim();
+    const cleanStr = constraints.budgetMax.replace(/[₹$,]/g, '').trim();
+    const baseNum = parseFloat(cleanStr.replace(/[^\d.]/g, ''));
+    if (!isNaN(baseNum)) {
+      if (cleanStr.toLowerCase().includes('lakh')) {
+        constraints.budgetNumeric = baseNum * 100000;
+      } else if (cleanStr.toLowerCase().includes('k')) {
+        constraints.budgetNumeric = baseNum * 1000;
+      } else {
+        constraints.budgetNumeric = baseNum;
+      }
+    }
   }
 
   // Extract location
-  if (lower.includes('delhi')) constraints.location = 'Delhi NCR';
+  if (lower.includes('rohini')) constraints.location = 'Rohini, Delhi';
+  else if (lower.includes('dwarka')) constraints.location = 'Dwarka, Delhi';
+  else if (lower.includes('connaught place') || lower.includes('cp')) constraints.location = 'Connaught Place, New Delhi';
+  else if (lower.includes('north campus')) constraints.location = 'North Campus, Delhi';
+  else if (lower.includes('south delhi') || lower.includes('south campus')) constraints.location = 'South Delhi';
+  else if (lower.includes('delhi')) constraints.location = 'Delhi NCR';
   else if (lower.includes('jaipur')) constraints.location = 'Jaipur, Rajasthan';
   else if (lower.includes('bangalore') || lower.includes('bengaluru')) constraints.location = 'Bengaluru';
   else if (lower.includes('mumbai')) constraints.location = 'Mumbai';
-  else if (lower.includes('connaught place') || lower.includes('cp')) constraints.location = 'Connaught Place, New Delhi';
 
   // Extract discipline/topic
-  if (lower.includes('b.tech') || lower.includes('engineering') || lower.includes('college') || lower.includes('institution')) {
+  if (lower.includes('b.tech') || lower.includes('btech') || lower.includes('engineering') || lower.includes('cse') || lower.includes('coding culture')) {
+    constraints.targetDomain = 'engineering';
     constraints.degree = 'B.Tech';
     if (lower.includes('cse') || lower.includes('computer')) constraints.branch = 'Computer Science (CSE)';
+  } else if (lower.includes('medical') || lower.includes('mbbs') || lower.includes('doctor')) {
+    constraints.targetDomain = 'medical';
+    constraints.degree = 'MBBS';
+    constraints.branch = 'Medicine';
+  } else if (lower.includes('commerce') || lower.includes('b.com') || lower.includes('bcom')) {
+    constraints.targetDomain = 'commerce';
+    constraints.degree = 'B.Com';
+  } else if (lower.includes('management') || lower.includes('bba') || lower.includes('bms')) {
+    constraints.targetDomain = 'management';
+    constraints.degree = 'BBA / BMS';
   }
 
   // Extract priority
-  if (lower.includes('coding') || lower.includes('developer') || lower.includes('programming')) {
+  if (lower.includes('coding') || lower.includes('developer') || lower.includes('programming') || lower.includes('coding culture')) {
     constraints.priority = 'Coding Culture & Hackathons';
   } else if (lower.includes('food') || lower.includes('restaurant') || lower.includes('ambience')) {
     constraints.priority = 'Food Authenticity & Value';
+  } else if (lower.includes('placement') || lower.includes('package') || lower.includes('salary') || lower.includes('roi')) {
+    constraints.priority = 'Placements & Career ROI';
   } else if (lower.includes('hotel') || lower.includes('heritage') || lower.includes('service')) {
     constraints.priority = 'Heritage Ambience & Guest Service';
   } else if (lower.includes('laptop') || lower.includes('software') || lower.includes('product')) {
@@ -42,67 +70,7 @@ export function parseQueryConstraints(query: string): ParsedConstraints {
 
 export function generateResearchReportForQuery(query: string): ResearchQuery {
   const lower = query.toLowerCase().trim();
-
-  // Check if query matches specific college or college category
-  const isCollege = (
-    lower.includes('college') ||
-    lower.includes('b.tech') ||
-    lower.includes('cse') ||
-    lower.includes('institution') ||
-    lower.includes('engineering') ||
-    lower.includes('university') ||
-    delhiColleges.some(c => c.aliases.some(a => lower.includes(a.toLowerCase())))
-  );
-
-  if (isCollege) {
-    const exact: EntityReport[] = [];
-    const partial: EntityReport[] = [];
-    const others: EntityReport[] = [];
-
-    for (const c of delhiColleges) {
-      const names = [c.canonicalName.toLowerCase(), ...c.aliases.map(a => a.toLowerCase())];
-      const loc = (c.location || "").toLowerCase() + " " + (c.formattedAddress || "").toLowerCase();
-      const cat = (c.category || "").toLowerCase();
-      const aff = (c.affiliation || "").toLowerCase();
-      const tag = (c.highlightTag || "").toLowerCase();
-
-      if (names.some(n => lower.includes(n) || (lower.length > 2 && n.includes(lower)))) {
-        exact.push(c);
-      } else if (
-        (lower.includes('rohini') && loc.includes('rohini')) ||
-        (lower.includes('dwarka') && loc.includes('dwarka')) ||
-        (lower.includes('north campus') && (loc.includes('north campus') || loc.includes('maurice nagar') || loc.includes('university enclave'))) ||
-        (lower.includes('south campus') && (loc.includes('south campus') || loc.includes('benito juarez') || loc.includes('dhaula kuan'))) ||
-        (lower.includes('south delhi') && (loc.includes('south') || loc.includes('kalkaji') || loc.includes('ansari nagar') || loc.includes('okhla') || loc.includes('hauz khas'))) ||
-        (lower.includes('west delhi') && (loc.includes('west') || loc.includes('raja garden') || loc.includes('janakpuri'))) ||
-        (lower.includes('east delhi') && (loc.includes('east') || loc.includes('vasundhara') || loc.includes('vivek vihar') || loc.includes('shahdara'))) ||
-        (lower.includes('shahdara') && loc.includes('shahdara')) ||
-        (lower.includes('central delhi') && (loc.includes('central') || loc.includes('connaught') || loc.includes('ajmeri') || loc.includes('chanakyapuri'))) ||
-        ((lower.includes('engineering') || lower.includes('btech') || lower.includes('tech')) && (cat.includes('engineering') || cat.includes('technology') || tag.includes('b.tech') || c.id.includes('dtu') || c.id.includes('nsut') || c.id.includes('iiitd'))) ||
-        ((lower.includes('medical') || lower.includes('health') || lower.includes('mbbs') || lower.includes('doctor')) && (cat.includes('medical') || aff.includes('hospital') || tag.includes('mbbs') || c.id.includes('aiims') || c.id.includes('vmmc') || c.id.includes('lhmc'))) ||
-        ((lower.includes('commerce') || lower.includes('bcom')) && (c.canonicalName.toLowerCase().includes('commerce') || cat.includes('commerce') || tag.includes('commerce'))) ||
-        ((lower.includes('women') || lower.includes('girls')) && (c.canonicalName.toLowerCase().includes('women') || aff.includes('women') || tag.includes('women') || c.canonicalName.toLowerCase().includes('miranda') || c.canonicalName.toLowerCase().includes('gargi') || c.canonicalName.toLowerCase().includes('lsr'))) ||
-        ((lower.includes('management') || lower.includes('bba') || lower.includes('bms')) && (c.canonicalName.toLowerCase().includes('business') || tag.includes('bba') || tag.includes('bms') || c.id.includes('sscbs') || c.id.includes('msi'))) ||
-        ((lower.includes('du') || lower.includes('delhi university')) && (aff.includes('university of delhi') || aff.includes('du')))
-      ) {
-        partial.push(c);
-      } else {
-        others.push(c);
-      }
-    }
-
-    const sortedColleges = [...exact, ...partial, ...others];
-    return {
-      ...genericEducationDemoData,
-      query: query,
-      entitiesDiscovered: sortedColleges.length,
-      results: sortedColleges,
-      constraints: {
-        ...genericEducationDemoData.constraints,
-        ...parseQueryConstraints(query)
-      }
-    };
-  }
+  const constraints = parseQueryConstraints(query);
 
   // Check if query matches specific restaurant or restaurant category
   const isRestaurant = (
@@ -119,7 +87,7 @@ export function generateResearchReportForQuery(query: string): ResearchQuery {
     lower.includes('biryani') ||
     lower.includes('connaught place') ||
     delhiRestaurants.some(r => r.aliases.some(a => lower.includes(a.toLowerCase())))
-  );
+  ) && !lower.includes('college') && !lower.includes('b.tech') && !lower.includes('engineering') && !lower.includes('medical');
 
   if (isRestaurant) {
     return createRestaurantQuery(query);
@@ -135,9 +103,137 @@ export function generateResearchReportForQuery(query: string): ResearchQuery {
     return createProductQuery(query);
   }
 
-  // Dynamic fallback for any general research query
-  return createDynamicFallbackQuery(query);
+  // Check if query is an education/college query
+  const isBtechQuery = (
+    lower.includes('b.tech') ||
+    lower.includes('btech') ||
+    lower.includes('cse') ||
+    lower.includes('computer science') ||
+    lower.includes('engineering') ||
+    lower.includes('coding culture')
+  );
+
+  const isMedicalQuery = (
+    lower.includes('medical') ||
+    lower.includes('mbbs') ||
+    lower.includes('doctor') ||
+    lower.includes('health science') ||
+    lower.includes('neet')
+  );
+
+  const isCommerceQuery = lower.includes('commerce') || lower.includes('b.com') || lower.includes('bcom') || lower.includes('economics');
+  const isManagementQuery = lower.includes('management') || lower.includes('bba') || lower.includes('bms');
+  const isDuQuery = lower.includes('du ') || lower.includes(' du') || lower.includes('delhi university') || lower.includes('north campus') || lower.includes('south campus');
+  const isRohiniQuery = lower.includes('rohini');
+  const isDwarkaQuery = lower.includes('dwarka');
+
+  const exact: EntityReport[] = [];
+  const candidates: EntityReport[] = [];
+
+  for (const c of delhiColleges) {
+    const names = [c.canonicalName.toLowerCase(), ...c.aliases.map(a => a.toLowerCase())];
+    const loc = (c.location || "").toLowerCase() + " " + (c.formattedAddress || "").toLowerCase() + " " + (c.locality || "").toLowerCase();
+    const cat = (c.category || "").toLowerCase();
+    const instType = (c.institutionType || "").toLowerCase();
+    const programs = (c.programs || []).map(p => p.toLowerCase());
+    const domains = (c.domains || []).map(d => d.toLowerCase());
+    const aff = (c.affiliation || "").toLowerCase();
+
+    // 1. HARD INTENT CONSTRAINTS
+    if (isBtechQuery) {
+      // Under B.Tech/CSE/Engineering, medical institutions (AIIMS, VMMC, LHMC) MUST NOT appear!
+      if (instType === 'medical' || domains.includes('medicine') || cat.includes('medical') || programs.some(p => p.includes('mbbs'))) {
+        continue;
+      }
+      // Pure DU arts/commerce/sciences with no B.Tech MUST NOT appear!
+      const hasBtech = programs.some(p => p.includes('b.tech'));
+      const hasEngg = instType === 'engineering' || instType === 'university' || domains.includes('engineering') || cat.includes('engineering') || cat.includes('technology');
+      if (!hasBtech && !hasEngg) {
+        continue;
+      }
+    }
+
+    if (isMedicalQuery) {
+      // Under medical queries, non-medical institutions MUST NOT appear
+      const isMed = instType === 'medical' || domains.includes('medicine') || cat.includes('medical') || programs.some(p => p.includes('mbbs'));
+      if (!isMed) {
+        continue;
+      }
+    }
+
+    // 2. NUMERIC BUDGET CONSTRAINT
+    if (constraints.budgetNumeric !== undefined && c.annualFeeNumeric !== undefined) {
+      if (c.annualFeeNumeric > constraints.budgetNumeric) {
+        continue;
+      }
+    }
+
+    // 3. DIRECT NAME OR ALIAS MATCH
+    if (names.some(n => n === lower || (n.length > 3 && lower.includes(n)))) {
+      exact.push(c);
+      continue;
+    }
+
+    // 4. LOCALITY FILTER (if specifically asked for Rohini or Dwarka)
+    if (isRohiniQuery && !loc.includes('rohini')) {
+      continue;
+    }
+    if (isDwarkaQuery && !loc.includes('dwarka')) {
+      continue;
+    }
+
+    // 5. INTENT MATCHING
+    let matched = false;
+    if (isBtechQuery) {
+      if (lower.includes('cse') || lower.includes('computer')) {
+        if (programs.some(p => p.includes('cse') || p.includes('computer')) || domains.includes('computer_science')) {
+          matched = true;
+        } else if (programs.some(p => p.includes('b.tech'))) {
+          matched = true;
+        }
+      } else {
+        matched = true;
+      }
+    } else if (isMedicalQuery) {
+      matched = true;
+    } else if (isCommerceQuery) {
+      if (domains.includes('commerce') || domains.includes('economics') || programs.some(p => p.includes('b.com'))) {
+        matched = true;
+      }
+    } else if (isManagementQuery) {
+      if (domains.includes('management') || programs.some(p => p.includes('bba') || p.includes('bms'))) {
+        matched = true;
+      }
+    } else if (isDuQuery) {
+      if (aff.includes('university of delhi') || aff.includes('du')) {
+        matched = true;
+      }
+    } else if (isRohiniQuery || isDwarkaQuery) {
+      matched = true;
+    } else {
+      matched = true;
+    }
+
+    if (matched) {
+      candidates.push(c);
+    }
+  }
+
+  const results = [...exact, ...candidates.filter(c => !exact.some(e => e.id === c.id))];
+  const finalResults = results.length > 0 ? results : delhiColleges.slice(0, 4);
+
+  return {
+    ...genericEducationDemoData,
+    query: query,
+    entitiesDiscovered: finalResults.length,
+    results: finalResults,
+    constraints: {
+      ...genericEducationDemoData.constraints,
+      ...constraints
+    }
+  };
 }
+
 
 function createRestaurantQuery(query: string): ResearchQuery {
   const lower = query.toLowerCase();

@@ -120,13 +120,24 @@ export interface EntityReport {
   sourceComposition: SourceDistribution[];
   conflict: ConflictReport;
   evidenceList: EvidenceItem[];
+  institutionType?: string; // "engineering" | "medical" | "management" | "college" | "university" | "restaurant"
+  programs?: string[];
+  domains?: string[];
+  degreeLevels?: string[];
+  city?: string;
+  district?: string;
+  locality?: string;
 }
 
 export interface ParsedConstraints {
+  domain?: string;
+  targetDomain?: string;
+  institutionType?: string;
   degree?: string;
   branch?: string;
   location?: string;
   budgetMax?: string;
+  budgetNumeric?: number;
   priority?: string;
   cuisine?: string;
   propertyType?: string;
