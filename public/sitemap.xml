@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Note: Replace https://reviewlens.example.com with your actual verified production domain -->
   <url>
-    <loc>https://reviewlens.example.com/</loc>
-    <changefreq>weekly</changefreq>
+    <loc>https://review-lens-black.vercel.app/</loc>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://reviewlens.example.com/sources</loc>
+    <loc>https://review-lens-black.vercel.app/#sources</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://reviewlens.example.com/methodology</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://review-lens-black.vercel.app/#methodology</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://reviewlens.example.com/privacy</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://review-lens-black.vercel.app/#map</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://reviewlens.example.com/terms</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://review-lens-black.vercel.app/#compare</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://review-lens-black.vercel.app/#history</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://review-lens-black.vercel.app/#privacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://review-lens-black.vercel.app/#terms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

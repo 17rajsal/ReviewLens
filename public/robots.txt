@@ -2,10 +2,10 @@
 User-agent: *
 Allow: /
 
-# Disallow private API endpoints from web crawler indexing
+# Disallow private backend API endpoints from crawler indexing
 Disallow: /api/
 Disallow: /docs
 Disallow: /redoc
 
 # Sitemap
-Sitemap: /sitemap.xml
+Sitemap: https://review-lens-black.vercel.app/sitemap.xml

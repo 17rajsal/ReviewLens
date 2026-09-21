@@ -100,7 +100,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               tactileAudio.playClick();
               setIsExpanded(!isExpanded);
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#18181B] text-white text-xs font-mono-code hover:bg-zinc-800 transition-all shadow-2xs"
+            aria-expanded={isExpanded}
+            aria-controls="filter-controls-panel"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#18181B] text-white text-xs font-mono-code hover:bg-zinc-800 transition-all shadow-2xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
           >
             <Filter className="w-3 h-3" />
             <span>{isExpanded ? 'Hide Filter Controls' : 'Show Filter Controls'}</span>
@@ -111,7 +113,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
       {/* Filter Control Panels */}
       {isExpanded && (
-        <div className="pt-3 border-t border-zinc-100 space-y-4">
+        <div id="filter-controls-panel" className="pt-3 border-t border-zinc-100 space-y-4">
           {/* College Specific Filters */}
           {isCollege && (
             <div className="space-y-3">
@@ -122,8 +124,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                 {/* Region */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Delhi Region</label>
+                  <label htmlFor="filter-college-region" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Delhi Region</label>
                   <select
+                    id="filter-college-region"
                     value={filters.collegeRegion}
                     onChange={(e) => updateFilter('collegeRegion', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -141,8 +144,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Institution Type */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Institution Type</label>
+                  <label htmlFor="filter-college-type" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Institution Type</label>
                   <select
+                    id="filter-college-type"
                     value={filters.collegeType}
                     onChange={(e) => updateFilter('collegeType', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -158,8 +162,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Course Domain */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Domain / Stream</label>
+                  <label htmlFor="filter-college-domain" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Domain / Stream</label>
                   <select
+                    id="filter-college-domain"
                     value={filters.collegeDomain}
                     onChange={(e) => updateFilter('collegeDomain', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -176,8 +181,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Accreditation */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Accreditation</label>
+                  <label htmlFor="filter-college-accreditation" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Accreditation</label>
                   <select
+                    id="filter-college-accreditation"
                     value={filters.collegeAccreditation}
                     onChange={(e) => updateFilter('collegeAccreditation', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -191,8 +197,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* NIRF */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">NIRF Rank</label>
+                  <label htmlFor="filter-college-nirf" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">NIRF Rank</label>
                   <select
+                    id="filter-college-nirf"
                     value={filters.collegeNirf}
                     onChange={(e) => updateFilter('collegeNirf', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -218,8 +225,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                 {/* Locality */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Locality / Market</label>
+                  <label htmlFor="filter-restaurant-locality" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Locality / Market</label>
                   <select
+                    id="filter-restaurant-locality"
                     value={filters.restaurantLocality}
                     onChange={(e) => updateFilter('restaurantLocality', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -243,8 +251,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Cuisine */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Cuisine</label>
+                  <label htmlFor="filter-restaurant-cuisine" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Cuisine</label>
                   <select
+                    id="filter-restaurant-cuisine"
                     value={filters.restaurantCuisine}
                     onChange={(e) => updateFilter('restaurantCuisine', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -261,8 +270,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Price Level */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Price Tier</label>
+                  <label htmlFor="filter-restaurant-price" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Price Tier</label>
                   <select
+                    id="filter-restaurant-price"
                     value={filters.restaurantPrice}
                     onChange={(e) => updateFilter('restaurantPrice', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -277,8 +287,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Vegetarian / Diet */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Dietary Profile</label>
+                  <label htmlFor="filter-restaurant-diet" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Dietary Profile</label>
                   <select
+                    id="filter-restaurant-diet"
                     value={filters.restaurantDiet}
                     onChange={(e) => updateFilter('restaurantDiet', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"
@@ -291,8 +302,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
                 {/* Dining Type */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Dining Format</label>
+                  <label htmlFor="filter-restaurant-type" className="text-[10px] font-mono-code text-zinc-500 font-semibold block">Dining Format</label>
                   <select
+                    id="filter-restaurant-type"
                     value={filters.restaurantType}
                     onChange={(e) => updateFilter('restaurantType', e.target.value)}
                     className="w-full text-xs font-mono-code py-1.5 px-2.5 rounded-xl border border-zinc-200 bg-[#FAF8F5] text-zinc-800 focus:outline-none focus:ring-1 focus:ring-[#4A5CD8]"

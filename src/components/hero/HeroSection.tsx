@@ -227,16 +227,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
             <div className="lg:col-span-8">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {categoryCards.map((cat) => (
-                  <div
+                  <button
                     key={cat.id}
+                    type="button"
                     onClick={() => handleCategoryClick(cat.query)}
-                    className="group cursor-pointer rounded-2xl bg-white border border-zinc-200/80 hover:border-zinc-300 p-2.5 shadow-sm hover:shadow-md transition-all duration-300 space-y-2.5"
+                    aria-label={`Research ${cat.title}: ${cat.subtitle}`}
+                    className="group text-left cursor-pointer rounded-2xl bg-white border border-zinc-200/80 hover:border-zinc-300 p-2.5 shadow-sm hover:shadow-md transition-all duration-300 space-y-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
                   >
                     {/* Image Preview Container */}
                     <div className="w-full h-24 sm:h-28 rounded-xl overflow-hidden bg-zinc-100 relative">
                       <img
                         src={cat.image}
-                        alt={cat.title}
+                        alt=""
+                        loading="lazy"
+                        width={240}
+                        height={160}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
@@ -244,18 +249,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
                     {/* Metadata & Minimal Arrow */}
                     <div className="flex items-end justify-between px-1 pb-1">
                       <div>
-                        <h4 className="text-xs font-bold text-[#18181B] group-hover:text-[#4A5CD8] transition-colors">
+                        <span className="block text-xs font-bold text-[#18181B] group-hover:text-[#4A5CD8] transition-colors">
                           {cat.title}
-                        </h4>
-                        <p className="text-[10px] text-zinc-500 font-light">
+                        </span>
+                        <span className="block text-[10px] text-zinc-500 font-light">
                           {cat.subtitle}
-                        </p>
+                        </span>
                       </div>
                       <div className="w-6 h-6 rounded-full bg-zinc-100 group-hover:bg-[#18181B] text-zinc-600 group-hover:text-white flex items-center justify-center transition-colors">
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </div>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

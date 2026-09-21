@@ -35,14 +35,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, githubUrl }) => {
           {/* Direct Contact Anchor */}
           <div>
             <button
+              type="button"
               onClick={() => {
                 tactileAudio.playClick();
                 onNavClick('contact');
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-xs font-mono-code text-zinc-800 transition-colors shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-xs font-mono-code text-zinc-800 transition-colors shadow-xs cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
             >
               <span>Contact / Suggestion</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -56,33 +57,36 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, githubUrl }) => {
             <ul className="space-y-2">
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('hero');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Research
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('map');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Map
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('compare');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Compare
                 </button>
@@ -97,55 +101,60 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, githubUrl }) => {
             <ul className="space-y-2">
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('sources');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Sources & Health
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('methodology');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Methodology
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('contact');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Contact / Suggestion
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('privacy');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Privacy Policy
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => {
                     tactileAudio.playClick();
                     onNavClick('terms');
                   }}
-                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer"
+                  className="text-zinc-600 hover:text-[#18181B] transition-colors text-left cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
                 >
                   Terms of Use
                 </button>
@@ -204,11 +213,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, githubUrl }) => {
               <a
                 href={githubUrl}
                 target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-[#18181B] hover:text-[#3444B8] font-mono-code text-[11px] pt-1"
+                rel="noopener noreferrer"
+                aria-label="View ReviewLens repository on GitHub (opens in new tab)"
+                className="inline-flex items-center gap-1 text-[#18181B] hover:text-[#3444B8] font-mono-code text-[11px] pt-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B] rounded-xs"
               >
                 <span>GitHub Repository</span>
-                <ArrowUpRight className="w-3 h-3" />
+                <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
               </a>
             )}
           </div>

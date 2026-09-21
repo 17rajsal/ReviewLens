@@ -52,6 +52,16 @@ export const EvidenceGraphModal: React.FC<EvidenceGraphModalProps> = ({
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
     setActiveEntity(entity);
     if (entity.aspects.length > 0) {
       setExpandedAspectIds(new Set([`asp-${entity.aspects[0].id}`]));
@@ -227,8 +237,13 @@ export const EvidenceGraphModal: React.FC<EvidenceGraphModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-900/40 backdrop-blur-md">
-      <div className="relative w-full max-w-6xl h-[88vh] rounded-3xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="graph-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-900/40 backdrop-blur-md"
+    >
+      <div className="relative w-full max-w-6xl h-[88vh] rounded-3xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden focus:outline-none">
         {/* Header HUD */}
         <div className="p-5 sm:p-6 border-b border-zinc-200/80 bg-[#FAF8F5] flex flex-wrap items-center justify-between gap-4 z-20">
           <div className="flex items-center gap-3">
@@ -244,9 +259,9 @@ export const EvidenceGraphModal: React.FC<EvidenceGraphModalProps> = ({
                   4-Tier Hierarchy
                 </span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-[#18181B] tracking-tight">
+              <h2 id="graph-modal-title" className="text-lg sm:text-xl font-bold text-[#18181B] tracking-tight">
                 {activeEntity.canonicalName}
-              </h3>
+              </h2>
             </div>
           </div>
 
@@ -271,7 +286,9 @@ export const EvidenceGraphModal: React.FC<EvidenceGraphModalProps> = ({
 
           {/* Close & Entity Selector */}
           <div className="flex items-center gap-2.5">
+            <label htmlFor="graph-entity-select" className="sr-only">Switch graph entity</label>
             <select
+              id="graph-entity-select"
               value={activeEntity.id}
               onChange={(e) => {
                 const found = allEntities.find((ent) => ent.id === e.target.value);
@@ -294,7 +311,8 @@ export const EvidenceGraphModal: React.FC<EvidenceGraphModalProps> = ({
                 tactileAudio.playClick();
                 onClose();
               }}
-              className="p-2 rounded-full bg-white hover:bg-zinc-100 text-zinc-500 hover:text-[#18181B] transition-colors border border-zinc-200"
+              aria-label="Close evidence graph"
+              className="p-2 rounded-full bg-white hover:bg-zinc-100 text-zinc-500 hover:text-[#18181B] transition-colors border border-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8] cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -322,22 +340,25 @@ export const EvidenceGraphModal: React.FC<EvidenceGraphModalProps> = ({
           <div className="absolute top-4 left-4 z-30 flex items-center gap-1.5 p-1.5 rounded-full bg-white/90 border border-zinc-200/90 backdrop-blur-xl shadow-md">
             <button
               onClick={() => setZoom((z) => Math.min(z + 0.15, 2.0))}
-              className="p-1.5 rounded-full text-zinc-600 hover:text-[#18181B] hover:bg-zinc-100"
+              className="p-1.5 rounded-full text-zinc-600 hover:text-[#18181B] hover:bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
               title="Zoom In"
+              aria-label="Zoom in on graph"
             >
               <ZoomIn className="w-4 h-4" />
             </button>
             <button
               onClick={() => setZoom((z) => Math.max(z - 0.15, 0.6))}
-              className="p-1.5 rounded-full text-zinc-600 hover:text-[#18181B] hover:bg-zinc-100"
+              className="p-1.5 rounded-full text-zinc-600 hover:text-[#18181B] hover:bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
               title="Zoom Out"
+              aria-label="Zoom out on graph"
             >
               <ZoomOut className="w-4 h-4" />
             </button>
             <button
               onClick={resetView}
-              className="p-1.5 rounded-full text-zinc-600 hover:text-[#18181B] hover:bg-zinc-100"
+              className="p-1.5 rounded-full text-zinc-600 hover:text-[#18181B] hover:bg-zinc-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
               title="Reset View"
+              aria-label="Reset graph view"
             >
               <RotateCcw className="w-4 h-4" />
             </button>

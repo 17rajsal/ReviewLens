@@ -165,17 +165,19 @@ export const ContactSuggestionSection: React.FC<ContactSuggestionSectionProps> =
 
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={handleCopyEmail}
-              className="px-3.5 py-2 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-700 text-xs font-mono-code flex items-center gap-1.5 transition-colors cursor-pointer"
+              aria-label={copied ? "Email address copied to clipboard" : "Copy contact email address to clipboard"}
+              className="px-3.5 py-2 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-700 text-xs font-mono-code flex items-center gap-1.5 transition-colors cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="text-emerald-700">Copied</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
+                  <span className="text-emerald-700" role="status" aria-live="polite">Copied</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5 text-zinc-400" />
+                  <Copy className="w-3.5 h-3.5 text-zinc-400" aria-hidden="true" />
                   <span>Copy Address</span>
                 </>
               )}

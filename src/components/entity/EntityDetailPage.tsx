@@ -34,6 +34,54 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
   const [drawerAspect, setDrawerAspect] = useState<string>('All');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  // Dynamic document title and Schema.org structured data injection
+  React.useEffect(() => {
+    const prevTitle = document.title;
+    document.title = `${entity.canonicalName} Evidence & Review Analysis | ReviewLens`;
+
+    // Schema.org dynamic injection
+    const scriptId = 'entity-schema-jsonld';
+    let scriptEl = document.getElementById(scriptId) as HTMLScriptElement | null;
+    if (!scriptEl) {
+      scriptEl = document.createElement('script');
+      scriptEl.id = scriptId;
+      scriptEl.type = 'application/ld+json';
+      document.head.appendChild(scriptEl);
+    }
+
+    const schemaType = entity.category === 'College' ? 'EducationalOrganization' : 'Restaurant';
+    const schemaData = {
+      '@context': 'https://schema.org',
+      '@type': schemaType,
+      name: entity.canonicalName,
+      description: entity.summaryVerdict,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: entity.formattedAddress || entity.location,
+        addressLocality: 'Delhi',
+        addressRegion: 'Delhi',
+        addressCountry: 'IN',
+      },
+      url: entity.website || 'https://review-lens-black.vercel.app/',
+      ...(entity.rating
+        ? {
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: entity.rating,
+              reviewCount: entity.userRatingsTotal || 50,
+            },
+          }
+        : {}),
+    };
+    scriptEl.textContent = JSON.stringify(schemaData);
+
+    return () => {
+      document.title = prevTitle;
+      const el = document.getElementById(scriptId);
+      if (el) el.remove();
+    };
+  }, [entity]);
+
   // Compute Signal facts from evidence & aspects
   const positiveAspects = entity.aspects.filter((a) => a.positiveRatio >= 70);
   const concernAspects = entity.aspects.filter((a) => a.positiveRatio <= 45);
@@ -67,13 +115,15 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-200/80">
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => {
                 tactileAudio.playClick();
                 onBack();
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-mono-code text-[#4A5CD8] hover:text-[#2A3CB0] transition-all shadow-xs"
+              aria-label="Back to research"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-mono-code text-[#4A5CD8] hover:text-[#2A3CB0] transition-all shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Back to Research</span>
             </button>
 
@@ -86,13 +136,14 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
 
           {onCompare && (
             <button
+              type="button"
               onClick={() => {
                 tactileAudio.playClick();
                 onCompare(entity);
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-zinc-300 hover:bg-zinc-50 text-xs font-mono-code font-medium text-zinc-800 transition-all shadow-xs"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-zinc-300 hover:bg-zinc-50 text-xs font-mono-code font-medium text-zinc-800 transition-all shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
             >
-              <GitCompare className="w-3.5 h-3.5 text-[#4A5CD8]" />
+              <GitCompare className="w-3.5 h-3.5 text-[#4A5CD8]" aria-hidden="true" />
               <span>Compare Entity</span>
             </button>
           )}
@@ -321,11 +372,13 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
                     </div>
 
                     <button
+                      type="button"
                       onClick={() => handleOpenEvidence(asp.name)}
-                      className="text-[11px] font-mono-code text-[#4A5CD8] hover:underline font-medium inline-flex items-center gap-1"
+                      aria-label={`Inspect evidence citations for ${asp.name}`}
+                      className="text-[11px] font-mono-code text-[#4A5CD8] hover:underline font-medium inline-flex items-center gap-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4A5CD8] rounded-xs"
                     >
                       <span>Inspect</span>
-                      <Eye className="w-3 h-3" />
+                      <Eye className="w-3 h-3" aria-hidden="true" />
                     </button>
                   </div>
                 </div>
@@ -391,8 +444,9 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
             </div>
 
             <button
+              type="button"
               onClick={() => handleOpenEvidence('All')}
-              className="px-4 py-2 rounded-full bg-[#18181B] hover:bg-[#27272A] text-white text-xs font-mono-code font-medium transition-all shadow-xs"
+              className="px-4 py-2 rounded-full bg-[#18181B] hover:bg-[#27272A] text-white text-xs font-mono-code font-medium transition-all shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
             >
               Open Full Drawer
             </button>
@@ -402,8 +456,17 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
             {entity.evidenceList.slice(0, 6).map((ev) => (
               <div
                 key={ev.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`Inspect evidence citation from ${ev.sourceName} regarding ${ev.aspect}`}
                 onClick={() => handleOpenEvidence(ev.aspect)}
-                className="p-4 rounded-2xl bg-white border border-zinc-200/80 hover:border-zinc-300 shadow-2xs space-y-2.5 cursor-pointer transition-all hover:scale-[1.01]"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleOpenEvidence(ev.aspect);
+                  }
+                }}
+                className="p-4 rounded-2xl bg-white border border-zinc-200/80 hover:border-zinc-300 shadow-2xs space-y-2.5 cursor-pointer transition-all hover:scale-[1.01] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
               >
                 <div className="flex items-center justify-between text-[10px] font-mono-code">
                   <span className="px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 font-bold uppercase">

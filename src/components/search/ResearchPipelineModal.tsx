@@ -122,7 +122,15 @@ export const ResearchPipelineModal: React.FC<ResearchPipelineModalProps> = ({
   const conflictsCount = currentStep >= 5 ? 3 : Math.min(currentStep >= 3 ? 1 : 0, 2);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-md">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-md"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pipeline-modal-title"
+    >
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        Stage {currentStep + 1} of 7: {currentStage.name}. {currentStage.subhead}. {currentStage.desc}
+      </div>
       <div className="relative w-full max-w-2xl rounded-3xl bg-white border border-zinc-200 shadow-2xl overflow-hidden">
         {/* Top Header Telemetry */}
         <div className="p-6 border-b border-zinc-100 bg-[#FAF8F5] flex items-center justify-between">
@@ -130,9 +138,10 @@ export const ResearchPipelineModal: React.FC<ResearchPipelineModalProps> = ({
             <div
               className="w-3 h-3 rounded-full animate-ping"
               style={{ backgroundColor: currentStage.color }}
+              aria-hidden="true"
             />
             <div>
-              <span className="text-xs font-mono-code uppercase font-bold tracking-wider text-[#18181B]">
+              <span id="pipeline-modal-title" className="text-xs font-mono-code uppercase font-bold tracking-wider text-[#18181B] block">
                 Research Synthesis Pipeline
               </span>
               <span className="text-[10px] font-mono-code text-zinc-500 block">

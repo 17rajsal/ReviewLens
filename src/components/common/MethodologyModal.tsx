@@ -8,35 +8,53 @@ interface MethodologyModalProps {
 }
 
 export const MethodologyModal: React.FC<MethodologyModalProps> = ({ isOpen, onClose }) => {
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-md">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/40 backdrop-blur-md"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="methodology-modal-title"
+    >
       <div className="relative w-full max-w-3xl max-h-[90vh] rounded-3xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden">
         {/* Header */}
         <div className="p-6 border-b border-zinc-100 bg-[#FAF8F5] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-blue-50 text-[#4A5CD8] border border-blue-200">
+            <div className="p-2.5 rounded-2xl bg-blue-50 text-[#4A5CD8] border border-blue-200" aria-hidden="true">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <span className="text-[10px] font-mono-code uppercase font-bold text-[#3444B8] tracking-wider">
                 Scientific & Engineering Architecture
               </span>
-              <h2 className="text-xl font-bold text-[#18181B] tracking-tight">
+              <h2 id="methodology-modal-title" className="text-xl font-bold text-[#18181B] tracking-tight">
                 ReviewLens Evidence Methodology
               </h2>
             </div>
           </div>
 
           <button
+            type="button"
             onClick={() => {
               tactileAudio.playClick();
               onClose();
             }}
-            className="p-2 rounded-full bg-white hover:bg-zinc-100 text-zinc-500 hover:text-[#18181B] transition-colors border border-zinc-200"
+            aria-label="Close methodology modal"
+            className="p-2 rounded-full bg-white hover:bg-zinc-100 text-zinc-500 hover:text-[#18181B] transition-colors border border-zinc-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
 

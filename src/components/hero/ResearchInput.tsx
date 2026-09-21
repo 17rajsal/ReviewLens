@@ -74,12 +74,19 @@ export const ResearchInput: React.FC<ResearchInputProps> = ({ onSearch, initialQ
           }`}
         >
           {/* Search Icon */}
-          <div className="flex-shrink-0 text-zinc-500 mr-3.5">
+          <div className="flex-shrink-0 text-zinc-500 mr-3.5" aria-hidden="true">
             <Search className="w-5 h-5 stroke-[2]" />
           </div>
 
+          {/* Accessible Form Label */}
+          <label htmlFor="research-query-input" className="sr-only">
+            Search entities, colleges, restaurants, or research topics
+          </label>
+
           {/* Text Input */}
           <input
+            id="research-query-input"
+            name="query"
             ref={inputRef}
             type="text"
             value={query}

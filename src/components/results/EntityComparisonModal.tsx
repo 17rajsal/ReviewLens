@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { EntityReport } from '../../types/evidence';
 import { X, GitCompare, ArrowUpRight } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
@@ -14,11 +14,26 @@ export const EntityComparisonModal: React.FC<EntityComparisonModalProps> = ({
   onClose,
   entities,
 }) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen || entities.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-900/40 backdrop-blur-md">
-      <div className="relative w-full max-w-5xl max-h-[90vh] rounded-3xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="comparison-modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-zinc-900/40 backdrop-blur-md"
+    >
+      <div className="relative w-full max-w-5xl max-h-[90vh] rounded-3xl bg-white border border-zinc-200 shadow-2xl flex flex-col overflow-hidden focus:outline-none">
         {/* Header */}
         <div className="p-6 border-b border-zinc-100 bg-[#FAF8F5] flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -29,7 +44,7 @@ export const EntityComparisonModal: React.FC<EntityComparisonModalProps> = ({
               <span className="text-[10px] font-mono-code uppercase font-bold text-[#3444B8] tracking-wider">
                 Multi-Entity Evidence Evaluation
               </span>
-              <h2 className="text-xl font-bold text-[#18181B] tracking-tight">
+              <h2 id="comparison-modal-title" className="text-xl font-bold text-[#18181B] tracking-tight">
                 Side-by-Side Comparison ({entities.length} Entities)
               </h2>
             </div>
@@ -40,7 +55,8 @@ export const EntityComparisonModal: React.FC<EntityComparisonModalProps> = ({
               tactileAudio.playClick();
               onClose();
             }}
-            className="p-2 rounded-full bg-white hover:bg-zinc-100 text-zinc-500 hover:text-[#18181B] transition-colors border border-zinc-200"
+            aria-label="Close comparison modal"
+            className="p-2 rounded-full bg-white hover:bg-zinc-100 text-zinc-500 hover:text-[#18181B] transition-colors border border-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8] cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>

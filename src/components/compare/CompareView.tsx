@@ -59,10 +59,10 @@ export const CompareView: React.FC<CompareViewProps> = ({
 
             <span className="text-zinc-300">•</span>
 
-            <span className="text-[11px] font-mono-code uppercase font-semibold text-zinc-500 flex items-center gap-1.5">
+            <h1 className="text-xs sm:text-sm font-mono-code uppercase font-bold text-zinc-800 flex items-center gap-1.5">
               <Scale className="w-3.5 h-3.5 text-[#4A5CD8]" />
-              Multi-Entity Comparative Intelligence Matrix
-            </span>
+              <span>Multi-Entity Comparative Intelligence Matrix</span>
+            </h1>
           </div>
 
           <div className="text-xs font-mono-code text-zinc-500">

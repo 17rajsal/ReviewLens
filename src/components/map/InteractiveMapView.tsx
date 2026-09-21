@@ -52,13 +52,14 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
         center: defaultCenter,
         zoom: 12,
         zoomControl: false,
-        attributionControl: false,
+        attributionControl: true,
       });
 
       // CartoDB Positron: Ultra-clean, warm light editorial tile layer
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
         subdomains: 'abcd',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener noreferrer">CARTO</a>',
       }).addTo(map);
 
       // Add clean zoom control to top-right
@@ -164,8 +165,11 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
       {/* Leaflet / Google Map Canvas */}
       <div
         ref={mapContainerRef}
+        role="region"
+        aria-label="Interactive map showing verified physical locations across Delhi NCR"
+        tabIndex={0}
         style={{ height }}
-        className="w-full relative z-0 transition-opacity duration-300"
+        className="w-full relative z-0 transition-opacity duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8]"
       />
 
       {/* Interactive Entity Preview Bottom Modal / Drawer */}
@@ -189,7 +193,8 @@ export const InteractiveMapView: React.FC<InteractiveMapViewProps> = ({
 
               <button
                 onClick={() => setActivePreviewEntity(null)}
-                className="p-1 rounded-full text-zinc-400 hover:text-[#18181B] hover:bg-zinc-100 transition-colors"
+                className="p-1 rounded-full text-zinc-400 hover:text-[#18181B] hover:bg-zinc-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8] cursor-pointer"
+                aria-label="Close place preview"
                 title="Close preview"
               >
                 <X className="w-4 h-4" />

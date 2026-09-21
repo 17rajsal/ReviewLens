@@ -90,16 +90,18 @@ export const FullMapPage: React.FC<FullMapPageProps> = ({
 
             <span className="text-zinc-300">•</span>
 
-            <span className="text-[11px] font-mono-code uppercase font-semibold text-zinc-500 flex items-center gap-1.5">
+            <h1 className="text-xs sm:text-sm font-mono-code uppercase font-bold text-zinc-800 flex items-center gap-1.5">
               <Navigation className="w-3.5 h-3.5 text-[#4A5CD8]" />
-              Geographic Intelligence Explorer
-            </span>
+              <span>Geographic Intelligence Explorer</span>
+            </h1>
           </div>
 
           {/* Quick Search */}
           <div className="relative w-full sm:w-80">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400" />
+            <label htmlFor="full-map-search-input" className="sr-only">Search by name, cuisine, or area</label>
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400" aria-hidden="true" />
             <input
+              id="full-map-search-input"
               type="text"
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
@@ -256,11 +258,22 @@ export const FullMapPage: React.FC<FullMapPageProps> = ({
                 return (
                   <div
                     key={ent.id}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Select ${ent.canonicalName} on map`}
+                    aria-pressed={isSelected}
                     onClick={() => {
                       tactileAudio.playNodeHover();
                       setSelectedEntityId(ent.id);
                     }}
-                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2 ${
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        tactileAudio.playNodeHover();
+                        setSelectedEntityId(ent.id);
+                      }
+                    }}
+                    className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8] ${
                       isSelected
                         ? 'bg-white border-[#4A5CD8] shadow-md ring-2 ring-[#4A5CD8]/20'
                         : 'bg-white/80 border-zinc-200/80 hover:border-zinc-300 hover:bg-white shadow-2xs'

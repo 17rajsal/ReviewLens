@@ -32,13 +32,15 @@ export const SourcesStatusPage: React.FC<SourcesStatusPageProps> = ({ onBack }) 
         <div className="flex items-center justify-between pb-4 border-b border-zinc-200/80">
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => {
                 tactileAudio.playClick();
                 onBack();
               }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-mono-code text-[#4A5CD8] hover:text-[#2A3CB0] transition-all shadow-xs"
+              aria-label="Back to research"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-mono-code text-[#4A5CD8] hover:text-[#2A3CB0] transition-all shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
+              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Back</span>
             </button>
 

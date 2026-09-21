@@ -79,7 +79,10 @@ export const EvidenceDrawer: React.FC<EvidenceDrawerProps> = ({
             animate={{ y: 0, x: 0 }}
             exit={{ y: '100%', x: 0 }}
             transition={{ type: 'spring', damping: 28, stiffness: 260 }}
-            className="relative z-50 w-full sm:max-w-2xl max-h-[92vh] sm:max-h-full sm:h-full rounded-t-3xl sm:rounded-none bg-[#FAF8F5] border-t sm:border-t-0 sm:border-l border-zinc-200 shadow-2xl flex flex-col overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="evidence-drawer-title"
+            className="relative z-50 w-full sm:max-w-2xl max-h-[92vh] sm:max-h-full sm:h-full rounded-t-3xl sm:rounded-none bg-[#FAF8F5] border-t sm:border-t-0 sm:border-l border-zinc-200 shadow-2xl flex flex-col overflow-hidden focus:outline-none"
           >
             {/* Atmospheric scenic blur subtle texture */}
             <div 
@@ -101,7 +104,7 @@ export const EvidenceDrawer: React.FC<EvidenceDrawerProps> = ({
                       SOURCE EVIDENCE DOCUMENT
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight">
+                  <h2 id="evidence-drawer-title" className="text-2xl sm:text-3xl font-bold text-[#18181B] tracking-tight">
                     {entity.canonicalName}
                   </h2>
                   <p className="text-xs text-zinc-500 font-mono-code">
@@ -114,7 +117,8 @@ export const EvidenceDrawer: React.FC<EvidenceDrawerProps> = ({
                     tactileAudio.playClick();
                     onClose();
                   }}
-                  className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-[#18181B] transition-colors"
+                  aria-label="Close evidence drawer"
+                  className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-[#18181B] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4A5CD8] cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -123,8 +127,10 @@ export const EvidenceDrawer: React.FC<EvidenceDrawerProps> = ({
               {/* In-drawer Search & Quick Filters */}
               <div className="space-y-2.5 pt-1">
                 <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <label htmlFor="evidence-drawer-search" className="sr-only">Search within verbatim quotes</label>
+                  <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" aria-hidden="true" />
                   <input
+                    id="evidence-drawer-search"
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}

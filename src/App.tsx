@@ -143,6 +143,14 @@ export function App() {
       {/* Precision Micro Magnetic Cursor */}
       <CustomCursor />
 
+      {/* Skip to Main Content Link for Keyboard & Screen Reader Users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[999] px-4 py-2 bg-[#18181B] text-white rounded-xl text-xs font-mono-code shadow-xl focus:outline-none focus:ring-2 focus:ring-[#4A5CD8]"
+      >
+        Skip to main content
+      </a>
+
       {/* Floating Glass Navigation Header */}
       <GlassNav
         onNavClick={handleNavClick}
@@ -153,14 +161,16 @@ export function App() {
         }}
       />
 
-      {/* Primary Views Coordinator */}
-      {activeView === 'results' ? (
-        <ResultsDashboard
-          researchQuery={researchData}
-          onBackToHero={() => {
-            setActiveView('hero');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+      {/* Primary Main Content Landmark */}
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
+        {/* Primary Views Coordinator */}
+        {activeView === 'results' ? (
+          <ResultsDashboard
+            researchQuery={researchData}
+            onBackToHero={() => {
+              setActiveView('hero');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           onOpenEntityDetail={(entity) => {
             setSelectedEntityForDetail(entity);
             setActiveView('entity');
@@ -275,7 +285,7 @@ export function App() {
           }}
         />
       ) : (
-        <main>
+        <>
           {/* Hero Section with 2D Honest Evidence Source Cards & Reference Background */}
           <HeroSection onSearch={handleStartSearch} />
 
@@ -338,11 +348,12 @@ export function App() {
 
           {/* Editorial Community Contact & Suggestion Section */}
           <ContactSuggestionSection />
-        </main>
+        </>
       )}
+      </main>
 
       {/* Editorial Luxury Footer */}
-      <Footer onNavClick={handleNavClick} />
+      <Footer onNavClick={handleNavClick} githubUrl="https://github.com/17rajsal/ReviewLens" />
 
       {/* Local Storage & Privacy Notice */}
       <CookieNotice onOpenPrivacy={() => handleNavClick('privacy')} />

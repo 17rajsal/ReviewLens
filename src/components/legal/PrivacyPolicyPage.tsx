@@ -14,13 +14,15 @@ export const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onBack }) 
         {/* Top Back Navigation */}
         <div>
           <button
+            type="button"
             onClick={() => {
               tactileAudio.playClick();
               onBack();
             }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-mono-code text-zinc-600 hover:text-[#18181B] hover:border-zinc-300 transition-all shadow-2xs cursor-pointer"
+            aria-label="Back to workspace"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-mono-code text-zinc-600 hover:text-[#18181B] hover:border-zinc-300 transition-all shadow-2xs cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#18181B]"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Back to Workspace</span>
           </button>
         </div>
