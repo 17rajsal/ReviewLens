@@ -25,6 +25,7 @@ import {
   Navigation
 } from 'lucide-react';
 import { tactileAudio } from '../../utils/audio';
+import { FilterBar, FilterState, initialFilterState } from './FilterBar';
 
 interface ResultsDashboardProps {
   researchQuery: ResearchQuery;
@@ -54,6 +55,7 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
   const [sortBy, setSortBy] = useState<'confidence' | 'budget'>('confidence');
   const [selectedEntityForMap, setSelectedEntityForMap] = useState<string | null>(researchQuery.results[0]?.id || null);
   const [layoutMode, setLayoutMode] = useState<'split' | 'cards' | 'map'>('split');
+  const [filters, setFilters] = useState<FilterState>(initialFilterState);
 
   // Sort entities
   const sortedEntities = [...researchQuery.results].sort((a, b) => {
@@ -62,6 +64,107 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
     } else {
       return (a.annualFeeNumeric || 0) - (b.annualFeeNumeric || 0);
     }
+  });
+
+  // Filter entities according to active filters
+  const filteredEntities = sortedEntities.filter((e) => {
+    const isCollegeEntity =
+      e.category.toLowerCase().includes('education') ||
+      e.category.toLowerCase().includes('college') ||
+      e.category.toLowerCase().includes('university') ||
+      e.category.toLowerCase().includes('institute');
+
+    if (isCollegeEntity) {
+      if (filters.collegeRegion !== 'all') {
+        const loc = e.location.toLowerCase();
+        if (filters.collegeRegion === 'north' && !loc.includes('north')) return false;
+        if (filters.collegeRegion === 'south' && !loc.includes('south')) return false;
+        if (filters.collegeRegion === 'central' && !(loc.includes('central') || loc.includes('connaught') || loc.includes('barakhamba'))) return false;
+        if (filters.collegeRegion === 'west' && !(loc.includes('west') || loc.includes('janakpuri') || loc.includes('dwarka'))) return false;
+        if (filters.collegeRegion === 'east' && !(loc.includes('east') || loc.includes('surajmal') || loc.includes('shahdara'))) return false;
+        if (filters.collegeRegion === 'dwarka' && !loc.includes('dwarka')) return false;
+        if (filters.collegeRegion === 'rohini' && !(loc.includes('rohini') || loc.includes('pitampura'))) return false;
+        if (filters.collegeRegion === 'shahdara' && !(loc.includes('shahdara') || loc.includes('dilshad garden') || loc.includes('east delhi'))) return false;
+      }
+
+      if (filters.collegeType !== 'all') {
+        const aff = (e.affiliation || '').toLowerCase();
+        const cat = e.category.toLowerCase();
+        if (filters.collegeType === 'du' && !(aff.includes('delhi university') || aff.includes('university of delhi') || aff.includes('du'))) return false;
+        if (filters.collegeType === 'govt' && !(aff.includes('state university') || aff.includes('autonomous') || aff.includes('institute of national importance') || aff.includes('government') || aff.includes('govt') || aff.includes('central university'))) return false;
+        if (filters.collegeType === 'private' && !(aff.includes('private') || cat.includes('private'))) return false;
+      }
+
+      if (filters.collegeDomain !== 'all') {
+        const text = `${e.category} ${e.highlightTag} ${e.summaryVerdict}`.toLowerCase();
+        if (filters.collegeDomain === 'engineering' && !(text.includes('engineering') || text.includes('technology') || text.includes('technical'))) return false;
+        if (filters.collegeDomain === 'management' && !(text.includes('management') || text.includes('business') || text.includes('commerce'))) return false;
+        if (filters.collegeDomain === 'medical' && !(text.includes('medical') || text.includes('health') || text.includes('nursing') || text.includes('dental') || text.includes('hospital'))) return false;
+        if (filters.collegeDomain === 'arts' && !(text.includes('arts') || text.includes('humanities') || text.includes('social science'))) return false;
+        if (filters.collegeDomain === 'law' && !(text.includes('law') || text.includes('legal'))) return false;
+      }
+
+      if (filters.collegeAccreditation !== 'all') {
+        const text = `${e.highlightTag} ${e.affiliation || ''}`.toLowerCase();
+        if (filters.collegeAccreditation === 'naac-aplus' && !text.includes('naac a')) return false;
+        if (filters.collegeAccreditation === 'ini' && !text.includes('national importance')) return false;
+      }
+
+      if (filters.collegeNirf !== 'all') {
+        const tag = (e.highlightTag || '').toLowerCase();
+        if (filters.collegeNirf === 'top10' && !(tag.includes('rank 1') || tag.includes('rank 2') || tag.includes('rank 3') || tag.includes('rank 4') || tag.includes('rank 5') || tag.includes('rank 6') || tag.includes('rank 7') || tag.includes('top 10') || tag.includes('top 5'))) return false;
+        if (filters.collegeNirf === 'top50' && !(tag.includes('nirf') || tag.includes('rank'))) return false;
+      }
+    } else {
+      if (filters.restaurantLocality !== 'all') {
+        const loc = e.location.toLowerCase();
+        if (filters.restaurantLocality === 'cp' && !(loc.includes('connaught') || loc.includes(' cp'))) return false;
+        if (filters.restaurantLocality === 'khan-market' && !loc.includes('khan market')) return false;
+        if (filters.restaurantLocality === 'hauz-khas' && !loc.includes('hauz khas')) return false;
+        if (filters.restaurantLocality === 'saket' && !loc.includes('saket')) return false;
+        if (filters.restaurantLocality === 'south-ex' && !(loc.includes('south extension') || loc.includes('south ex'))) return false;
+        if (filters.restaurantLocality === 'defence-colony' && !loc.includes('defence colony')) return false;
+        if (filters.restaurantLocality === 'gk' && !(loc.includes('greater kailash') || loc.includes('gk'))) return false;
+        if (filters.restaurantLocality === 'old-delhi' && !(loc.includes('chandni chowk') || loc.includes('jama masjid') || loc.includes('old delhi') || loc.includes('daryaganj'))) return false;
+        if (filters.restaurantLocality === 'karol-bagh' && !loc.includes('karol bagh')) return false;
+        if (filters.restaurantLocality === 'west-delhi' && !(loc.includes('rajouri') || loc.includes('punjabi bagh') || loc.includes('janakpuri') || loc.includes('west delhi'))) return false;
+        if (filters.restaurantLocality === 'dwarka' && !loc.includes('dwarka')) return false;
+        if (filters.restaurantLocality === 'rohini' && !(loc.includes('rohini') || loc.includes('pitampura'))) return false;
+      }
+
+      if (filters.restaurantCuisine !== 'all') {
+        const text = `${e.category} ${e.summaryVerdict} ${e.highlightTag}`.toLowerCase();
+        if (filters.restaurantCuisine === 'mughlai' && !(text.includes('mughlai') || text.includes('north indian') || text.includes('nihari') || text.includes('kebab'))) return false;
+        if (filters.restaurantCuisine === 'street-food' && !(text.includes('chaat') || text.includes('street food') || text.includes('sweet') || text.includes('parantha') || text.includes('chole bhature'))) return false;
+        if (filters.restaurantCuisine === 'tibetan' && !(text.includes('tibetan') || text.includes('momo') || text.includes('majnu ka tilla') || text.includes('thukpa'))) return false;
+        if (filters.restaurantCuisine === 'south-indian' && !(text.includes('south indian') || text.includes('dosa') || text.includes('carnatic') || text.includes('idli'))) return false;
+        if (filters.restaurantCuisine === 'italian' && !(text.includes('italian') || text.includes('pizza') || text.includes('pasta'))) return false;
+        if (filters.restaurantCuisine === 'cafe' && !(text.includes('bakery') || text.includes('cafe') || text.includes('coffee') || text.includes('pastry'))) return false;
+        if (filters.restaurantCuisine === 'fine-dining' && !(text.includes('fine dining') || e.priceLevel === '₹₹₹₹')) return false;
+        if (filters.restaurantCuisine === 'regional' && !(text.includes('kashmiri') || text.includes('bengali') || text.includes('bhavan') || text.includes('regional') || text.includes('parsi'))) return false;
+      }
+
+      if (filters.restaurantPrice !== 'all') {
+        if (e.priceLevel !== filters.restaurantPrice) return false;
+      }
+
+      if (filters.restaurantDiet !== 'all') {
+        const text = `${e.category} ${e.summaryVerdict} ${e.highlightTag}`.toLowerCase();
+        if (filters.restaurantDiet === 'veg' && !(text.includes('pure vegetarian') || text.includes('vegetarian') || text.includes('veg '))) return false;
+        if (filters.restaurantDiet === 'non-veg' && text.includes('pure vegetarian')) return false;
+      }
+
+      if (filters.restaurantType !== 'all') {
+        const text = `${e.category} ${e.summaryVerdict} ${e.highlightTag}`.toLowerCase();
+        if (filters.restaurantType === 'heritage' && !(text.includes('heritage') || text.includes('iconic') || text.includes('historic') || text.includes('legacy') || text.includes('institution'))) return false;
+        if (filters.restaurantType === 'fine-dining' && !(text.includes('fine dining') || e.priceLevel === '₹₹₹₹')) return false;
+        if (filters.restaurantType === 'casual' && !(text.includes('casual') || e.priceLevel === '₹₹')) return false;
+        if (filters.restaurantType === 'street' && !(text.includes('street') || text.includes('counter') || text.includes('dhaba') || text.includes('gali'))) return false;
+        if (filters.restaurantType === 'bakery' && !(text.includes('bakery') || text.includes('patisserie') || text.includes('confectionery'))) return false;
+      }
+    }
+
+    return true;
   });
 
   const avgCoverage = Math.round(
@@ -367,6 +470,22 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
           </div>
         </section>
 
+        {/* Filter Bar */}
+        <FilterBar
+          category={
+            researchQuery.category === 'college'
+              ? 'college'
+              : researchQuery.category === 'restaurant'
+              ? 'restaurant'
+              : 'all'
+          }
+          filters={filters}
+          onFilterChange={(newFilters) => setFilters(newFilters)}
+          onReset={() => setFilters(initialFilterState)}
+          totalCount={sortedEntities.length}
+          filteredCount={filteredEntities.length}
+        />
+
         {/* View Layout Controls & Sort Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
           <div className="flex items-center gap-2 flex-wrap">
@@ -426,20 +545,73 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
           </div>
         </div>
 
-        {/* Primary Research Experience Layout */}
-        {layoutMode === 'split' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left: Entity Cards (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              {sortedEntities.map((entity, idx) => (
-                <div
-                  key={entity.id}
-                  className={`transition-all duration-200 rounded-3xl ${
-                    selectedEntityForMap === entity.id ? 'ring-2 ring-[#4A5CD8]/30 shadow-lg' : ''
-                  }`}
-                  onClick={() => setSelectedEntityForMap(entity.id)}
-                >
+        {/* Empty state when filters return 0 matches */}
+        {filteredEntities.length === 0 ? (
+          <div className="p-12 text-center rounded-3xl bg-white border border-zinc-200 shadow-2xs space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto text-amber-700 font-bold">
+              !
+            </div>
+            <h3 className="text-lg font-editorial font-bold text-zinc-900">
+              No entities match the active filters
+            </h3>
+            <p className="text-xs text-zinc-500 max-w-md mx-auto">
+              Try loosening your region, cuisine, or category criteria to view more verified Delhi discovery results.
+            </p>
+            <button
+              onClick={() => setFilters(initialFilterState)}
+              className="px-4 py-2 rounded-full bg-[#18181B] text-white text-xs font-mono-code hover:bg-zinc-800 transition-all"
+            >
+              Reset All Filters
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Primary Research Experience Layout */}
+            {layoutMode === 'split' && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Left: Entity Cards (7 cols) */}
+                <div className="lg:col-span-7 space-y-6">
+                  {filteredEntities.map((entity, idx) => (
+                    <div
+                      key={entity.id}
+                      className={`transition-all duration-200 rounded-3xl ${
+                        selectedEntityForMap === entity.id ? 'ring-2 ring-[#4A5CD8]/30 shadow-lg' : ''
+                      }`}
+                      onClick={() => setSelectedEntityForMap(entity.id)}
+                    >
+                      <EntityCard
+                        entity={entity}
+                        index={idx}
+                        isCompared={comparedEntities.some((e) => e.id === entity.id)}
+                        onToggleCompare={() => handleToggleCompare(entity)}
+                        onOpenEvidence={(filterAspect) => handleOpenDrawer(entity, filterAspect)}
+                        onOpenGraph={() => handleOpenGraph(entity)}
+                        onViewOnMap={() => handleViewOnMap(entity)}
+                        onOpenDetail={() => onOpenEntityDetail && onOpenEntityDetail(entity)}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Right: Sticky Interactive Map (5 cols) */}
+                <div id="research-map-section" className="lg:col-span-5 sticky top-24 space-y-4">
+                  <InteractiveMapView
+                    entities={filteredEntities}
+                    selectedEntityId={selectedEntityForMap}
+                    onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
+                    onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
+                    onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
+                    height="620px"
+                  />
+                </div>
+              </div>
+            )}
+
+            {layoutMode === 'cards' && (
+              <div className="space-y-6 max-w-4xl mx-auto">
+                {filteredEntities.map((entity, idx) => (
                   <EntityCard
+                    key={entity.id}
                     entity={entity}
                     index={idx}
                     isCompared={comparedEntities.some((e) => e.id === entity.id)}
@@ -449,53 +621,23 @@ export const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                     onViewOnMap={() => handleViewOnMap(entity)}
                     onOpenDetail={() => onOpenEntityDetail && onOpenEntityDetail(entity)}
                   />
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
-            {/* Right: Sticky Interactive Map (5 cols) */}
-            <div id="research-map-section" className="lg:col-span-5 sticky top-24 space-y-4">
-              <InteractiveMapView
-                entities={sortedEntities}
-                selectedEntityId={selectedEntityForMap}
-                onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
-                onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
-                onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
-                height="620px"
-              />
-            </div>
-          </div>
-        )}
-
-        {layoutMode === 'cards' && (
-          <div className="space-y-6 max-w-4xl mx-auto">
-            {sortedEntities.map((entity, idx) => (
-              <EntityCard
-                key={entity.id}
-                entity={entity}
-                index={idx}
-                isCompared={comparedEntities.some((e) => e.id === entity.id)}
-                onToggleCompare={() => handleToggleCompare(entity)}
-                onOpenEvidence={(filterAspect) => handleOpenDrawer(entity, filterAspect)}
-                onOpenGraph={() => handleOpenGraph(entity)}
-                onViewOnMap={() => handleViewOnMap(entity)}
-                onOpenDetail={() => onOpenEntityDetail && onOpenEntityDetail(entity)}
-              />
-            ))}
-          </div>
-        )}
-
-        {layoutMode === 'map' && (
-          <div className="space-y-4">
-            <InteractiveMapView
-              entities={sortedEntities}
-              selectedEntityId={selectedEntityForMap}
-              onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
-              onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
-              onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
-              height="750px"
-            />
-          </div>
+            {layoutMode === 'map' && (
+              <div className="space-y-4">
+                <InteractiveMapView
+                  entities={filteredEntities}
+                  selectedEntityId={selectedEntityForMap}
+                  onSelectEntity={(ent) => setSelectedEntityForMap(ent.id)}
+                  onOpenEntityDetail={(ent) => onOpenEntityDetail && onOpenEntityDetail(ent)}
+                  onOpenEvidenceDrawer={(ent) => handleOpenDrawer(ent)}
+                  height="750px"
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
 

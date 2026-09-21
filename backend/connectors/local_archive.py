@@ -536,7 +536,7 @@ class LocalArchiveConnector(BaseSourceConnector):
     def get_generic_restaurant_entities(self) -> List[EntityReport]:
         return GENERIC_RESTAURANT_ENTITIES
 
-    def filter_education_entities(self, query: str, limit: int = 6) -> List[EntityReport]:
+    def filter_education_entities(self, query: str, limit: int = 8) -> List[EntityReport]:
         q = query.lower()
         exact_matches = []
         partial_matches = []
@@ -544,16 +544,32 @@ class LocalArchiveConnector(BaseSourceConnector):
 
         for ent in GENERIC_EDUCATION_ENTITIES:
             names = [ent.canonical_name.lower()] + [a.lower() for a in ent.aliases]
-            if any(name in q or (len(q) > 3 and q in name) for name in names):
+            loc = (ent.location or "").lower() + " " + (ent.formatted_address or "").lower()
+            cat = (ent.category or "").lower()
+            aff = (ent.affiliation or "").lower()
+            tag = (ent.highlight_tag or "").lower()
+
+            # Exact or direct alias match
+            if any(name in q or (len(q) > 2 and q in name) for name in names):
                 exact_matches.append(ent)
             elif (
-                ("north campus" in q and "north campus" in ent.location.lower()) or
-                ("south campus" in q and "south campus" in ent.location.lower()) or
-                ("rohini" in q and "rohini" in ent.location.lower()) or
-                ("pitampura" in q and "pitampura" in ent.location.lower()) or
-                ("commerce" in q and ("commerce" in ent.canonical_name.lower() or "commerce" in ent.category.lower())) or
-                ("women" in q and ("miranda" in ent.canonical_name.lower() or "gargi" in ent.canonical_name.lower())) or
-                ("bms" in q and ("sscbs" in ent.id or "dduc" in ent.id or "keshav" in ent.id))
+                # Locality & Region filters
+                ("rohini" in q and "rohini" in loc) or
+                ("dwarka" in q and "dwarka" in loc) or
+                ("north campus" in q and ("north campus" in loc or "maurice nagar" in loc or "university enclave" in loc)) or
+                ("south campus" in q and ("south campus" in loc or "benito juarez" in loc or "dhaula kuan" in loc)) or
+                ("south delhi" in q and ("south" in loc or "kalkaji" in loc or "ansari nagar" in loc or "okhla" in loc or "hauz khas" in loc)) or
+                ("west delhi" in q and ("west" in loc or "raja garden" in loc or "janakpuri" in loc)) or
+                ("east delhi" in q and ("east" in loc or "vasundhara" in loc or "vivek vihar" in loc or "shahdara" in loc)) or
+                ("shahdara" in q and "shahdara" in loc) or
+                ("central delhi" in q and ("central" in loc or "connaught" in loc or "ajmeri" in loc or "chanakyapuri" in loc)) or
+                # Domain & Category filters
+                (("engineering" in q or "btech" in q or "tech" in q) and ("engineering" in cat or "technology" in cat or "b.tech" in tag or "tech" in ent.id)) or
+                (("medical" in q or "health" in q or "mbbs" in q or "doctor" in q) and ("medical" in cat or "hospital" in aff or "mbbs" in tag or "aiims" in ent.id or "vmmc" in ent.id or "lhmc" in ent.id)) or
+                (("commerce" in q or "bcom" in q) and ("commerce" in ent.canonical_name.lower() or "commerce" in cat or "commerce" in tag)) or
+                (("women" in q or "girls" in q) and ("women" in ent.canonical_name.lower() or "women" in aff or "women" in tag)) or
+                (("management" in q or "bba" in q or "bms" in q) and ("business" in ent.canonical_name.lower() or "bba" in tag or "bms" in tag or "sscbs" in ent.id or "msi" in ent.id)) or
+                (("du" in q or "delhi university" in q) and ("university of delhi" in aff or "du" in aff))
             ):
                 partial_matches.append(ent)
             else:
@@ -562,7 +578,7 @@ class LocalArchiveConnector(BaseSourceConnector):
         results = exact_matches + partial_matches + others
         return results[:limit]
 
-    def filter_restaurant_entities(self, query: str, limit: int = 6) -> List[EntityReport]:
+    def filter_restaurant_entities(self, query: str, limit: int = 8) -> List[EntityReport]:
         q = query.lower()
         exact_matches = []
         partial_matches = []
@@ -570,15 +586,41 @@ class LocalArchiveConnector(BaseSourceConnector):
 
         for ent in GENERIC_RESTAURANT_ENTITIES:
             names = [ent.canonical_name.lower()] + [a.lower() for a in ent.aliases]
-            if any(name in q or (len(q) > 3 and q in name) for name in names):
+            loc = (ent.location or "").lower() + " " + (ent.formatted_address or "").lower()
+            cat = (ent.category or "").lower()
+            tag = (ent.highlight_tag or "").lower()
+
+            # Exact or direct alias match
+            if any(name in q or (len(q) > 2 and q in name) for name in names):
                 exact_matches.append(ent)
             elif (
-                (("connaught place" in q or " cp" in q or q.startswith("cp")) and "connaught place" in ent.location.lower()) or
-                ("south delhi" in q and ("lodhi" in ent.location.lower() or "mehrauli" in ent.location.lower() or "saket" in ent.location.lower())) or
-                ("italian" in q and ("tonino" in ent.canonical_name.lower() or "olive" in ent.canonical_name.lower())) or
-                ("mughlai" in q and ("karim" in ent.canonical_name.lower() or "bukhara" in ent.canonical_name.lower() or "spice art" in ent.canonical_name.lower())) or
-                (("vegetarian" in q or "dosa" in q) and "saravana" in ent.canonical_name.lower()) or
-                ("fine dining" in q and ent.price_level in ("₹₹₹", "₹₹₹₹"))
+                # Locality filters
+                (("connaught place" in q or " cp" in q or q.startswith("cp") or "cp " in q or "in cp" in q) and ("connaught" in loc or "cp" in loc)) or
+                (("hauz khas" in q or "hkv" in q) and "hauz khas" in loc) or
+                ("khan market" in q and "khan market" in loc) or
+                ("saket" in q and "saket" in loc) or
+                ("south delhi" in q and ("lodhi" in loc or "mehrauli" in loc or "saket" in loc or "defence colony" in loc or "greater kailash" in loc or "safdarjung" in loc or "lajpat" in loc or "hauz khas" in loc)) or
+                ("defence colony" in q and "defence colony" in loc) or
+                (("greater kailash" in q or "gk" in q) and "greater kailash" in loc) or
+                ("lajpat nagar" in q and "lajpat" in loc) or
+                ("safdarjung" in q and "safdarjung" in loc) or
+                (("old delhi" in q or "chandni chowk" in q or "jama masjid" in q) and ("old delhi" in loc or "chandni chowk" in loc or "jama masjid" in loc or "chawri bazar" in loc)) or
+                ("karol bagh" in q and "karol bagh" in loc) or
+                (("west delhi" in q or "rajouri" in q or "punjabi bagh" in q) and ("rajouri" in loc or "punjabi bagh" in loc)) or
+                ("north campus" in q and ("north campus" in loc or "gtb nagar" in loc or "hudson lane" in loc)) or
+                ("rohini" in q and "rohini" in loc) or
+                (("pitampura" in q or "nsp" in q) and ("pitampura" in loc or "nsp" in loc or "netaji subhash" in loc)) or
+                ("dwarka" in q and "dwarka" in loc) or
+                ("mehrauli" in q and "mehrauli" in loc) or
+                # Cuisine & dining type filters
+                (("cafe" in q or "cafes" in q) and ("cafe" in cat or "cafe" in ent.canonical_name.lower() or "deli" in cat or "bistro" in cat)) or
+                (("budget" in q or "cheap" in q or "street food" in q or "quick bite" in q) and (ent.price_level in ("₹", "₹₹") or "street" in cat or "canteen" in cat)) or
+                (("italian" in q or "pizza" in q or "pasta" in q) and ("italian" in cat or "pizza" in cat or "pasta" in tag or "tonino" in ent.id or "olive" in ent.id or "leos" in ent.id or "artusi" in ent.id or "big-chill" in ent.id or "diggin" in ent.id)) or
+                (("mughlai" in q or "kebab" in q or "butter chicken" in q or "tandoori" in q or "meat" in q) and ("mughlai" in cat or "tandoori" in cat or "kebab" in cat or "butter chicken" in tag or "bukhara" in ent.id or "karim" in ent.id or "aslam" in ent.id or "al-jawahar" in ent.id or "daryaganj" in ent.id or "gulati" in ent.id or "moti-mahal" in ent.id or "rajinder" in ent.id)) or
+                (("south indian" in q or "dosa" in q or "idli" in q) and ("south indian" in cat or "dosa" in tag or "saravana" in ent.id or "dakshin" in ent.id or "andhra" in ent.id or "carnatic" in ent.id or "sagar-ratna" in ent.id)) or
+                (("vegetarian" in q or "pure veg" in q) and ("pure vegetarian" in tag or "vegetarian" in cat or "saravana" in ent.id or "carnatic" in ent.id or "burma" in ent.id or "sagar-ratna" in ent.id or "natraj" in ent.id or "suruchi" in ent.id or "kuremal" in ent.id or "billu" in ent.id)) or
+                (("fine dining" in q or "luxury" in q) and (ent.price_level in ("₹₹₹", "₹₹₹₹") or "fine dining" in cat or "luxury" in tag)) or
+                (("bakery" in q or "dessert" in q or "sweet" in q or "kulfi" in q) and ("bakery" in cat or "dessert" in cat or "kulfi" in tag or "wenger" in ent.id or "defence-bakery" in ent.id or "kuremal" in ent.id or "roshan" in ent.id))
             ):
                 partial_matches.append(ent)
             else:

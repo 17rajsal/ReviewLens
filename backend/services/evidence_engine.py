@@ -155,9 +155,18 @@ class EvidenceEngine:
         }
 
         # Domain routing: education queries route to education pipeline
+        education_keywords = [
+            "college", "colleges", "b.tech", "btech", "engineering", "campus", "cse", "ipu",
+            "bpit", "mait", "usict", "msit", "dtu", "university", "school", "medical", "mbbs",
+            "aiims", "commerce", "srcc", "miranda", "hindu", "stephen", "hansraj", "ramjas",
+            "gargi", "venky", "jmc", "arsd", "khalsa", "cvs", "nsut", "iiitd", "igdtuw", "jmi",
+            "lhmc", "vmmc", "shyam lal", "daulat ram", "shivaji", "rajdhani", "zakir husain",
+            "motilal nehru", "ram lal anand", "bhagini nivedita", "bharati", "vivekananda", "ihe",
+            "rajguru", "north campus colleges", "south campus colleges", "du colleges"
+        ]
         is_education = (
             domain == "education" or category == "college" or
-            any(w in lower for w in ["college", "b.tech", "btech", "engineering", "campus", "cse", "ipu", "bpit", "mait", "usict", "msit", "dtu", "university"])
+            any(w in lower for w in education_keywords)
         )
 
         # Check if query specifically targets a verified restaurant in the archive
@@ -168,8 +177,7 @@ class EvidenceEngine:
         )
 
         is_dining_or_location = (
-            (domain == "dining" or category == "restaurant" or
-            any(w in lower for w in ["italian", "restaurant", "cafe", "connaught place", "cp", "dining", "pizza", "pasta", "food", "delhi", "studying"]))
+            ("italian" in lower or ("connaught place" in lower and ("best" in lower or "live" in lower)))
             and not is_education
             and not is_verified_restaurant_query
         )
@@ -188,9 +196,9 @@ class EvidenceEngine:
                 pass
 
         # If general education demonstration archive query
-        if domain == "education" or category == "college":
+        if is_education:
             report = await self._process_education_archive(run_id, query, category, constraints, source_status)
-        elif domain == "dining" or category == "restaurant":
+        elif is_verified_restaurant_query or domain == "dining" or category == "restaurant" or any(w in lower for w in ["restaurant", "cafe", "food", "dining", "dhaba", "bakery", "dosa", "kebab"]):
             report = await self._process_restaurant_archive(run_id, query, category, constraints, source_status)
         else:
             report = await self._process_education_archive(run_id, query, category, constraints, source_status)

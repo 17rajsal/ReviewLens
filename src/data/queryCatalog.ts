@@ -33,10 +33,34 @@ export const sampleQueries: { label: string; query: string; category: string; de
     description: 'Deconstructs authentic culinary reviews, peak wait times, and value for money.'
   },
   {
-    label: 'B.Tech CSE Colleges',
-    query: 'Best B.Tech CSE colleges in Delhi under ₹2 lakh/year with good coding culture',
+    label: 'Engineering Colleges Delhi',
+    query: 'Best engineering colleges in Delhi with high tech placements',
     category: 'Higher Education',
-    description: 'Analyzes peer coding culture, placement discussions, and attendance policies.'
+    description: 'Compares DTU, NSUT, IIIT-Delhi, IGDTUW, and MAIT tech placements and coding culture.'
+  },
+  {
+    label: 'Colleges in Rohini',
+    query: 'Top colleges in Rohini for engineering and management',
+    category: 'Higher Education',
+    description: 'Evaluates DTU, MAIT, SSCBS, and BPIT campus facilities and connectivity.'
+  },
+  {
+    label: 'Cafes in Hauz Khas',
+    query: 'Best cafes in Hauz Khas Village with lake view and good food',
+    category: 'Dining & Food',
+    description: 'Analyzes Hauz Khas Social, Coast Cafe, and Nagaland Kitchen ambiance and menus.'
+  },
+  {
+    label: 'Budget Restaurants Delhi',
+    query: 'Top budget restaurants in Delhi under ₹800 for two',
+    category: 'Dining & Food',
+    description: 'Highlights Wenger’s, Andhra Bhavan, Rajinder Da Dhaba, and Natraj Dahi Bhalla.'
+  },
+  {
+    label: 'Restaurants near Saket',
+    query: 'Top restaurants in and near Saket for Asian and South Indian dining',
+    category: 'Dining & Food',
+    description: 'Evaluates Burma Burma, Yum Yum Cha, and Dakshin ratings and service.'
   }
 ];
 

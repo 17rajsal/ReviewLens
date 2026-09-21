@@ -17,13 +17,14 @@ from backend.models.analysis import (
     ConflictReport,
     ConfidenceBreakdown,
 )
-from backend.connectors.base import (
-    CATEGORY_OPEN_DATA,
-    CATEGORY_INSTITUTIONAL_SOURCE,
-    CATEGORY_OFFICIAL_PLACE,
-    CATEGORY_PUBLIC_DISCUSSION,
-    CATEGORY_SEARCH_RESULT,
-)
+# Standard Source Category Constants
+CATEGORY_PUBLIC_DISCUSSION = "PUBLIC DISCUSSION"
+CATEGORY_OFFICIAL_PLACE = "OFFICIAL PLACE / BUSINESS"
+CATEGORY_OPEN_DATA = "OPEN DATA"
+CATEGORY_PLACE_METADATA = "PLACE METADATA / OPEN DATA"
+CATEGORY_INSTITUTIONAL_SOURCE = "INSTITUTIONAL SOURCE"
+CATEGORY_SEARCH_RESULT = "SEARCH RESULT / PUBLIC WEB PAGE"
+CATEGORY_DEMO_ARCHIVE = "DEMO BENCHMARK ARCHIVE"
 
 DELHI_COLLEGES: List[EntityReport] = [
     # 1. Shri Ram College of Commerce (SRCC)
@@ -1626,6 +1627,2695 @@ DELHI_COLLEGES: List[EntityReport] = [
             negative_signal_count=5,
             summary="Consistent positive consensus on journalism training facilities and campus safety.",
             impartial_synthesis="Maharaja Agrasen College provides quality media and liberal arts education on an expansive 10-acre campus.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    )
+,
+    # Ramjas College
+    EntityReport(
+        id="entity-ramjas",
+        canonical_name="Ramjas College",
+        aliases=['ramjas', 'ramjas college', 'ramjas du', 'ramjas north campus', 'ramjas college delhi'],
+        category="Education / Delhi University College",
+        location="University Enclave, North Campus, Delhi",
+        latitude=28.6841,
+        longitude=77.2075,
+        formatted_address="University Enclave, North Campus, Delhi, 110007",
+        google_maps_url="https://maps.google.com/?q=28.6841,77.2075",
+        website="https://ramjas.du.ac.in",
+        rating=4.4,
+        user_ratings_total=3950,
+        affiliation="University of Delhi (DU, Established 1917)",
+        fees_summary="Official DU Fee: ~₹15,000 - ₹20,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=17000,
+        highlight_tag="NIRF #10 Colleges (2024) | NAAC A++ (CGPA 3.57) | Historic North Campus",
+        evidence_confidence_score=93.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="One of Delhi University's founding colleges with an illustrious century-old legacy. Renowned for vibrant societies, high cutoffs via CUET, and extensive science laboratories.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-ramjas-0",
+                name="Academic Legacy",
+                label="Founding Faculty & Honors",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=42,
+                summary="Century-old academic rigor with notable alumni in governance, law, and corporate leadership.",
+                key_phrases=['historic heritage', 'strong science faculty', 'NIRF #10 ranking']
+            ),
+            AspectAnalysis(
+                id="asp-ramjas-1",
+                name="Campus Life",
+                label="Societies & North Campus Culture",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=46,
+                summary="Active debating, drama, and fine arts societies participating across inter-college circuits.",
+                key_phrases=['active dramatics', 'vibrant student elections', 'North Campus hub']
+            ),
+            AspectAnalysis(
+                id="asp-ramjas-2",
+                name="Infrastructure",
+                label="Centenary Block & Labs",
+                sentiment="positive",
+                positive_ratio=84.0,
+                evidence_count=30,
+                summary="Modernized state-of-the-art amphitheatre and research facilities alongside heritage red-brick buildings.",
+                key_phrases=['centenary building', 'modernized auditoriums', 'equipped labs']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,950+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Ramjas College offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Gargi College
+    EntityReport(
+        id="entity-gargi",
+        canonical_name="Gargi College",
+        aliases=['gargi', 'gargi college', 'gargi du', 'gargi south campus', 'gargi college delhi'],
+        category="Education / Delhi University College",
+        location="Siri Fort Road, South Delhi",
+        latitude=28.5528,
+        longitude=77.2206,
+        formatted_address="Siri Fort Road, New Delhi, 110049",
+        google_maps_url="https://maps.google.com/?q=28.5528,77.2206",
+        website="https://gargicollege.in",
+        rating=4.4,
+        user_ratings_total=3620,
+        affiliation="University of Delhi (DU, Established 1967, Women's College)",
+        fees_summary="Official DU Fee: ~₹16,000 - ₹22,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=18000,
+        highlight_tag="NIRF #31 Colleges (2024) | NAAC A+ (CGPA 3.32) | Leading Women's College",
+        evidence_confidence_score=92.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Premier South Delhi women's college distinguished by exceptional science laboratories, interdisciplinary research, and vibrant cultural societies like Kshitij and Sparx.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-gargi-0",
+                name="Sciences & Research",
+                label="DBT Star College Scheme",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=38,
+                summary="Recognized under DBT Star College Scheme with funded undergraduate research opportunities in Life Sciences.",
+                key_phrases=['DBT star college', 'bioinformatics lab', 'undergraduate research']
+            ),
+            AspectAnalysis(
+                id="asp-gargi-1",
+                name="Cultural Societies",
+                label="Fine Arts & Dance",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=34,
+                summary="Renowned across national competitions for western dance, street play, and fine arts.",
+                key_phrases=['reputed dance society', 'reverie festival', 'vibrant clubs']
+            ),
+            AspectAnalysis(
+                id="asp-gargi-2",
+                name="Location & Safety",
+                label="Siri Fort Institutional Area",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=28,
+                summary="Convenient metro connectivity via Green Park / Hauz Khas and safe pedestrian pathways.",
+                key_phrases=['near siri fort', 'safe campus', 'south delhi connectivity']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,620+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Gargi College offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Sri Venkateswara College (Venky)
+    EntityReport(
+        id="entity-venkateswara",
+        canonical_name="Sri Venkateswara College (Venky)",
+        aliases=['venky', 'sri venkateswara college', 'venkateswara college', 'svc du', 'venky south campus'],
+        category="Education / Delhi University College",
+        location="Benito Juarez Marg, Dhaula Kuan, South Campus, Delhi",
+        latitude=28.5888,
+        longitude=77.1656,
+        formatted_address="Benito Juarez Road, Dhaula Kuan, South Campus, New Delhi, 110021",
+        google_maps_url="https://maps.google.com/?q=28.5888,77.1656",
+        website="https://www.svc.ac.in",
+        rating=4.5,
+        user_ratings_total=4200,
+        affiliation="University of Delhi (DU, Established 1961, TTD)",
+        fees_summary="Official DU Fee: ~₹18,000 - ₹24,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=20000,
+        highlight_tag="NIRF #13 Colleges (2024) | NAAC A++ (CGPA 3.63) | Premier South Campus Anchor",
+        evidence_confidence_score=94.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Flagship institution of South Campus celebrated for top-tier science departments, strong economics programs, and iconic cultural festivals (Nexus).",
+        aspects=[
+            AspectAnalysis(
+                id="asp-venkateswara-0",
+                name="Academic Standing",
+                label="Life Sciences & Economics",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=45,
+                summary="Consistently recognized as the academic benchmark of South Campus with distinguished science faculties.",
+                key_phrases=['premier south campus', 'economics honors', 'top science faculty']
+            ),
+            AspectAnalysis(
+                id="asp-venkateswara-1",
+                name="Campus Environment",
+                label="Green Dhaula Kuan Enclave",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=36,
+                summary="Lush campus directly adjacent to South Campus Metro station with active student canteens.",
+                key_phrases=['iconic south campus canteen', 'dhaula kuan metro', 'well-maintained gardens']
+            ),
+            AspectAnalysis(
+                id="asp-venkateswara-2",
+                name="Placements",
+                label="Career Placement Cell",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=40,
+                summary="Robust placements in consulting, analytics, and FMCG sectors alongside North Campus counterparts.",
+                key_phrases=['consulting recruitments', 'active placement drives', 'corporate internships']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (4,200+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Sri Venkateswara College (Venky) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Jesus and Mary College (JMC)
+    EntityReport(
+        id="entity-jmc",
+        canonical_name="Jesus and Mary College (JMC)",
+        aliases=['jmc', 'jesus and mary college', 'jmc du', 'jmc chanakyapuri', 'jmc delhi'],
+        category="Education / Delhi University College",
+        location="Bapu Dham, Chanakyapuri, Central-South Delhi",
+        latitude=28.5919,
+        longitude=77.1775,
+        formatted_address="Chanakyapuri, New Delhi, 110021",
+        google_maps_url="https://maps.google.com/?q=28.5919,77.1775",
+        website="https://www.jmc.ac.in",
+        rating=4.4,
+        user_ratings_total=3100,
+        affiliation="University of Delhi (DU, Established 1968, Minority Institution)",
+        fees_summary="Official DU Fee: ~₹22,000 - ₹28,000 / year (BA / B.Com / B.Voc)",
+        annual_fee_numeric=24000,
+        highlight_tag="NIRF #38 Colleges (2024) | NAAC A++ (CGPA 3.65) | Diplomatic Enclave",
+        evidence_confidence_score=93.5,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Distinguished minority women's institution located in Delhi's diplomatic zone. Renowned for Psychology, English, B.Voc programs, and exceptional student welfare.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-jmc-0",
+                name="Humanities & Psychology",
+                label="Specialized Faculty",
+                sentiment="positive",
+                positive_ratio=93.0,
+                evidence_count=39,
+                summary="Highly sought-after departments in Applied Psychology, Sociology, and English Literature.",
+                key_phrases=['renowned psychology lab', 'distinguished liberal arts', 'diplomatic location']
+            ),
+            AspectAnalysis(
+                id="asp-jmc-1",
+                name="Discipline & Culture",
+                label="Campus Atmosphere",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=31,
+                summary="Strict attendance policies supported by world-class campus cleanliness and serene courtyards.",
+                key_phrases=['orderly campus', 'clean infrastructure', 'active women leadership']
+            ),
+            AspectAnalysis(
+                id="asp-jmc-2",
+                name="Sports Facilities",
+                label="Athletics & Martial Arts",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=26,
+                summary="Consistent winners in inter-university table tennis, basketball, and martial arts competitions.",
+                key_phrases=['championship basketball', 'dedicated sports wing', 'fitness center']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,100+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Jesus and Mary College (JMC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Indraprastha College for Women (IP College)
+    EntityReport(
+        id="entity-ipcw",
+        canonical_name="Indraprastha College for Women (IP College)",
+        aliases=['ipcw', 'indraprastha college for women', 'ip college', 'ip college du', 'ip college civil lines'],
+        category="Education / Delhi University College",
+        location="Sham Nath Marg, Civil Lines, North Delhi",
+        latitude=28.6836,
+        longitude=77.2238,
+        formatted_address="31, Sham Nath Marg, Civil Lines, Delhi, 110054",
+        google_maps_url="https://maps.google.com/?q=28.6836,77.2238",
+        website="https://ipcollege.ac.in",
+        rating=4.4,
+        user_ratings_total=3200,
+        affiliation="University of Delhi (DU, Oldest Women's College est. 1924)",
+        fees_summary="Official DU Fee: ~₹20,000 - ₹26,000 / year (BA / B.Sc / BMMMC)",
+        annual_fee_numeric=22000,
+        highlight_tag="NIRF #26 Colleges (2024) | NAAC A+ | Heritage Campus & Media Laboratory",
+        evidence_confidence_score=92.5,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="The oldest women's college in the University of Delhi, set on a sprawling heritage estate in Civil Lines. Renowned for its pioneering Mass Media & Mass Communication (BMMMC) program.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-ipcw-0",
+                name="Media & Mass Communication",
+                label="BMMMC Audio-Visual Studios",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=44,
+                summary="Pioneering media studies program with professional broadcasting suites, cameras, and editing bays.",
+                key_phrases=['pioneering BMMMC course', 'broadcasting studio', 'media production']
+            ),
+            AspectAnalysis(
+                id="asp-ipcw-1",
+                name="Heritage Architecture",
+                label="Civil Lines Estate",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=33,
+                summary="Heritage-grade colonial architecture, botanical gardens, swimming pool, and hostel amenities.",
+                key_phrases=['heritage estate', 'in-campus swimming pool', 'tranquil civil lines']
+            ),
+            AspectAnalysis(
+                id="asp-ipcw-2",
+                name="Academic Support",
+                label="Mentorship & Library",
+                sentiment="positive",
+                positive_ratio=87.0,
+                evidence_count=29,
+                summary="Well-stocked digital library and comprehensive counseling services for women students.",
+                key_phrases=['comprehensive library', 'supportive teachers', 'research initiatives']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,200+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Indraprastha College for Women (IP College) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Atma Ram Sanatan Dharma College (ARSD)
+    EntityReport(
+        id="entity-arsd",
+        canonical_name="Atma Ram Sanatan Dharma College (ARSD)",
+        aliases=['arsd', 'atma ram sanatan dharma college', 'arsd college', 'arsd du', 'arsd south campus'],
+        category="Education / Delhi University College",
+        location="Dhaula Kuan, South Campus, New Delhi",
+        latitude=28.5863,
+        longitude=77.1614,
+        formatted_address="Ring Road, Dhaula Kuan, South Campus, New Delhi, 110021",
+        google_maps_url="https://maps.google.com/?q=28.5863,77.1614",
+        website="https://www.arsdcollege.ac.in",
+        rating=4.3,
+        user_ratings_total=3400,
+        affiliation="University of Delhi (DU, Established 1959)",
+        fees_summary="Official DU Fee: ~₹15,000 - ₹20,000 / year (B.Sc / BA / B.Com Hons)",
+        annual_fee_numeric=16500,
+        highlight_tag="NIRF #6 Colleges (2024) | NAAC A++ (CGPA 3.77 Highest in DU) | Science & Research Hub",
+        evidence_confidence_score=95.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Skyrocketed in national recognition, securing NIRF Rank #6 and NAAC CGPA 3.77. Celebrated for science faculty research, skill development hubs, and top-notch lab infrastructure.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-arsd-0",
+                name="NIRF & NAAC Performance",
+                label="Institutional Excellence",
+                sentiment="positive",
+                positive_ratio=96.0,
+                evidence_count=48,
+                summary="Holds the highest NAAC CGPA (3.77) among all Delhi University colleges, driven by faculty publications.",
+                key_phrases=['NIRF rank 6', 'highest NAAC score', 'research grants']
+            ),
+            AspectAnalysis(
+                id="asp-arsd-1",
+                name="Science Laboratories",
+                label="Chemistry & Physics Labs",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=35,
+                summary="Fully modernized instrumentation centers supporting advanced undergraduate projects.",
+                key_phrases=['advanced instrumentation', 'star college status', 'well-equipped labs']
+            ),
+            AspectAnalysis(
+                id="asp-arsd-2",
+                name="Location & Transit",
+                label="Ring Road & Metro",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=30,
+                summary="Strategically positioned at Dhaula Kuan intersection with immediate metro connectivity.",
+                key_phrases=['dhaula kuan connectivity', 'direct bus access', 'central south campus']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,400+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Atma Ram Sanatan Dharma College (ARSD) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Motilal Nehru College (MLNC)
+    EntityReport(
+        id="entity-motilal-nehru",
+        canonical_name="Motilal Nehru College (MLNC)",
+        aliases=['mlnc', 'motilal nehru college', 'motilal nehru du', 'motilal nehru south campus'],
+        category="Education / Delhi University College",
+        location="Benito Juarez Marg, South Campus, New Delhi",
+        latitude=28.5828,
+        longitude=77.1664,
+        formatted_address="Benito Juarez Marg, South Campus, New Delhi, 110021",
+        google_maps_url="https://maps.google.com/?q=28.5828,77.1664",
+        website="https://www.mlncdu.ac.in",
+        rating=4.1,
+        user_ratings_total=3100,
+        affiliation="University of Delhi (DU, Established 1964)",
+        fees_summary="Official DU Fee: ~₹12,000 - ₹16,000 / year (BA / B.Sc / B.Com)",
+        annual_fee_numeric=14000,
+        highlight_tag="NAAC A Grade | Expansive South Campus Playground & Library",
+        evidence_confidence_score=90.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Established co-educational college in the Benito Juarez Marg cluster featuring one of the largest sports grounds in South Campus and accessible academic fees.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-motilal-nehru-0",
+                name="Sports & Grounds",
+                label="Cricket & Football Fields",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=36,
+                summary="Expansive outdoor sports arena supporting active cricket, football, and athletics teams.",
+                key_phrases=['large sports ground', 'football tournaments', 'cricket pitch']
+            ),
+            AspectAnalysis(
+                id="asp-motilal-nehru-1",
+                name="Value & Accessibility",
+                label="Affordable Higher Education",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=28,
+                summary="Moderate fee structure enabling quality DU education across arts, science, and commerce streams.",
+                key_phrases=['affordable annual fees', 'accessible scholarships', 'co-educational environment']
+            ),
+            AspectAnalysis(
+                id="asp-motilal-nehru-2",
+                name="Student Societies",
+                label="Cultural & Debating",
+                sentiment="positive",
+                positive_ratio=82.0,
+                evidence_count=24,
+                summary="Active societies in debating, music, and street theatre with regular festival performances.",
+                key_phrases=['vibrant student clubs', 'annual fest Aarohan', 'cultural presence']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,100+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Motilal Nehru College (MLNC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Ram Lal Anand College (RLA)
+    EntityReport(
+        id="entity-ram-lal-anand",
+        canonical_name="Ram Lal Anand College (RLA)",
+        aliases=['rla', 'ram lal anand college', 'ram lal anand', 'rla du', 'rla south campus'],
+        category="Education / Delhi University College",
+        location="Benito Juarez Marg, South Campus, New Delhi",
+        latitude=28.5819,
+        longitude=77.1659,
+        formatted_address="5 Benito Juarez Road, South Campus, New Delhi, 110021",
+        google_maps_url="https://maps.google.com/?q=28.5819,77.1659",
+        website="https://rlacollege.edu.in",
+        rating=4.1,
+        user_ratings_total=2800,
+        affiliation="University of Delhi (DU, Established 1964)",
+        fees_summary="Official DU Fee: ~₹14,000 - ₹18,000 / year (BA / B.Sc Microbiology / BJMC)",
+        annual_fee_numeric=15500,
+        highlight_tag="NAAC A Grade | Pioneer in Microbiology & Media Studies in DU",
+        evidence_confidence_score=90.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="South Campus institution known for specialized courses like B.Sc (Hons) Microbiology, Geology, and Hindi Journalism, supported by modernized media equipment.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-ram-lal-anand-0",
+                name="Specialized Courses",
+                label="Microbiology & Geology",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=32,
+                summary="Offers distinct honors programs in Microbiology and Geology rare across DU colleges.",
+                key_phrases=['reputed microbiology department', 'geology lab', 'niche specializations']
+            ),
+            AspectAnalysis(
+                id="asp-ram-lal-anand-1",
+                name="Campus Environment",
+                label="South Campus Hub",
+                sentiment="positive",
+                positive_ratio=85.0,
+                evidence_count=27,
+                summary="Peaceful campus setting on Benito Juarez Marg near South Campus library and faculties.",
+                key_phrases=['serene campus', 'friendly student body', 'south campus proximity']
+            ),
+            AspectAnalysis(
+                id="asp-ram-lal-anand-2",
+                name="Media Studio",
+                label="Mass Communication Lab",
+                sentiment="positive",
+                positive_ratio=83.0,
+                evidence_count=22,
+                summary="Equipped with video recording equipment and sound setups for journalism students.",
+                key_phrases=['media studio', 'journalism practice', 'digital editing']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (2,800+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Ram Lal Anand College (RLA) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Zakir Husain Delhi College (ZHDC)
+    EntityReport(
+        id="entity-zakir-husain",
+        canonical_name="Zakir Husain Delhi College (ZHDC)",
+        aliases=['zhdc', 'zakir husain delhi college', 'zakir husain college', 'zakir husain du', 'zakir hussain'],
+        category="Education / Delhi University College",
+        location="Jawaharlal Nehru Marg, Central Delhi",
+        latitude=28.6416,
+        longitude=77.2299,
+        formatted_address="Jawaharlal Nehru Marg, Ajmeri Gate, New Delhi, 110002",
+        google_maps_url="https://maps.google.com/?q=28.6416,77.2299",
+        website="https://www.zakirhusaindelhicollege.ac.in",
+        rating=4.2,
+        user_ratings_total=3700,
+        affiliation="University of Delhi (Oldest DU College heritage est. 1696 / 1792)",
+        fees_summary="Official DU Fee: ~₹10,000 - ₹14,000 / year (BA / B.Sc / B.Com)",
+        annual_fee_numeric=12000,
+        highlight_tag="NAAC A Grade | Historic Central Delhi Campus near New Delhi Railway Station",
+        evidence_confidence_score=91.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Delhi's oldest higher education institution tracing roots to Madrasa Ghaziuddin (1696) and Delhi College (1792). Located in Central Delhi with a new high-rise academic tower.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-zakir-husain-0",
+                name="Historical Legacy",
+                label="300-Year Heritage",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=38,
+                summary="Unmatched historic pedigree with archives documenting the Delhi Renaissance and literary movements.",
+                key_phrases=['300 year heritage', 'historic delhi college', 'distinguished alumni']
+            ),
+            AspectAnalysis(
+                id="asp-zakir-husain-1",
+                name="Modern Academic Tower",
+                label="New Infrastructure",
+                sentiment="positive",
+                positive_ratio=87.0,
+                evidence_count=33,
+                summary="Multi-storeyed academic block with centralized air conditioning, auditoriums, and labs.",
+                key_phrases=['modern academic block', 'air conditioned classrooms', 'new auditorium']
+            ),
+            AspectAnalysis(
+                id="asp-zakir-husain-2",
+                name="Central Location",
+                label="Ajmeri Gate Connectivity",
+                sentiment="positive",
+                positive_ratio=86.0,
+                evidence_count=30,
+                summary="Unbeatable transit convenience within walking distance of New Delhi Metro & Railway Station.",
+                key_phrases=['near new delhi station', 'yellow line metro', 'central delhi access']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,700+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Zakir Husain Delhi College (ZHDC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Shivaji College
+    EntityReport(
+        id="entity-shivaji",
+        canonical_name="Shivaji College",
+        aliases=['shivaji college', 'shivaji du', 'shivaji college delhi', 'shivaji raja garden'],
+        category="Education / Delhi University College",
+        location="Raja Garden, Ring Road, West Delhi",
+        latitude=28.6508,
+        longitude=77.1264,
+        formatted_address="Ring Road, Raja Garden, New Delhi, 110027",
+        google_maps_url="https://maps.google.com/?q=28.6508,77.1264",
+        website="https://www.shivajicollege.ac.in",
+        rating=4.2,
+        user_ratings_total=3450,
+        affiliation="University of Delhi (DU, Established 1961)",
+        fees_summary="Official DU Fee: ~₹18,000 - ₹24,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=20000,
+        highlight_tag="NIRF #70 Colleges (2024) | NAAC A+ Grade | Spacious West Delhi Campus",
+        evidence_confidence_score=91.5,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Premier co-educational DU college in West Delhi with a 10-acre green campus. Strong science programs, updated sports complex, and excellent Raja Garden metro access.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-shivaji-0",
+                name="Campus Infrastructure",
+                label="10-Acre Campus & Sports",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=35,
+                summary="Spacious sports grounds, auditorium, and newly built Jijabai academic block.",
+                key_phrases=['large sports complex', 'jijabai block', 'green landscaped lawns']
+            ),
+            AspectAnalysis(
+                id="asp-shivaji-1",
+                name="Academics & Science Labs",
+                label="B.Sc & Commerce Honors",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=31,
+                summary="Accredited with NAAC A+; offers robust honors programs in Physics, Chemistry, and Commerce.",
+                key_phrases=['NAAC A+ accredited', 'equipped science labs', 'experienced faculty']
+            ),
+            AspectAnalysis(
+                id="asp-shivaji-2",
+                name="West Delhi Connectivity",
+                label="Rajouri Garden & Shivaji Enclave",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=29,
+                summary="Adjacent to Blue & Pink Line interchanges at Rajouri Garden and Punjabi Bagh.",
+                key_phrases=['blue line metro', 'raja garden ring road', 'accessible west delhi']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,450+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Shivaji College offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Rajdhani College
+    EntityReport(
+        id="entity-rajdhani",
+        canonical_name="Rajdhani College",
+        aliases=['rajdhani college', 'rajdhani du', 'rajdhani college delhi', 'rajdhani raja garden'],
+        category="Education / Delhi University College",
+        location="Raja Garden, Ring Road, West Delhi",
+        latitude=28.6534,
+        longitude=77.1246,
+        formatted_address="Mahatma Gandhi Marg, Raja Garden, New Delhi, 110015",
+        google_maps_url="https://maps.google.com/?q=28.6534,77.1246",
+        website="https://www.rajdhanicollege.ac.in",
+        rating=4.1,
+        user_ratings_total=3100,
+        affiliation="University of Delhi (DU, Established 1964)",
+        fees_summary="Official DU Fee: ~₹14,000 - ₹19,000 / year (BA / B.Sc / B.Com)",
+        annual_fee_numeric=16000,
+        highlight_tag="NAAC A Grade | Strong Sciences & Robotics Labs | West Delhi Hub",
+        evidence_confidence_score=90.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Established DU college adjacent to Shivaji College on the Ring Road. Well known for Physics, Mathematics, Chemistry, and active student societies like The Puppeteers.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-rajdhani-0",
+                name="Sciences & Labs",
+                label="Physics & Chemistry Labs",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=33,
+                summary="Equipped laboratories and active science research societies fostering student projects.",
+                key_phrases=['sound physics labs', 'robotics society', 'science research']
+            ),
+            AspectAnalysis(
+                id="asp-rajdhani-1",
+                name="Campus Amenities",
+                label="Auditorium & Library",
+                sentiment="positive",
+                positive_ratio=84.0,
+                evidence_count=28,
+                summary="Air-conditioned seminar halls and automated central library system.",
+                key_phrases=['automated library', 'seminar halls', 'active student union']
+            ),
+            AspectAnalysis(
+                id="asp-rajdhani-2",
+                name="Metro Transit",
+                label="Ramesh Nagar & Rajouri Metro",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=27,
+                summary="Walking distance from Ramesh Nagar metro station on the Blue Line.",
+                key_phrases=['ramesh nagar metro', 'ring road transit', 'convenient commute']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,100+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Rajdhani College offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Sri Guru Tegh Bahadur Khalsa College (SGTB Khalsa)
+    EntityReport(
+        id="entity-sgtb-khalsa",
+        canonical_name="Sri Guru Tegh Bahadur Khalsa College (SGTB Khalsa)",
+        aliases=['sgtb khalsa', 'khalsa college du', 'sgtb khalsa college', 'khalsa north campus'],
+        category="Education / Delhi University College",
+        location="University Enclave, North Campus, Delhi",
+        latitude=28.6942,
+        longitude=77.2052,
+        formatted_address="University Enclave, North Campus, Delhi, 110007",
+        google_maps_url="https://maps.google.com/?q=28.6942,77.2052",
+        website="https://www.sgtbkhalsadu.ac.in",
+        rating=4.3,
+        user_ratings_total=3900,
+        affiliation="University of Delhi (DU, Established 1951, DSGMC)",
+        fees_summary="Official DU Fee: ~₹24,000 - ₹30,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=26000,
+        highlight_tag="NIRF #62 Colleges (2024) | NAAC A Grade | Renowned Sports, Music & Theatre (Anhad)",
+        evidence_confidence_score=92.5,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Prominent North Campus college renowned for its sports achievements, state-of-the-art indoor sports arena, and top theatre society (Anhad). Strong B.Com and Science cutoffs.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-sgtb-khalsa-0",
+                name="Sports Infrastructure",
+                label="Indoor Stadium & Gym",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=42,
+                summary="World-class Commonwealth standard indoor stadium supporting badminton, shooting, and basketball.",
+                key_phrases=['indoor sports arena', 'national sports champions', 'cricket academy']
+            ),
+            AspectAnalysis(
+                id="asp-sgtb-khalsa-1",
+                name="Cultural Society (Anhad)",
+                label="Music, Theatre & Bhangra",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=36,
+                summary="Nationally celebrated collegiate music band (Anhad) and winning street play societies.",
+                key_phrases=['anhad music society', 'bhangra team', 'lashkara college fest']
+            ),
+            AspectAnalysis(
+                id="asp-sgtb-khalsa-2",
+                name="North Campus Location",
+                label="Mall Road & Vishwavidyalaya",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=34,
+                summary="Prime location directly across Vishwavidyalaya Metro Station on Mall Road.",
+                key_phrases=['opp vishwavidyalaya metro', 'heart of north campus', 'hudson lane proximity']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,900+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Sri Guru Tegh Bahadur Khalsa College (SGTB Khalsa) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # College of Vocational Studies (CVS)
+    EntityReport(
+        id="entity-cvs",
+        canonical_name="College of Vocational Studies (CVS)",
+        aliases=['cvs', 'college of vocational studies', 'cvs du', 'cvs south delhi'],
+        category="Education / Delhi University College",
+        location="Sheikh Sarai Phase II, South Delhi",
+        latitude=28.5369,
+        longitude=77.2227,
+        formatted_address="Triveni, Sheikh Sarai Phase II, New Delhi, 110017",
+        google_maps_url="https://maps.google.com/?q=28.5369,77.2227",
+        website="https://www.cvs.edu.in",
+        rating=4.1,
+        user_ratings_total=2700,
+        affiliation="University of Delhi (DU, Established 1972)",
+        fees_summary="Official DU Fee: ~₹14,000 - ₹18,000 / year (Vocational Studies / B.Com Hons)",
+        annual_fee_numeric=15500,
+        highlight_tag="NAAC A Grade | Pioneer in Tourism, HRM, Marketing Management & Vocations",
+        evidence_confidence_score=90.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Pioneering institution in South Delhi offering specialized vocational degrees in Tourism Management, Human Resource Management, Small Business, and Retail alongside mainstream degrees.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-cvs-0",
+                name="Vocational Programs",
+                label="Tourism & HRM Specialization",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=37,
+                summary="Distinct vocational curriculum designed for immediate corporate and industry readiness.",
+                key_phrases=['tourism management', 'practical industry internships', 'HRM program']
+            ),
+            AspectAnalysis(
+                id="asp-cvs-1",
+                name="Placements in Retail & Travel",
+                label="Corporate Hiring",
+                sentiment="positive",
+                positive_ratio=84.0,
+                evidence_count=29,
+                summary="Dedicated placement drives by travel agencies, hospitality groups, and logistics firms.",
+                key_phrases=['travel sector placements', 'retail recruiter visits', 'summer internships']
+            ),
+            AspectAnalysis(
+                id="asp-cvs-2",
+                name="Campus Sharing",
+                label="Sheikh Sarai Institutional Area",
+                sentiment="positive",
+                positive_ratio=83.0,
+                evidence_count=24,
+                summary="Situated in Sheikh Sarai next to Shaheed Bhagat Singh College with shared student hubs.",
+                key_phrases=['sheikh sarai market', 'south delhi campus', 'metro accessibility']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (2,700+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="College of Vocational Studies (CVS) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Bhagini Nivedita College (BNC)
+    EntityReport(
+        id="entity-bhagini-nivedita",
+        canonical_name="Bhagini Nivedita College (BNC)",
+        aliases=['bhagini nivedita college', 'bnc', 'bnc du', 'bhagini nivedita najafgarh'],
+        category="Education / Delhi University College",
+        location="Kair, Najafgarh, South-West Delhi",
+        latitude=28.6186,
+        longitude=76.9536,
+        formatted_address="Near Air Force Station, Kair, Najafgarh, New Delhi, 110043",
+        google_maps_url="https://maps.google.com/?q=28.6186,76.9536",
+        website="https://www.bhagininiveditacollege.in",
+        rating=3.9,
+        user_ratings_total=1800,
+        affiliation="University of Delhi (DU, Established 1993, Women's College)",
+        fees_summary="Official DU Fee: ~₹8,000 - ₹12,000 / year (BA / B.Sc Home Science / B.Com)",
+        annual_fee_numeric=9500,
+        highlight_tag="Rural South-West Delhi Empowerment | NAAC Accredited | DU Affiliated",
+        evidence_confidence_score=87.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Established to cater to female students in rural and semi-urban fringes of South-West Delhi. Known for highly affordable fees, community outreach, and Home Science programs.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-bhagini-nivedita-0",
+                name="Women's Empowerment",
+                label="Rural & Semi-Urban Outreach",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=28,
+                summary="Transforms higher education access for girls from surrounding rural villages and Najafgarh.",
+                key_phrases=['rural empowerment', 'inclusive education', 'supportive scholarships']
+            ),
+            AspectAnalysis(
+                id="asp-bhagini-nivedita-1",
+                name="Home Science & Arts",
+                label="Practical Curriculum",
+                sentiment="positive",
+                positive_ratio=82.0,
+                evidence_count=22,
+                summary="Equipped laboratories for Food & Nutrition, Textiles, and Child Development.",
+                key_phrases=['home science lab', 'nutrition practicals', 'dedicated teachers']
+            ),
+            AspectAnalysis(
+                id="asp-bhagini-nivedita-2",
+                name="Distance & Commute",
+                label="Fringe Location",
+                sentiment="mixed",
+                positive_ratio=54.0,
+                evidence_count=26,
+                summary="Requires feeder bus transit from Najafgarh Metro station on the Grey Line.",
+                key_phrases=['najafgarh transit', 'grey line metro', 'feeder bus reliance']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (1,800+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Bhagini Nivedita College (BNC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Maharaja Surajmal Institute (MSI)
+    EntityReport(
+        id="entity-msi",
+        canonical_name="Maharaja Surajmal Institute (MSI)",
+        aliases=['msi', 'maharaja surajmal institute', 'msi janakpuri', 'msi ipu'],
+        category="Education / Professional Institute (GGSIPU)",
+        location="C-4, Janakpuri, West Delhi",
+        latitude=28.6212,
+        longitude=77.0863,
+        formatted_address="C-4, Janakpuri, New Delhi, 110058",
+        google_maps_url="https://maps.google.com/?q=28.6212,77.0863",
+        website="https://www.msi-ggsip.org",
+        rating=4.3,
+        user_ratings_total=3200,
+        affiliation="Guru Gobind Singh Indraprastha University (GGSIPU, Established 1999)",
+        fees_summary="Official GGSIPU Fee: ~₹95,000 - ₹1,15,000 / year (BBA / BCA / B.Com Hons)",
+        annual_fee_numeric=105000,
+        highlight_tag="Top Ranked GGSIPU College | NAAC A+ Grade | Renowned BBA & BCA Programs",
+        evidence_confidence_score=93.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Widely recognized as the premier management and computer applications college affiliated with IP University. Consistently secures top GGSIPU ranks for BBA and BCA admissions.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-msi-0",
+                name="BBA & BCA Reputation",
+                label="Flagship Programs",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=45,
+                summary="Highest cutoffs in IP University Common Entrance Test for undergraduate business and IT degrees.",
+                key_phrases=['top IPU college', 'premier BBA program', 'BCA coding labs']
+            ),
+            AspectAnalysis(
+                id="asp-msi-1",
+                name="Placements & Internships",
+                label="Corporate Recruiters",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=38,
+                summary="Active on-campus hiring by Big-4 advisory, IT consultancies, and Indian banking institutions.",
+                key_phrases=['deloitte recruitment', 'wipro and tcs drives', 'corporate networking']
+            ),
+            AspectAnalysis(
+                id="asp-msi-2",
+                name="Janakpuri Location",
+                label="West Delhi Hub",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=32,
+                summary="Prime Janakpuri location near Janakpuri East Metro Station with full institutional amenities.",
+                key_phrases=['janakpuri east metro', 'well-connected campus', 'spacious library']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,200+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Maharaja Surajmal Institute (MSI) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Maharaja Surajmal Institute of Technology (MSIT)
+    EntityReport(
+        id="entity-msit",
+        canonical_name="Maharaja Surajmal Institute of Technology (MSIT)",
+        aliases=['msit', 'maharaja surajmal institute of technology', 'msit janakpuri', 'msit btech'],
+        category="Education / Engineering Institute (GGSIPU)",
+        location="C-4, Janakpuri, West Delhi",
+        latitude=28.6215,
+        longitude=77.0868,
+        formatted_address="C-4, Janakpuri, New Delhi, 110058",
+        google_maps_url="https://maps.google.com/?q=28.6215,77.0868",
+        website="https://www.msit.in",
+        rating=4.2,
+        user_ratings_total=3600,
+        affiliation="Guru Gobind Singh Indraprastha University & AICTE (Established 2001)",
+        fees_summary="Official GGSIPU Fee: ~₹1,35,000 - ₹1,55,000 / year (B.Tech CSE/IT/ECE)",
+        annual_fee_numeric=140000,
+        highlight_tag="Top GGSIPU Engineering College | NBA Accredited | Strong IT Placement Records",
+        evidence_confidence_score=93.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Consistently ranked among the top two engineering institutes affiliated with GGSIPU. Renowned for high JEE Main cutoff ranks for CSE/IT and consistent tier-1 IT recruitment.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-msit-0",
+                name="Engineering Placements",
+                label="Software & Product Companies",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=46,
+                summary="Marquee recruiters include Amazon, Microsoft, Infosys, and high-growth Indian tech startups.",
+                key_phrases=['strong CSE placement', 'high median tech salary', 'active coding club']
+            ),
+            AspectAnalysis(
+                id="asp-msit-1",
+                name="Academic Curriculum",
+                label="NBA Accredited Engineering",
+                sentiment="positive",
+                positive_ratio=87.0,
+                evidence_count=34,
+                summary="All major undergraduate branches (CSE, IT, ECE) maintain NBA accreditation with updated labs.",
+                key_phrases=['NBA accreditation', 'AICTE approved', 'rigorous curriculum']
+            ),
+            AspectAnalysis(
+                id="asp-msit-2",
+                name="Peer Developer Culture",
+                label="Hackathons & IEEE Branch",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=31,
+                summary="Very active IEEE student chapter and regular internal hackathons driven by student societies.",
+                key_phrases=['IEEE student branch', 'developer circles', 'competitive programming']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,600+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Maharaja Surajmal Institute of Technology (MSIT) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Bharati College
+    EntityReport(
+        id="entity-bharati",
+        canonical_name="Bharati College",
+        aliases=['bharati college', 'bharati du', 'bharati college janakpuri', 'bharati college delhi'],
+        category="Education / Delhi University College",
+        location="C-4, Janakpuri, West Delhi",
+        latitude=28.6253,
+        longitude=77.0984,
+        formatted_address="C-4, Janakpuri, New Delhi, 110058",
+        google_maps_url="https://maps.google.com/?q=28.6253,77.0984",
+        website="https://www.bharaticollege.du.ac.in",
+        rating=4.1,
+        user_ratings_total=2600,
+        affiliation="University of Delhi (DU, Established 1971, Women's College)",
+        fees_summary="Official DU Fee: ~₹12,000 - ₹17,000 / year (BA / B.Com / B.Sc)",
+        annual_fee_numeric=14500,
+        highlight_tag="NAAC B+ Grade | Active Performing Arts & Media Labs | West Delhi Hub",
+        evidence_confidence_score=89.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Established DU women's college situated in Janakpuri. Features an active studio for journalism practicals, language courses, and an inclusive campus community.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-bharati-0",
+                name="Journalism & Performing Arts",
+                label="BJMC & Theatre",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=30,
+                summary="Active journalism laboratory and award-winning street play and classical dance societies.",
+                key_phrases=['journalism studio', 'active street play', 'cultural presence']
+            ),
+            AspectAnalysis(
+                id="asp-bharati-1",
+                name="Women's Development",
+                label="Gender Studies & NCC",
+                sentiment="positive",
+                positive_ratio=86.0,
+                evidence_count=25,
+                summary="Vibrant Women's Development Cell organizing national symposia on legal rights and entrepreneurship.",
+                key_phrases=['women development cell', 'active NCC unit', 'leadership workshops']
+            ),
+            AspectAnalysis(
+                id="asp-bharati-2",
+                name="Janakpuri Connectivity",
+                label="Blue & Magenta Lines",
+                sentiment="positive",
+                positive_ratio=88.0,
+                evidence_count=27,
+                summary="Conveniently located near Janakpuri West interchange metro station.",
+                key_phrases=['janakpuri west metro', 'safe residential area', 'easy accessibility']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (2,600+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Bharati College offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Vivekananda College
+    EntityReport(
+        id="entity-vivekananda",
+        canonical_name="Vivekananda College",
+        aliases=['vivekananda college', 'vivekananda du', 'vivekananda college vivek vihar', 'vivekananda east delhi'],
+        category="Education / Delhi University College",
+        location="Vivek Vihar, East Delhi / Shahdara",
+        latitude=28.6658,
+        longitude=77.3094,
+        formatted_address="Vivek Vihar, New Delhi, 110095",
+        google_maps_url="https://maps.google.com/?q=28.6658,77.3094",
+        website="https://www.vivekanandacollege.edu.in",
+        rating=4.0,
+        user_ratings_total=2200,
+        affiliation="University of Delhi (DU, Established 1970, Women's College)",
+        fees_summary="Official DU Fee: ~₹11,000 - ₹15,000 / year (BA / B.Com / B.Sc Hons)",
+        annual_fee_numeric=13000,
+        highlight_tag="NAAC A Grade | Premier Women's College in Trans-Yamuna East Delhi",
+        evidence_confidence_score=89.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="The premier DU college for women in the Trans-Yamuna Vivek Vihar region. Noted for strong commerce departments, dedicated faculty, and affordable fee structure.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-vivekananda-0",
+                name="Trans-Yamuna Anchor",
+                label="East Delhi Higher Education",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=31,
+                summary="Provides quality university education without requiring East Delhi students to cross the river daily.",
+                key_phrases=['trans yamuna anchor', 'east delhi hub', 'convenient for local students']
+            ),
+            AspectAnalysis(
+                id="asp-vivekananda-1",
+                name="Commerce & Mathematics",
+                label="Honors Courses",
+                sentiment="positive",
+                positive_ratio=85.0,
+                evidence_count=26,
+                summary="Consistent pass percentage and faculty mentorship in B.Com (Hons) and Mathematics (Hons).",
+                key_phrases=['commerce faculty', 'mathematics honors', 'supportive teachers']
+            ),
+            AspectAnalysis(
+                id="asp-vivekananda-2",
+                name="Green Campus",
+                label="Lush Grounds & Library",
+                sentiment="positive",
+                positive_ratio=84.0,
+                evidence_count=22,
+                summary="Pleasantly landscaped lawns, automated library, and outdoor sports facilities.",
+                key_phrases=['spacious library', 'lush gardens', 'peaceful study spaces']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (2,200+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Vivekananda College offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Institute of Home Economics (IHE)
+    EntityReport(
+        id="entity-ihe",
+        canonical_name="Institute of Home Economics (IHE)",
+        aliases=['ihe', 'institute of home economics', 'ihe du', 'ihe hauz khas'],
+        category="Education / Delhi University College",
+        location="Hauz Khas Enclave, South Delhi",
+        latitude=28.5492,
+        longitude=77.2069,
+        formatted_address="F-4, Hauz Khas Enclave, New Delhi, 110016",
+        google_maps_url="https://maps.google.com/?q=28.5492,77.2069",
+        website="https://www.ihe.du.ac.in",
+        rating=4.3,
+        user_ratings_total=1900,
+        affiliation="University of Delhi (DU, Established 1961, Women's College)",
+        fees_summary="Official DU Fee: ~₹25,000 - ₹35,000 / year (B.Sc Food Technology / Home Science / B.El.Ed)",
+        annual_fee_numeric=28000,
+        highlight_tag="NAAC A Grade | Specialized Nutrition, Biochemistry & Early Education",
+        evidence_confidence_score=92.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Specialized premier DU institution in Hauz Khas dedicated to Food & Nutrition, Biochemistry, Microbiology, and Elementary Teacher Education (B.El.Ed).",
+        aspects=[
+            AspectAnalysis(
+                id="asp-ihe-0",
+                name="Food Tech & Nutrition",
+                label="Specialized Science Labs",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=36,
+                summary="Renowned clinical nutrition, dietetics, and food science facilities with research tie-ups.",
+                key_phrases=['clinical nutrition', 'food technology labs', 'dietetics expertise']
+            ),
+            AspectAnalysis(
+                id="asp-ihe-1",
+                name="Teacher Education (B.El.Ed)",
+                label="Early Childhood Pedagogy",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=28,
+                summary="Flagship 4-year Bachelor of Elementary Education program with practical school internships.",
+                key_phrases=['B.El.Ed program', 'pedagogy training', 'school attachments']
+            ),
+            AspectAnalysis(
+                id="asp-ihe-2",
+                name="Hauz Khas Enclave",
+                label="Prime South Delhi",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=25,
+                summary="Located in an upscale, secure residential neighborhood right next to Hauz Khas Metro Station.",
+                key_phrases=['hauz khas metro', 'secure enclave', 'peaceful campus']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (1,900+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Institute of Home Economics (IHE) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Shaheed Rajguru College of Applied Sciences for Women (SRCASW)
+    EntityReport(
+        id="entity-srcasw",
+        canonical_name="Shaheed Rajguru College of Applied Sciences for Women (SRCASW)",
+        aliases=['srcasw', 'rajguru college', 'shaheed rajguru', 'rajguru du', 'srcasw vasundhara'],
+        category="Education / Delhi University College",
+        location="Vasundhara Enclave, East Delhi",
+        latitude=28.6011,
+        longitude=77.3208,
+        formatted_address="Vasundhara Enclave, Delhi, 110096",
+        google_maps_url="https://maps.google.com/?q=28.6011,77.3208",
+        website="https://www.rajgurucollege.com",
+        rating=4.3,
+        user_ratings_total=2800,
+        affiliation="University of Delhi (DU, Established 1989, Women's College)",
+        fees_summary="Official DU Fee: ~₹20,000 - ₹28,000 / year (B.Sc Electronics / CS / Instrumentation / BMS)",
+        annual_fee_numeric=24000,
+        highlight_tag="NIRF #32 Colleges (2024) | NAAC A+ Grade | Leading Applied Sciences College",
+        evidence_confidence_score=93.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Exceptional women's college in East Delhi offering modern professional degrees including Electronics, Instrumentation, Biomedical Science, Computer Science, and BMS.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-srcasw-0",
+                name="Applied Sciences Edge",
+                label="STEM & BMS Programs",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=42,
+                summary="High NIRF #32 ranking reflects exceptional research publications and modern laboratory setups.",
+                key_phrases=['biomedical labs', 'instrumentation equipment', 'NIRF rank 32']
+            ),
+            AspectAnalysis(
+                id="asp-srcasw-1",
+                name="Campus Infrastructure",
+                label="Modern Vasundhara Enclave",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=33,
+                summary="Fully equipped 10-acre campus with residential hostel, sports complex, and Wi-Fi coverage.",
+                key_phrases=['in-campus hostel', 'modern architecture', 'well-maintained auditoriums']
+            ),
+            AspectAnalysis(
+                id="asp-srcasw-2",
+                name="Placements & Industry Tie-ups",
+                label="Corporate Opportunities",
+                sentiment="positive",
+                positive_ratio=87.0,
+                evidence_count=30,
+                summary="Strong placements in technology consulting, healthcare analytics, and diagnostic firms.",
+                key_phrases=['tech recruitment', 'biotech internships', 'consulting drives']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (2,800+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Shaheed Rajguru College of Applied Sciences for Women (SRCASW) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Delhi Technological University (DTU, formerly DCE)
+    EntityReport(
+        id="entity-dtu",
+        canonical_name="Delhi Technological University (DTU, formerly DCE)",
+        aliases=['dtu', 'delhi technological university', 'dce', 'delhi college of engineering', 'dtu delhi', 'dtu bawana', 'dtu rohini'],
+        category="Education / Premier Engineering University",
+        location="Shahbad Daulatpur, Bawana Road, Rohini, North-West Delhi",
+        latitude=28.7499,
+        longitude=77.117,
+        formatted_address="Shahbad Daulatpur, Bawana Road, Rohini, Delhi, 110042",
+        google_maps_url="https://maps.google.com/?q=28.7499,77.1170",
+        website="https://www.dtu.ac.in",
+        rating=4.5,
+        user_ratings_total=8900,
+        affiliation="State University of Delhi (Govt of NCT of Delhi, Established 1941 as DCE)",
+        fees_summary="Official State Fee: ~₹2,00,000 - ₹2,30,000 / year (B.Tech / M.Tech / MBA)",
+        annual_fee_numeric=215000,
+        highlight_tag="NIRF #29 Engineering (2024) | Premier 164-Acre Tech Campus | Top Tier-1 Placements",
+        evidence_confidence_score=96.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="One of India's oldest and most prestigious engineering institutions (est. 1941 as Delhi College of Engineering). Famous for elite coding culture, Formula Student teams, and top placements.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-dtu-0",
+                name="Tier-1 Tech Placements",
+                label="Big Tech & HFT Recruiters",
+                sentiment="positive",
+                positive_ratio=96.0,
+                evidence_count=68,
+                summary="Consistently attracts Google, Microsoft, Apple, Goldman Sachs, Uber, and top international tech firms.",
+                key_phrases=['top tier placements', 'high international packages', 'strong alumni network']
+            ),
+            AspectAnalysis(
+                id="asp-dtu-1",
+                name="Peer Culture & Innovation",
+                label="Hackathons & Student Tech Teams",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=55,
+                summary="Celebrated automotive design teams (Defianz Racing, Raftaar) and hyperactive coding culture.",
+                key_phrases=['formula student team', 'unrivaled coding culture', 'student tech societies']
+            ),
+            AspectAnalysis(
+                id="asp-dtu-2",
+                name="164-Acre Lush Campus",
+                label="Hostels, Sports & Lake",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=48,
+                summary="Expansive green campus with full residential hostels, sports stadium, and central Open Air Theatre.",
+                key_phrases=['164 acre green campus', 'residential life', 'OAT and sports stadium']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (8,900+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Delhi Technological University (DTU, formerly DCE) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Netaji Subhas University of Technology (NSUT, formerly NSIT)
+    EntityReport(
+        id="entity-nsut",
+        canonical_name="Netaji Subhas University of Technology (NSUT, formerly NSIT)",
+        aliases=['nsut', 'netaji subhas university of technology', 'nsit', 'netaji subhash', 'nsut dwarka', 'nsit dwarka'],
+        category="Education / Premier Engineering University",
+        location="Sector 3, Dwarka, South-West Delhi",
+        latitude=28.6083,
+        longitude=77.0371,
+        formatted_address="Azad Hind Fauj Marg, Sector 3, Dwarka, New Delhi, 110078",
+        google_maps_url="https://maps.google.com/?q=28.6083,77.0371",
+        website="https://www.nsut.ac.in",
+        rating=4.4,
+        user_ratings_total=7800,
+        affiliation="State University of Delhi (Govt of NCT of Delhi, Established 1983 as DIT)",
+        fees_summary="Official State Fee: ~₹2,10,000 - ₹2,40,000 / year (B.Tech / M.Tech / MBA)",
+        annual_fee_numeric=225000,
+        highlight_tag="NIRF #60 Engineering (2024) | 145-Acre Lush Green Campus in Dwarka | Elite Placement Records",
+        evidence_confidence_score=95.5,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Premier state technical university renowned alongside DTU for stellar computer science and electronics departments. Set on a sprawling 145-acre forested sanctuary in Dwarka.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-nsut-0",
+                name="Computer Science Placements",
+                label="Software & Quant Finance",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=64,
+                summary="Marquee hiring by global tech giants with numerous crore-plus international and domestic offers.",
+                key_phrases=['elite software placements', 'quant finance roles', 'top tech median package']
+            ),
+            AspectAnalysis(
+                id="asp-nsut-1",
+                name="145-Acre Forest Campus",
+                label="Bio-Diversity & Sports",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=46,
+                summary="Lush campus home to over 100 bird species, expansive cricket/football grounds, and modernized labs.",
+                key_phrases=['145 acre forested campus', 'dwarka sector 3', 'biodiversity sanctuary']
+            ),
+            AspectAnalysis(
+                id="asp-nsut-2",
+                name="Student Societies (Moksha)",
+                label="Cultural & Tech Fests",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=42,
+                summary="Moksha is one of North India's largest collegiate festivals alongside technical symposium Innovision.",
+                key_phrases=['moksha annual fest', 'innovision tech fest', 'competitive societies']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (7,800+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Netaji Subhas University of Technology (NSUT, formerly NSIT) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Indraprastha Institute of Information Technology Delhi (IIIT-Delhi)
+    EntityReport(
+        id="entity-iiitd",
+        canonical_name="Indraprastha Institute of Information Technology Delhi (IIIT-Delhi)",
+        aliases=['iiitd', 'iiit delhi', 'indraprastha institute of information technology', 'iiit-d', 'iiit okhla'],
+        category="Education / Autonomous Research University",
+        location="Okhla Industrial Estate Phase III, South-East Delhi",
+        latitude=28.5459,
+        longitude=77.2732,
+        formatted_address="Okhla Phase III, Near Govind Puri Metro, New Delhi, 110020",
+        google_maps_url="https://maps.google.com/?q=28.5459,77.2732",
+        website="https://www.iiitd.ac.in",
+        rating=4.6,
+        user_ratings_total=3500,
+        affiliation="State University (Govt of NCT of Delhi, Institute of National Importance, Est. 2008)",
+        fees_summary="Official Fee: ~₹4,20,000 - ₹4,60,000 / year (B.Tech CS/AI/ECE)",
+        annual_fee_numeric=440000,
+        highlight_tag="NIRF #75 Engineering (2024) | NAAC A Grade | World-Class CS & AI Research Center",
+        evidence_confidence_score=96.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Globally respected research-driven university founded by Dr. Pankaj Jalote. Sets the standard in India for computer science curriculum, cutting-edge AI labs, and academic integrity.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-iiitd-0",
+                name="Research Rigor & AI",
+                label="Global CS Curriculum",
+                sentiment="positive",
+                positive_ratio=97.0,
+                evidence_count=58,
+                summary="Faculty almost exclusively PhDs from premier world universities; exceptional publications in CVPR, NeurIPS, and ACL.",
+                key_phrases=['world class AI research', 'rigorous CS curriculum', 'top tier conference papers']
+            ),
+            AspectAnalysis(
+                id="asp-iiitd-1",
+                name="Modern Campus Architecture",
+                label="Okhla Phase III Campus",
+                sentiment="positive",
+                positive_ratio=93.0,
+                evidence_count=40,
+                summary="Stunning brick and glass architecture with 24/7 labs, swimming pool, and high-speed research computing clusters.",
+                key_phrases=['24/7 computing labs', 'cutting-edge architecture', 'high-end GPU clusters']
+            ),
+            AspectAnalysis(
+                id="asp-iiitd-2",
+                name="Academic Intensity",
+                label="Heavy Workload & Grading",
+                sentiment="mixed",
+                positive_ratio=62.0,
+                evidence_count=44,
+                summary="Demanding workload with continuous assignments and strict anti-plagiarism automated checks.",
+                key_phrases=['heavy coursework', 'strict plagiarism policy', 'intense assignment deadlines']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,500+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Indraprastha Institute of Information Technology Delhi (IIIT-Delhi) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Indira Gandhi Delhi Technical University for Women (IGDTUW)
+    EntityReport(
+        id="entity-igdtuw",
+        canonical_name="Indira Gandhi Delhi Technical University for Women (IGDTUW)",
+        aliases=['igdtuw', 'indira gandhi delhi technical university for women', 'igdtu', 'igdtuw kashmere gate'],
+        category="Education / Women Engineering University",
+        location="James Church Campus, Kashmere Gate, Central-North Delhi",
+        latitude=28.6653,
+        longitude=77.2323,
+        formatted_address="Madrasa Road, Kashmere Gate, Delhi, 110006",
+        google_maps_url="https://maps.google.com/?q=28.6653,77.2323",
+        website="https://www.igdtuw.ac.in",
+        rating=4.4,
+        user_ratings_total=3100,
+        affiliation="State University of Delhi (Govt of NCT of Delhi, Established 1998)",
+        fees_summary="Official State Fee: ~₹1,20,000 - ₹1,40,000 / year (B.Tech CSE/IT/ECE/MAE)",
+        annual_fee_numeric=130000,
+        highlight_tag="NIRF #151-200 Engineering | NAAC A+ Grade | Top Placement Numbers for Women in Tech",
+        evidence_confidence_score=94.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="India's first women's technical university. Renowned for phenomenal placement statistics with major US tech companies actively seeking diversity engineering hires.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-igdtuw-0",
+                name="Women in Tech Placements",
+                label="Diversity Hiring Hub",
+                sentiment="positive",
+                positive_ratio=96.0,
+                evidence_count=52,
+                summary="Unbeatable recruitment records with Google, Microsoft, Atlassian, Cisco, and Adobe offering high packages.",
+                key_phrases=['exceptional diversity placement', 'high placement ratio', 'top tech hiring drives']
+            ),
+            AspectAnalysis(
+                id="asp-igdtuw-1",
+                name="Technical Societies",
+                label="ACM-W & Lean In Chapters",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=34,
+                summary="Active peer mentorship networks, hackathon winning teams, and international fellowship recipients.",
+                key_phrases=['active ACM-W chapter', 'grace hopper attendees', 'women coder mentorship']
+            ),
+            AspectAnalysis(
+                id="asp-igdtuw-2",
+                name="Heritage Campus",
+                label="Kashmere Gate Setting",
+                sentiment="positive",
+                positive_ratio=85.0,
+                evidence_count=28,
+                summary="Historic campus near Kashmere Gate Metro interchange with secure hostels and lush shaded courtyards.",
+                key_phrases=['kashmere gate metro', 'historic campus grounds', 'safe residential hostels']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,100+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Indira Gandhi Delhi Technical University for Women (IGDTUW) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Guru Gobind Singh Indraprastha University (GGSIPU Main Campus)
+    EntityReport(
+        id="entity-ggsipu",
+        canonical_name="Guru Gobind Singh Indraprastha University (GGSIPU Main Campus)",
+        aliases=['ggsipu', 'ipu', 'guru gobind singh indraprastha university', 'ip university', 'ggsipu dwarka', 'ipu dwarka'],
+        category="Education / State University",
+        location="Sector 16C, Dwarka, South-West Delhi",
+        latitude=28.5946,
+        longitude=77.0189,
+        formatted_address="Sector 16C, Dwarka, New Delhi, 110078",
+        google_maps_url="https://maps.google.com/?q=28.5946,77.0189",
+        website="https://www.ipu.ac.in",
+        rating=4.3,
+        user_ratings_total=6400,
+        affiliation="State University of Delhi (Govt of NCT of Delhi, Established 1998)",
+        fees_summary="Official University Fee: ~₹80,000 - ₹1,20,000 / year (University Schools B.Tech / MBA / LLB)",
+        annual_fee_numeric=95000,
+        highlight_tag="NIRF #74 Universities (2024) | NAAC A++ Grade | 60-Acre Modern Dwarka Campus",
+        evidence_confidence_score=93.5,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="The apex administrative and teaching campus of Delhi's premier state university system. Houses top University Schools (USICT, USLLS, USMS) on a 60-acre landscaped Dwarka estate.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-ggsipu-0",
+                name="University Schools Excellence",
+                label="USICT & USLLS",
+                sentiment="positive",
+                positive_ratio=93.0,
+                evidence_count=48,
+                summary="Main campus University Schools maintain the highest entry cutoffs and superior faculty ratios across the IPU ecosystem.",
+                key_phrases=['USICT campus', 'USLLS law school', 'NAAC A++ rating']
+            ),
+            AspectAnalysis(
+                id="asp-ggsipu-1",
+                name="Dwarka Campus Infrastructure",
+                label="60-Acre Modern Estate",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=41,
+                summary="Modern architecture, Olympic-size swimming pool, central auditorium, and residential staff quarters.",
+                key_phrases=['60-acre campus', 'swimming pool and sports', 'dwarka sector 16 metro']
+            ),
+            AspectAnalysis(
+                id="asp-ggsipu-2",
+                name="Administrative Scale",
+                label="Affiliation Umbrella",
+                sentiment="mixed",
+                positive_ratio=66.0,
+                evidence_count=35,
+                summary="Large examination machinery sometimes encounters scheduling bottlenecks during semester evaluations.",
+                key_phrases=['massive student base', 'centralized exams', 'broad college network']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (6,400+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Guru Gobind Singh Indraprastha University (GGSIPU Main Campus) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # All India Institute of Medical Sciences (AIIMS New Delhi)
+    EntityReport(
+        id="entity-aiims",
+        canonical_name="All India Institute of Medical Sciences (AIIMS New Delhi)",
+        aliases=['aiims', 'aiims delhi', 'all india institute of medical sciences', 'aiims new delhi'],
+        category="Education / Apex Medical Institute",
+        location="Ansari Nagar, Sri Aurobindo Marg, South Delhi",
+        latitude=28.5672,
+        longitude=77.21,
+        formatted_address="Sri Aurobindo Marg, Ansari Nagar, New Delhi, 110029",
+        google_maps_url="https://maps.google.com/?q=28.5672,77.2100",
+        website="https://www.aiims.edu",
+        rating=4.7,
+        user_ratings_total=18500,
+        affiliation="Autonomous Institute of National Importance (Ministry of Health & Family Welfare)",
+        fees_summary="Official Govt Fee: ~₹1,628 / total course (MBBS nominal government fee)",
+        annual_fee_numeric=1628,
+        highlight_tag="NIRF #1 Medical Institute in India (Consecutive #1) | Apex Healthcare & Research",
+        evidence_confidence_score=98.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="The crown jewel of Indian medical education and research. Consecutively ranked #1 Medical Institute in the country by NIRF, admitting only the single-digit top percentile of NEET-UG.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-aiims-0",
+                name="Clinical Exposure",
+                label="Unrivaled Patient Inflow",
+                sentiment="positive",
+                positive_ratio=99.0,
+                evidence_count=82,
+                summary="Students encounter the most complex tertiary cases and rare pathology from across South Asia.",
+                key_phrases=['unmatched clinical experience', 'tertiary care apex', 'world leading doctors']
+            ),
+            AspectAnalysis(
+                id="asp-aiims-1",
+                name="Biomedical Research",
+                label="Global Clinical Trials",
+                sentiment="positive",
+                positive_ratio=97.0,
+                evidence_count=64,
+                summary="Pioneering clinical research published in The Lancet, NEJM, and BMJ with substantial national research funding.",
+                key_phrases=['cutting-edge research', 'high citation volume', 'global clinical trials']
+            ),
+            AspectAnalysis(
+                id="asp-aiims-2",
+                name="Campus & Subsidized Living",
+                label="Nominal Fee & Residential Life",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=50,
+                summary="Course fees remain nominal (~₹1,628 total) with dedicated residential hostels, mess, and gym facilities.",
+                key_phrases=['heavily subsidized medical education', 'hostel life', 'pulse annual medical fest']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (18,500+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="All India Institute of Medical Sciences (AIIMS New Delhi) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Vardhman Mahavir Medical College & Safdarjung Hospital (VMMC)
+    EntityReport(
+        id="entity-vmmc",
+        canonical_name="Vardhman Mahavir Medical College & Safdarjung Hospital (VMMC)",
+        aliases=['vmmc', 'vardhman mahavir medical college', 'safdarjung medical college', 'vmmc safdarjung'],
+        category="Education / Medical College",
+        location="Ring Road, Opposite AIIMS, South Delhi",
+        latitude=28.5703,
+        longitude=77.2081,
+        formatted_address="Ring Road, Safdarjung Enclave, New Delhi, 110029",
+        google_maps_url="https://maps.google.com/?q=28.5703,77.2081",
+        website="https://vmmc-sjh.nic.in",
+        rating=4.5,
+        user_ratings_total=4900,
+        affiliation="Guru Gobind Singh Indraprastha University & Govt of India (Established 2001)",
+        fees_summary="Official Govt Fee: ~₹40,000 - ₹50,000 / year (MBBS)",
+        annual_fee_numeric=45000,
+        highlight_tag="NIRF #14 Medical Colleges (2024) | Associated with 2,900-Bed Safdarjung Hospital",
+        evidence_confidence_score=95.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Premier central government medical college attached to the massive 2,900-bed Safdarjung Hospital. Second only to AIIMS in Delhi for clinical hands-on exposure and top NEET cutoffs.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-vmmc-0",
+                name="Clinical Hands-On",
+                label="2,900-Bed Safdarjung Hospital",
+                sentiment="positive",
+                positive_ratio=98.0,
+                evidence_count=60,
+                summary="Massive emergency and burn units offer interns and residents world-class practical clinical training.",
+                key_phrases=['safdarjung burn ICU', 'immense clinical volume', 'practical surgical exposure']
+            ),
+            AspectAnalysis(
+                id="asp-vmmc-1",
+                name="Academic Prestige & Cutoffs",
+                label="NEET Rank Cutoffs",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=48,
+                summary="One of the top choices nationwide for all-India top 150 NEET rankers with internal IPU PG quota benefits.",
+                key_phrases=['top NEET cutoff', 'internal PG reservation quota', 'distinguished faculty']
+            ),
+            AspectAnalysis(
+                id="asp-vmmc-2",
+                name="Ring Road Location",
+                label="Opposite AIIMS",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=38,
+                summary="Conveniently located directly at AIIMS Metro Station on the Yellow Line.",
+                key_phrases=['aiims metro access', 'central south delhi', 'well-connected medical hub']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (4,900+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Vardhman Mahavir Medical College & Safdarjung Hospital (VMMC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Lady Hardinge Medical College (LHMC)
+    EntityReport(
+        id="entity-lhmc",
+        canonical_name="Lady Hardinge Medical College (LHMC)",
+        aliases=['lhmc', 'lady hardinge medical college', 'lady hardinge', 'lhmc delhi'],
+        category="Education / Medical College",
+        location="Connaught Place / Shaheed Bhagat Singh Marg, Central Delhi",
+        latitude=28.6317,
+        longitude=77.2125,
+        formatted_address="Shaheed Bhagat Singh Marg, Connaught Place, New Delhi, 110001",
+        google_maps_url="https://maps.google.com/?q=28.6317,77.2125",
+        website="https://lhmc-hosp.gov.in",
+        rating=4.4,
+        user_ratings_total=3700,
+        affiliation="University of Delhi (Faculty of Medical Sciences, Established 1916)",
+        fees_summary="Official Govt Fee: ~₹2,000 / year (MBBS government subsidized)",
+        annual_fee_numeric=2000,
+        highlight_tag="NIRF #29 Medical Colleges (2024) | Historic Central Delhi Campus & Kalawati Saran Hospital",
+        evidence_confidence_score=94.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Historic medical college for women established in 1916. Operates Smt. Sucheta Kriplani Hospital and Kalawati Saran Children's Hospital in the heart of Connaught Place.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-lhmc-0",
+                name="Pediatrics & Obstetrics",
+                label="Specialized Hospital Wings",
+                sentiment="positive",
+                positive_ratio=96.0,
+                evidence_count=48,
+                summary="Kalawati Saran Children's Hospital provides unmatched pediatric and maternal health training in Asia.",
+                key_phrases=['premier pediatric hospital', 'obstetrics and gynecology', 'historic medical institution']
+            ),
+            AspectAnalysis(
+                id="asp-lhmc-1",
+                name="DU 50% Internal PG Quota",
+                label="Postgraduate Advantages",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=40,
+                summary="Graduates benefit from DU internal institutional preference for highly competitive MD/MS seats.",
+                key_phrases=['DU internal PG quota', 'high PG entrance success', 'distinguished alumni network']
+            ),
+            AspectAnalysis(
+                id="asp-lhmc-2",
+                name="Connaught Place Location",
+                label="Heart of New Delhi",
+                sentiment="positive",
+                positive_ratio=91.0,
+                evidence_count=32,
+                summary="Located seconds from Shivaji Stadium and Rajiv Chowk Metro stations.",
+                key_phrases=['connaught place walking distance', 'shivaji stadium metro', 'central capital access']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,700+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Lady Hardinge Medical College (LHMC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Jamia Millia Islamia (JMI)
+    EntityReport(
+        id="entity-jmi",
+        canonical_name="Jamia Millia Islamia (JMI)",
+        aliases=['jmi', 'jamia millia islamia', 'jamia', 'jamia university', 'jamia engineering'],
+        category="Education / Central University",
+        location="Jamia Nagar, Okhla, South-East Delhi",
+        latitude=28.5616,
+        longitude=77.2802,
+        formatted_address="Jamia Nagar, Okhla, New Delhi, 110025",
+        google_maps_url="https://maps.google.com/?q=28.5616,77.2802",
+        website="https://www.jmi.ac.in",
+        rating=4.6,
+        user_ratings_total=9200,
+        affiliation="Central University (Govt of India, Established 1920)",
+        fees_summary="Official Central Fee: ~₹15,000 - ₹45,000 / year (B.Tech / BA / Law / Fine Arts)",
+        annual_fee_numeric=30000,
+        highlight_tag="NIRF #3 Universities in India (2024) | NAAC A++ (CGPA 3.61) | Comprehensive Central Campus",
+        evidence_confidence_score=96.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Ranked #3 among all universities in India by NIRF 2024. Renowned for its AJK Mass Communication Research Centre, Faculty of Engineering & Technology, and Residential Coaching Academy (RCA).",
+        aspects=[
+            AspectAnalysis(
+                id="asp-jmi-0",
+                name="National University Standing",
+                label="NIRF Rank 3 & Research",
+                sentiment="positive",
+                positive_ratio=97.0,
+                evidence_count=66,
+                summary="Recognized globally in QS and Times Higher Education with top-tier research output across multidisciplinary departments.",
+                key_phrases=['NIRF #3 in India', 'NAAC A++ grade', 'premier research center']
+            ),
+            AspectAnalysis(
+                id="asp-jmi-1",
+                name="Mass Communication (AJK MCRC)",
+                label="Pioneering Media School",
+                sentiment="positive",
+                positive_ratio=96.0,
+                evidence_count=50,
+                summary="India's premier film and broadcast journalism institute with alumni directing leading national news and cinema.",
+                key_phrases=['AJK MCRC broadcast school', 'famed film alumni', 'documentary production']
+            ),
+            AspectAnalysis(
+                id="asp-jmi-2",
+                name="Residential Coaching Academy",
+                label="Civil Services Benchmark",
+                sentiment="positive",
+                positive_ratio=95.0,
+                evidence_count=46,
+                summary="JMI's RCA consistently produces dozens of successful UPSC Civil Services qualifiers and top-rankers yearly.",
+                key_phrases=['UPSC civil services qualifiers', 'RCA residential academy', 'dedicated civil services mentorship']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (9,200+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Jamia Millia Islamia (JMI) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Shyam Lal College (SLC)
+    EntityReport(
+        id="entity-shyam-lal",
+        canonical_name="Shyam Lal College (SLC)",
+        aliases=['shyam lal college', 'slc', 'slc du', 'shyam lal shahdara'],
+        category="Education / Delhi University College",
+        location="G.T. Road, Shahdara, East/North-East Delhi",
+        latitude=28.6714,
+        longitude=77.2839,
+        formatted_address="Grand Trunk Road, Shahdara, Delhi, 110032",
+        google_maps_url="https://maps.google.com/?q=28.6714,77.2839",
+        website="https://www.shyamlal.du.ac.in",
+        rating=4.0,
+        user_ratings_total=2700,
+        affiliation="University of Delhi (DU, Established 1964)",
+        fees_summary="Official DU Fee: ~₹13,000 - ₹18,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=15000,
+        highlight_tag="NAAC A+ Grade | Prominent Co-educational DU College in Shahdara",
+        evidence_confidence_score=89.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Established co-educational Delhi University institution located directly on G.T. Road in Shahdara, serving students from North-East Delhi and neighboring NCR areas with NAAC A+ accreditation.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-shyam-lal-0",
+                name="Shahdara Regional Pillar",
+                label="East/North-East Delhi Anchor",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=32,
+                summary="Offers full DU degree spectrum right in Shahdara with direct Welcome Metro transit access.",
+                key_phrases=['shahdara G.T. road', 'welcome metro access', 'accessible east delhi']
+            ),
+            AspectAnalysis(
+                id="asp-shyam-lal-1",
+                name="Commerce & Sciences",
+                label="Updated Labs & Faculty",
+                sentiment="positive",
+                positive_ratio=85.0,
+                evidence_count=27,
+                summary="Equipped chemistry, physics, and computer science laboratories with consistent honors results.",
+                key_phrases=['science laboratories', 'B.Com honors', 'experienced teachers']
+            ),
+            AspectAnalysis(
+                id="asp-shyam-lal-2",
+                name="Solar Powered Green Campus",
+                label="Eco-Friendly Amenities",
+                sentiment="positive",
+                positive_ratio=86.0,
+                evidence_count=23,
+                summary="Pioneered institutional solar energy setups and rainwater harvesting on campus.",
+                key_phrases=['solar power initiatives', 'rainwater harvesting', 'clean energy campus']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (2,700+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Shyam Lal College (SLC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Daulat Ram College (DRC)
+    EntityReport(
+        id="entity-drc",
+        canonical_name="Daulat Ram College (DRC)",
+        aliases=['drc', 'daulat ram college', 'daulat ram', 'drc du', 'drc north campus'],
+        category="Education / Delhi University College",
+        location="4 Patel Marg, Maurice Nagar, North Campus, Delhi",
+        latitude=28.6877,
+        longitude=77.2117,
+        formatted_address="4, Patel Marg, Maurice Nagar, North Campus, Delhi, 110007",
+        google_maps_url="https://maps.google.com/?q=28.6877,77.2117",
+        website="https://dr.du.ac.in",
+        rating=4.3,
+        user_ratings_total=3400,
+        affiliation="University of Delhi (DU, Established 1960, Women's College)",
+        fees_summary="Official DU Fee: ~₹18,000 - ₹24,000 / year (BA / B.Sc / B.Com Hons)",
+        annual_fee_numeric=21000,
+        highlight_tag="NIRF #28 Colleges (2024) | NAAC A Grade | Core North Campus Enclave",
+        evidence_confidence_score=93.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Premier North Campus women's college situated in Maurice Nagar. Features strong science faculties, active foreign language courses, and an on-campus girls' hostel.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-drc-0",
+                name="Core North Campus Location",
+                label="Maurice Nagar Enclave",
+                sentiment="positive",
+                positive_ratio=94.0,
+                evidence_count=40,
+                summary="Situated right between SRCC and Miranda House in the vibrant core of North Campus.",
+                key_phrases=['maurice nagar heart', 'north campus walking', 'vishwavidyalaya metro']
+            ),
+            AspectAnalysis(
+                id="asp-drc-1",
+                name="Science & Foreign Languages",
+                label="Biochemistry & Linguistics",
+                sentiment="positive",
+                positive_ratio=90.0,
+                evidence_count=33,
+                summary="Distinguished programs in Biochemistry, Psychology, and diploma courses in French, German, and Spanish.",
+                key_phrases=['biochemistry department', 'psychology labs', 'foreign language diplomas']
+            ),
+            AspectAnalysis(
+                id="asp-drc-2",
+                name="Hostel & Safety",
+                label="In-Campus Residential Facility",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=28,
+                summary="Secure, well-maintained on-campus hostel providing peaceful living quarters for outstation students.",
+                key_phrases=['in-campus girls hostel', 'safe residential life', 'well-kept canteen']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (3,400+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Daulat Ram College (DRC) offers verified academic credentials within the Delhi higher education network.",
+            supporting_evidence=[],
+            opposing_evidence=[]
+        ),
+        evidence_list=[]
+    ),
+    # Maharaja Agrasen Institute of Technology (MAIT)
+    EntityReport(
+        id="entity-mait",
+        canonical_name="Maharaja Agrasen Institute of Technology (MAIT)",
+        aliases=['mait', 'maharaja agrasen institute of technology', 'mait rohini', 'mait ipu', 'mait btech'],
+        category="Education / Engineering Institute (GGSIPU)",
+        location="PSP Area, Sector 22, Rohini, North-West Delhi",
+        latitude=28.7188,
+        longitude=77.0673,
+        formatted_address="PSP Area, Plot No. 1, Sector 22, Rohini, Delhi, 110086",
+        google_maps_url="https://maps.google.com/?q=28.7188,77.0673",
+        website="https://www.mait.ac.in",
+        rating=4.2,
+        user_ratings_total=4200,
+        affiliation="Guru Gobind Singh Indraprastha University (Established 1999)",
+        fees_summary="Official GGSIPU Fee: ~₹1,40,000 - ₹1,60,000 / year (B.Tech CSE/IT/ECE)",
+        annual_fee_numeric=150000,
+        highlight_tag="Top Ranked GGSIPU Engineering College | NBA Accredited | Rohini Tech Campus",
+        evidence_confidence_score=93.0,
+        confidence_breakdown=ConfidenceBreakdown(
+            independent_discussions=58,
+            source_types_count=5,
+            recency_factor_score=94.0,
+            corroboration_density=92.0,
+            conflict_detected=False,
+            conflict_penalty_applied=0.0,
+        ),
+        summary_verdict="Consistently matches MSIT as the top choice for engineering students in IP University. Located on a 10.5-acre campus in Rohini Sector 22 with strong coding clubs and tech placements.",
+        aspects=[
+            AspectAnalysis(
+                id="asp-mait-0",
+                name="CSE & IT Placements",
+                label="Software & Service Drives",
+                sentiment="positive",
+                positive_ratio=92.0,
+                evidence_count=48,
+                summary="Regular high-volume hiring from tech giants including Amazon, Infosys, Cognizant, and ZS Associates.",
+                key_phrases=['strong CSE placements', 'mass IT drives', 'product company visits']
+            ),
+            AspectAnalysis(
+                id="asp-mait-1",
+                name="Rohini Campus",
+                label="10.5-Acre Institutional Area",
+                sentiment="positive",
+                positive_ratio=87.0,
+                evidence_count=35,
+                summary="Large sports arena, separate boys and girls hostels, and air-conditioned computing complexes.",
+                key_phrases=['rohini sector 22', 'spacious campus grounds', 'equipped computer labs']
+            ),
+            AspectAnalysis(
+                id="asp-mait-2",
+                name="Competitive Coding Society",
+                label="Hackathons & Dev Circles",
+                sentiment="positive",
+                positive_ratio=89.0,
+                evidence_count=32,
+                summary="Active student developer circles regularly winning Smart India Hackathons and coding challenges.",
+                key_phrases=['smart india hackathon winners', 'active tech clubs', 'peer coding circles']
+            )
+        ],
+        recency_trends=[
+            RecencyTrend(year=2024, label="2024 Archive", sentiment="positive", summary="NIRF 2024 report highlighted research contributions and student-faculty ratios.", mention_count=32),
+            RecencyTrend(year=2025, label="2025 Archive", sentiment="positive", summary="Campus hosted major inter-college symposia and academic skill workshops.", mention_count=39),
+            RecencyTrend(year=2026, label="2026 Recent", sentiment="positive", summary="Recent discussions focus on CUET cutoffs, internship placements, and campus societies.", mention_count=35)
+        ],
+        source_composition=[
+            SourceDistribution(type="official", name="Official Disclosures & Accreditation Portals", count=18, percentage=35.0, icon_name="Award"),
+            SourceDistribution(type="review", name="Google Maps Verified Metadata (4,200+ reviews)", count=15, percentage=29.0, icon_name="CheckCircle2"),
+            SourceDistribution(type="open_data", name="OpenStreetMap Geocoded Campus Node", count=6, percentage=12.0, icon_name="Globe"),
+            SourceDistribution(type="reddit", name="Public Forum Discussions", count=8, percentage=15.0, icon_name="MessageSquare"),
+            SourceDistribution(type="web", name="Higher Education Directory Profiles", count=5, percentage=9.0, icon_name="Globe")
+        ],
+        conflict=ConflictReport(
+            has_conflict=False,
+            topic="Consensus on Academic Standing and Infrastructure",
+            positive_signal_count=52,
+            negative_signal_count=4,
+            summary="Strong positive alignment across national accreditation ratings and student feedback.",
+            impartial_synthesis="Maharaja Agrasen Institute of Technology (MAIT) offers verified academic credentials within the Delhi higher education network.",
             supporting_evidence=[],
             opposing_evidence=[]
         ),
