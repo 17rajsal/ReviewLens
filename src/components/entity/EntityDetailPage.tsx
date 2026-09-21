@@ -174,7 +174,7 @@ export const EntityDetailPage: React.FC<EntityDetailPageProps> = ({
   const strokeDashoffset = circumference - (confidenceScore / 100) * circumference;
 
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-[#FAF8F5] text-[#18181B] relative overflow-hidden">
+    <div className="min-h-screen pt-24 pb-20 bg-[#FAF8F5] text-[#18181B] relative overflow-clip">
       {/* Background ambient lighting accents */}
       <div className="pointer-events-none absolute top-10 left-1/4 w-[800px] h-[500px] bg-[#6B7CFF]/[0.03] rounded-full blur-[140px] -z-10" />
       <div className="pointer-events-none absolute top-96 right-1/4 w-[700px] h-[500px] bg-[#F59E72]/[0.03] rounded-full blur-[160px] -z-10" />
